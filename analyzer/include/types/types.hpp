@@ -16,8 +16,8 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_POSITIONING_HPP
-#define BRIDGE_ANALYZER_POSITIONING_HPP
+#ifndef BRIDGE_ANALYZER_TYPES_HPP
+#define BRIDGE_ANALYZER_TYPES_HPP
 
 #include <any>
 #include <string>
@@ -67,4 +67,4 @@ namespace bridge::analyzer::types
     };
 }
 
-#endif // BRIDGE_ANALYZER_POSITIONING_HPP
+#endif // BRIDGE_ANALYZER_TYPES_HPP
