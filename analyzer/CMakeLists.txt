@@ -32,9 +32,6 @@ list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 set(ANALYZER_PUBLIC_HPP)
 list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
-set(ANALYZER_PRIVATE_HPP)
-list(TRANSFORM ANALYZER_PRIVATE_HPP PREPEND "src/")
-
 add_library(analyzer STATIC "${ANALYZER_CPP}")
 target_include_directories(analyzer PUBLIC "include/")
 
@@ -45,9 +42,4 @@ target_sources(
 		FILE_SET HEADERS
 		TYPE HEADERS
 		FILES "${ANALYZER_PUBLIC_HPP}"
-
-	PRIVATE
-		FILE_SET private_headers
-		TYPE HEADERS
-		FILES "${ANALYZER_PRIVATE_HPP}"
 )
