@@ -29,7 +29,11 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 set(ANALYZER_CPP)
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 
-set(ANALYZER_PUBLIC_HPP)
+set(
+	ANALYZER_PUBLIC_HPP
+	types/types.hpp
+)
+
 list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
 add_library(analyzer STATIC "${ANALYZER_CPP}")

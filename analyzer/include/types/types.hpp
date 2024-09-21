@@ -1,0 +1,48 @@
+/*
+ * Copyright (C) 2024 Mattéo Rossillol‑‑Laruelle <beatussum@protonmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+
+#ifndef BRIDGE_ANALYZER_POSITIONING_HPP
+#define BRIDGE_ANALYZER_POSITIONING_HPP
+
+#include <any>
+#include <string>
+
+/**
+ * @file
+ * @brief This header describes basic types used by the analyzer
+ */
+
+/**
+ * @brief This namespace contains all types used by the analyzer
+ */
+
+namespace bridge::analyzer::types
+{
+    /**
+     * @brief An aggregate describing a player
+     */
+
+    struct player
+    {
+        std::string first_name; ///< The first name of the player
+        std::string last_name;  ///< The last name of the player
+        std::any    metadata;   ///< The metadata of the player
+    };
+}
+
+#endif // BRIDGE_ANALYZER_POSITIONING_HPP
