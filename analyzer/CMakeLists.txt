@@ -39,7 +39,7 @@ target_sources(
 	analyzer
 
 	PUBLIC
-		FILE_SET HEADERS
+		FILE_SET public_headers
 		TYPE HEADERS
 		FILES "${ANALYZER_PUBLIC_HPP}"
 )
