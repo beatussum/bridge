@@ -31,9 +31,9 @@ list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 
 set(
 	ANALYZER_PUBLIC_HPP
-	types/card/bidding/bidding.hpp
-	types/card/card.hpp
-	types/types.hpp
+	types/card/bidding.hpp
+	types/card.hpp
+	types.hpp
 )
 
 list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
