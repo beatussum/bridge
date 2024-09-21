@@ -43,6 +43,16 @@ namespace bridge::analyzer::types
         std::string last_name;  ///< The last name of the player
         std::any    metadata;   ///< The metadata of the player
     };
+
+    /**
+     * @brief The phase of the game
+     */
+
+    enum struct phase
+    {
+        bidding, ///< The bidding phase
+        card     ///< The card-playing phase
+    };
 }
 
 #endif // BRIDGE_ANALYZER_POSITIONING_HPP
