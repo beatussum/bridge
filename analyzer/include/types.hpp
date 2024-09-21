@@ -19,8 +19,11 @@
 #ifndef BRIDGE_ANALYZER_TYPES_HPP
 #define BRIDGE_ANALYZER_TYPES_HPP
 
+#include "types/card/bidding.hpp"
+
 #include <any>
 #include <string>
+#include <vector>
 
 /**
  * @file
@@ -33,6 +36,27 @@
 
 namespace bridge::analyzer::types
 {
+    /**
+     * @brief An aggregate describing an auction
+     */
+
+    struct auction
+    {
+        /**
+         * @brief The positioning of the first player to call
+         */
+
+        positioning first_player;
+
+        /**
+         * @brief The bidding cards of the auction
+         *
+         * @note The cards are described clockwise from the first player.
+         */
+
+        std::vector<card::bidding::card> bidding_cards;
+    };
+
     /**
      * @brief An aggregate describing a player
      */
