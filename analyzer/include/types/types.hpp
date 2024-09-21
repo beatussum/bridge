@@ -53,6 +53,18 @@ namespace bridge::analyzer::types
         bidding, ///< The bidding phase
         card     ///< The card-playing phase
     };
+
+    /**
+     * @brief A player's position on the table
+     */
+
+    enum struct positioning
+    {
+        north, ///< This is the northern player
+        west,  ///< This is the western player
+        south, ///< This is the southern player
+        east   ///< This is the eastern player
+    };
 }
 
 #endif // BRIDGE_ANALYZER_POSITIONING_HPP
