@@ -24,6 +24,11 @@
 
 #include <vector>
 
+/**
+ * @file
+ * @brief This namespace describes the deal type and its associated types
+ */
+
 namespace bridge::analyzer::types
 {
     using deal_unit = std::vector<card::playing::card>; ///< A deal unit
