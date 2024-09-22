@@ -55,6 +55,8 @@ namespace bridge::analyzer::types
          */
 
         std::vector<card::bidding::card> bidding_cards;
+
+        std::any metadata; ///< The metadata of the auction
     };
 
     /**
