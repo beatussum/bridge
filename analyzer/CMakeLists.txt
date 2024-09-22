@@ -35,6 +35,7 @@ set(
 	types/card/playing.hpp
 	types/card.hpp
 	types/deal.hpp
+	types/trick.hpp
 	types.hpp
 )
 
