@@ -20,7 +20,9 @@
 #define BRIDGE_ANALYZER_TYPES_HPP
 
 #include "types/card/bidding.hpp"
+#include "deal.hpp"
 #include "metadata.hpp"
+#include "trick.hpp"
 
 #include <string>
 #include <vector>
@@ -57,6 +59,24 @@ namespace bridge::analyzer::types
         std::vector<card::bidding::card> bidding_cards;
 
         metadata metadata; ///< The metadata of the auction
+    };
+
+    /**
+     * @brief An aggregate describing a game
+     */
+
+    struct game
+    {
+        player north; ///< The north player of the game
+        player west;  ///< The west player of the game
+        player south; ///< The south player of the game
+        player east;  ///< The east player of the game
+
+        auction auction;           ///< The auction of the game
+        deal deal;                 ///< The deal of the game
+        std::vector<trick> tricks; ///< The tricks of the game
+
+        metadata metadata; ///< The metadata of the game
     };
 
     /**
