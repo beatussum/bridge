@@ -53,3 +53,5 @@ target_sources(
 		TYPE HEADERS
 		FILES "${ANALYZER_PUBLIC_HPP}"
 )
+
+doxygen_add_docs(doc "${ANALYZER_PUBLIC_HPP}" COMMENT "Generating documentation...")

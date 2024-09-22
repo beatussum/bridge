@@ -24,6 +24,20 @@ project(
     LANGUAGES CXX
 )
 
+option(WITH_DOC "Enable building of documentation" OFF)
+
+if (WITH_DOC)
+    find_package(Doxygen REQUIRED)
+
+    set(DOC_DIR "${CMAKE_BINARY_DIR}/doc/" CACHE PATH "The path where the documention is built")
+
+    set(DOXYGEN_EXTRACT_STATIC YES)
+    set(DOXYGEN_INLINE_INHERITED_MEMB YES)
+    set(DOXYGEN_OUTPUT_DIRECTORY "${DOC_DIR}")
+    set(DOXYGEN_WARN_LOGFILE "${DOC_DIR}/log")
+    set(DOXYGEN_WARN_NO_PARAMDOC YES)
+endif()
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 include(CompilerFlags)
