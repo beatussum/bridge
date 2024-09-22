@@ -20,8 +20,8 @@
 #define BRIDGE_ANALYZER_TYPES_TRICK_HPP
 
 #include "card/playing.hpp"
+#include "metadata.hpp"
 
-#include <any>
 #include <array>
 
 namespace bridge::analyzer::types
@@ -52,7 +52,7 @@ namespace bridge::analyzer::types
 
         std::array<trick_unit, 4> units;
 
-        std::any metadata; ///< The metadata of the trick
+        metadata metadata; ///< The metadata of the trick
     };
 }
 

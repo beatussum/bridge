@@ -16,31 +16,19 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_TYPES_DEAL_HPP
-#define BRIDGE_ANALYZER_TYPES_DEAL_HPP
+#ifndef BRIDGE_ANALYZER_TYPES_METADATA_HPP
+#define BRIDGE_ANALYZER_TYPES_METADATA_HPP
 
-#include "card/playing.hpp"
-#include "metadata.hpp"
+#include <any>
 
-#include <vector>
+/**
+ * @file
+ * @brief This file defines the type used for metadata
+ */
 
 namespace bridge::analyzer::types
 {
-    using deal_unit = std::vector<card::playing::card>; ///< A deal unit
-
-    /**
-     * @brief An aggregate describing a deal
-     */
-
-    struct deal
-    {
-        deal_unit north; ///< The deal unit of the north player
-        deal_unit west;  ///< The deal unit of the west player
-        deal_unit south; ///< The deal unit of the south player
-        deal_unit east;  ///< The deal unit of the north player
-
-        metadata metadata; ///< The metadata of the deal
-    };
+    using metadata = std::any; ///< A metadata
 }
 
-#endif // BRIDGE_ANALYZER_TYPES_DEAL_HPP
+#endif // BRIDGE_ANALYZER_TYPES_METADATA_HPP

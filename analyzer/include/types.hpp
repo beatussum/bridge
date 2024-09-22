@@ -20,8 +20,8 @@
 #define BRIDGE_ANALYZER_TYPES_HPP
 
 #include "types/card/bidding.hpp"
+#include "metadata.hpp"
 
-#include <any>
 #include <string>
 #include <vector>
 
@@ -56,7 +56,7 @@ namespace bridge::analyzer::types
 
         std::vector<card::bidding::card> bidding_cards;
 
-        std::any metadata; ///< The metadata of the auction
+        metadata metadata; ///< The metadata of the auction
     };
 
     /**
@@ -67,7 +67,8 @@ namespace bridge::analyzer::types
     {
         std::string first_name; ///< The first name of the player
         std::string last_name;  ///< The last name of the player
-        std::any    metadata;   ///< The metadata of the player
+
+        metadata metadata; ///< The metadata of the player
     };
 
     /**
