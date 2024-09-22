@@ -1,0 +1,26 @@
+name: Build documentation
+on: push
+
+jobs:
+  build-documentation:
+    name: Build documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get install -qy cmake doxygen ninja-build
+
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Run CMake
+        run: cmake -B build -DWITH_DOC=ON .
+
+      - name: Build documentation
+        run: ninja -C build doc
+
+      - name: Upload generated documentation
+        uses: actions/upload-artifact@v4.4.0
+        with:
+          name: documentation
+          path: build/doc/html/
