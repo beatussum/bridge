@@ -34,6 +34,7 @@ set(
 	types/card/bidding.hpp
 	types/card/playing.hpp
 	types/card.hpp
+	types/deal.hpp
 	types.hpp
 )
 
