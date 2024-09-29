@@ -38,6 +38,10 @@ if (WITH_DOC)
     set(DOXYGEN_WARN_NO_PARAMDOC YES)
 endif()
 
+macro (bridge_add_to_doc __headers)
+    list(APPEND BRIDGE_DOC_HPP "${__headers}")
+endmacro()
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 include(CompilerFlags)
@@ -83,3 +87,7 @@ add_gcc_cxx_flags(
 )
 
 add_subdirectory(analyzer)
+
+if (WITH_DOC)
+    doxygen_add_docs(doc "${BRIDGE_DOC_HPP}" COMMENT "Generating documentation...")
+endif()

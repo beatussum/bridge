@@ -54,4 +54,4 @@ target_sources(
 		FILES "${ANALYZER_PUBLIC_HPP}"
 )
 
-doxygen_add_docs(doc "${ANALYZER_PUBLIC_HPP}" COMMENT "Generating documentation...")
+bridge_add_to_doc("${ANALYZER_PUBLIC_HPP}")
