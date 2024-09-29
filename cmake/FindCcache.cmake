@@ -89,7 +89,7 @@ set_package_properties(
         PURPOSE "Enable support for ccache during build"
 )
 
-function(enable_ccache)
+function (enable_ccache)
     set(options REQUIRED)
     set(one_value_args)
     set(multi_value_args)
