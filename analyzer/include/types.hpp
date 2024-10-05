@@ -19,7 +19,7 @@
 #ifndef BRIDGE_ANALYZER_TYPES_HPP
 #define BRIDGE_ANALYZER_TYPES_HPP
 
-#include "types/card/bidding.hpp"
+#include "types/card.hpp"
 #include "deal.hpp"
 #include "metadata.hpp"
 #include "trick.hpp"
@@ -111,6 +111,18 @@ namespace bridge::analyzer::types
         west,  ///< This is the western player
         south, ///< This is the southern player
         east   ///< This is the eastern player
+    };
+
+    /**
+     * @brief A trick as analyzed by the IA model
+     */
+
+    struct raw_trick
+    {
+        std::vector<card::card> north; ///< North's cards on the table
+        std::vector<card::card> west;  ///< West's cards on the table
+        std::vector<card::card> south; ///< South's cards on the table
+        std::vector<card::card> east;  ///< East's cards on the table
     };
 }
 

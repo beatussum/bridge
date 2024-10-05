@@ -19,6 +19,9 @@
 #ifndef BRIDGE_ANALYZER_TYPES_CARD_HPP
 #define BRIDGE_ANALYZER_TYPES_CARD_HPP
 
+#include "card/bidding.hpp"
+#include "card/playing.hpp"
+
 /**
  * @file
  * @brief The base header of the namespace bridge::analyzer::types::card
@@ -28,6 +31,13 @@
  * @brief This namespace describes different card types
  */
 
-namespace bridge::analyzer::types::card {}
+namespace bridge::analyzer::types::card
+{
+    /**
+     * @brief A variant type representing a bidding or playing card
+     */
+
+    using card = std::variant<bidding::card, playing::card>;
+}
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_HPP
