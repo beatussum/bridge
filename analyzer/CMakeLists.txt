@@ -26,11 +26,8 @@ project(
 
 list(APPEND CMAKE_MODULE_PATH "cmake/")
 
-set(ANALYZER_CPP)
-list(TRANSFORM ANALYZER_CPP PREPEND "src/")
-
 set(
-	ANALYZER_PUBLIC_HPP
+	ANALYZER_INTERFACE_HPP
 	types/card/bidding.hpp
 	types/card/playing.hpp
 	types/card.hpp
@@ -40,18 +37,18 @@ set(
 	types.hpp
 )
 
-list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
+list(TRANSFORM ANALYZER_INTERFACE_HPP PREPEND "include/")
 
-add_library(analyzer STATIC "${ANALYZER_CPP}")
-target_include_directories(analyzer PUBLIC "include/")
+add_library(analyzer INTERFACE)
+target_include_directories(analyzer INTERFACE "include/")
 
 target_sources(
 	analyzer
 
-	PUBLIC
-		FILE_SET public_headers
+	INTERFACE
+		FILE_SET HEADERS
 		TYPE HEADERS
-		FILES "${ANALYZER_PUBLIC_HPP}"
+		FILES "${ANALYZER_INTERFACE_HPP}"
 )
 
-bridge_add_to_doc("${ANALYZER_PUBLIC_HPP}")
+bridge_add_to_doc("${ANALYZER_INTERFACE_HPP}")
