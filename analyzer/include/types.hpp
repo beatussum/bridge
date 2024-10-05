@@ -110,7 +110,8 @@ namespace bridge::analyzer::types
         north, ///< This is the northern player
         west,  ///< This is the western player
         south, ///< This is the southern player
-        east   ///< This is the eastern player
+        east,  ///< This is the eastern player
+        none   ///< The positioning is not specified
     };
 
     /**
