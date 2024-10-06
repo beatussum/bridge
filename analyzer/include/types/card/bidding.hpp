@@ -64,8 +64,8 @@ namespace bridge::analyzer::types::card::bidding
 
     struct card_bid
     {
-        color color; ///< The color of the bid
-        level level; ///< The level of the bid
+        color c; ///< The color of the bid
+        level l; ///< The level of the bid
     };
 
     struct card_double {};   ///< A double

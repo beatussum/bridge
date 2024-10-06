@@ -40,7 +40,7 @@ namespace bridge::analyzer::types
     struct trick_unit
     {
         card::playing::card card; ///< The card played by the associated player
-        positioning positioning;  ///< The positioning of the associated player
+        positioning p;            ///< The positioning of the associated player
     };
 
     /**
@@ -57,7 +57,7 @@ namespace bridge::analyzer::types
 
         std::array<trick_unit, 4> units;
 
-        metadata metadata; ///< The metadata of the trick
+        metadata m; ///< The metadata of the trick
     };
 }
 

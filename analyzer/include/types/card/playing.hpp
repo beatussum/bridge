@@ -72,8 +72,8 @@ namespace bridge::analyzer::types::card::playing
 
     struct card
     {
-        color color; ///< The color of the playing card
-        rank  rank;  ///< The rank of the playing card
+        color c; ///< The color of the playing card
+        rank r;  ///< The rank of the playing card
     };
 }
 

@@ -20,9 +20,9 @@
 #define BRIDGE_ANALYZER_TYPES_HPP
 
 #include "types/card.hpp"
-#include "deal.hpp"
-#include "metadata.hpp"
-#include "trick.hpp"
+#include "types/deal.hpp"
+#include "types/metadata.hpp"
+#include "types/trick.hpp"
 
 #include <string>
 #include <vector>
@@ -58,7 +58,19 @@ namespace bridge::analyzer::types
 
         std::vector<card::bidding::card> bidding_cards;
 
-        metadata metadata; ///< The metadata of the auction
+        metadata m; ///< The metadata of the auction
+    };
+
+    /**
+     * @brief An aggregate describing a player
+     */
+
+    struct player
+    {
+        std::string first_name; ///< The first name of the player
+        std::string last_name;  ///< The last name of the player
+
+        metadata m; ///< The metadata of the player
     };
 
     /**
@@ -72,23 +84,11 @@ namespace bridge::analyzer::types
         player south; ///< The south player of the game
         player east;  ///< The east player of the game
 
-        auction auction;           ///< The auction of the game
-        deal deal;                 ///< The deal of the game
+        auction a;                 ///< The auction of the game
+        deal d;                    ///< The deal of the game
         std::vector<trick> tricks; ///< The tricks of the game
 
-        metadata metadata; ///< The metadata of the game
-    };
-
-    /**
-     * @brief An aggregate describing a player
-     */
-
-    struct player
-    {
-        std::string first_name; ///< The first name of the player
-        std::string last_name;  ///< The last name of the player
-
-        metadata metadata; ///< The metadata of the player
+        metadata m; ///< The metadata of the game
     };
 
     /**
