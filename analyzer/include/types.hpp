@@ -39,38 +39,6 @@
 namespace bridge::analyzer::types
 {
     /**
-     * @brief _Details_ namespace of bridge::analyzer::types
-     *
-     * @caution This namespace exists for implementation reasons. It should
-     * never be used by users of bridge::analyzer::types.
-     */
-
-    namespace details
-    {
-        /**
-         * @brief A SFINAE alias to conditionnaly enable to_string()
-         *
-         * This alias causes a substitution failure if the type T does not have
-         * its output operator defined.
-         *
-         * @tparam[in] T The type tested
-         *
-         * @see to_string()
-         */
-
-        template <class T>
-        using enable_to_string_t =
-            std::enable_if_t<
-                std::is_same_v<
-                    decltype(std::ostringstream() << std::declval<T>()),
-                    std::ostringstream&&
-                >,
-
-                std::string
-            >;
-    }
-
-    /**
      * @brief An aggregate describing an auction
      */
 
@@ -166,7 +134,7 @@ namespace bridge::analyzer::types
      */
 
     template <class T>
-    details::enable_to_string_t<T> to_string(const T& __value)
+    std::string to_string(const T& __value)
     {
         std::ostringstream ss;
         return (ss << __value).str();
