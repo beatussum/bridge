@@ -61,12 +61,36 @@ if (WITH_TESTS)
 
     enable_testing()
 
-    function (bridge_add_unit_tests __tests)
-        foreach (test ${__tests})
-            set(target "${PROJECT_NAME}-${test}")
+    function (bridge_add_unit_tests)
+        set(options)
+        set(one_value_args SCOPE_NAME)
+        set(multi_value_args TESTS EXTRA_LIBS)
+
+        cmake_parse_arguments(
+            BRIDGE_ADD_UNIT_TEST
+            "${options}"
+            "${one_value_args}"
+            "${multi_value_args}"
+            ${ARGN}
+        )
+
+        if (NOT DEFINED BRIDGE_ADD_UNIT_TEST_SCOPE_NAME)
+            set(BRIDGE_ADD_UNIT_TEST_SCOPE_NAME "${PROJECT_NAME}")
+        endif()
+
+        foreach (test ${BRIDGE_ADD_UNIT_TEST_TESTS})
+            set(target "${BRIDGE_ADD_UNIT_TEST_SCOPE_NAME}-${test}")
 
             add_executable("${target}" "src/${test}_test.cpp")
-            target_link_libraries("${target}" GTest::gtest GTest::gtest_main)
+
+            target_link_libraries(
+                "${target}"
+
+                PRIVATE
+                    GTest::gtest
+                    GTest::gtest_main
+                    "${BRIDGE_ADD_UNIT_TEST_EXTRA_LIBS}"
+            )
 
             set_target_properties(
                 "${target}"
@@ -80,13 +104,13 @@ if (WITH_TESTS)
 
             gtest_discover_tests(
                 "${target}"
-                TEST_PREFIX "${PROJECT_NAME}."
+                TEST_PREFIX "${BRIDGE_ADD_UNIT_TEST_SCOPE_NAME}."
                 XML_OUTPUT_DIR "${TEST_RESULT_DIR}"
             )
         endforeach()
     endfunction()
 else()
-    function (bridge_add_unit_tests __tests)
+    function (bridge_add_unit_tests)
     endfunction()
 endif()
 
