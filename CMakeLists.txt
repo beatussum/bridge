@@ -30,7 +30,12 @@ option(WITH_TESTS "Enable building of the tests" OFF)
 if (WITH_DOC)
     find_package(Doxygen REQUIRED)
 
-    set(DOC_DIR "${CMAKE_BINARY_DIR}/doc/" CACHE PATH "The path where the documention is built")
+    set(
+        DOC_DIR
+        "${CMAKE_BINARY_DIR}/doc/"
+        CACHE PATH
+        "The path where the documention is built"
+    )
 
     set(DOXYGEN_EXTRACT_STATIC YES)
     set(DOXYGEN_INLINE_INHERITED_MEMB YES)
@@ -44,7 +49,12 @@ macro (bridge_add_to_doc __headers)
 endmacro()
 
 if (WITH_TESTS)
-    set(TEST_RESULT_DIR "${CMAKE_BINARY_DIR}/test-results/" CACHE PATH "The path where the JUnit4 XML report of the unit tests is written")
+    set(
+        TEST_RESULT_DIR
+        "${CMAKE_BINARY_DIR}/test-results/"
+        CACHE PATH
+        "The path where the JUnit4 XML report of the unit tests is written"
+    )
 
     find_package(GTest REQUIRED)
     include(GoogleTest)
@@ -62,7 +72,9 @@ if (WITH_TESTS)
                 "${target}"
 
                 PROPERTIES
-                    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/unit-tests/"
+                    RUNTIME_OUTPUT_DIRECTORY
+                        "${CMAKE_CURRENT_BINARY_DIR}/unit-tests/"
+
                     RUNTIME_OUTPUT_NAME "${test}"
             )
 
@@ -125,5 +137,7 @@ add_gcc_cxx_flags(
 add_subdirectory(analyzer)
 
 if (WITH_DOC)
-    doxygen_add_docs(doc "${BRIDGE_DOC_HPP}" COMMENT "Generating documentation...")
+    doxygen_add_docs(
+        doc "${BRIDGE_DOC_HPP}" COMMENT "Generating documentation..."
+    )
 endif()
