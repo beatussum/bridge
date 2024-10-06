@@ -46,6 +46,36 @@ namespace bridge::analyzer::types
 
         metadata m; ///< The metadata of the deal
     };
+
+    /**
+     * @brief Equality operator for deal
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    inline bool operator==(const deal& __lhs, const deal& __rhs) noexcept
+    {
+        return
+            (__lhs.north == __rhs.north) &&
+            (__lhs.west == __rhs.west) &&
+            (__lhs.south == __rhs.south) &&
+            (__lhs.east == __rhs.east);
+    }
+
+    /**
+     * @brief Inequality operator for deal
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    inline bool operator!=(const deal& __lhs, const deal& __rhs) noexcept
+        { return !(__lhs == __rhs); }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_DEAL_HPP
