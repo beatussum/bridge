@@ -39,10 +39,10 @@
 namespace bridge::analyzer::types
 {
     /**
-     * @brief _Details_ namespace of bridge::analyzer::core
+     * @brief _Details_ namespace of bridge::analyzer::types
      *
      * @caution This namespace exists for implementation reasons. It should
-     * never be used by users of bridge::analyzer::core.
+     * never be used by users of bridge::analyzer::types.
      */
 
     namespace details
@@ -54,6 +54,8 @@ namespace bridge::analyzer::types
          * its output operator defined.
          *
          * @tparam[in] T The type tested
+         *
+         * @see to_string()
          */
 
         template <class T>
