@@ -140,9 +140,7 @@ namespace bridge::analyzer::types::card::bidding
         const card_bid& __lhs,
         const card_bid& __rhs
     ) noexcept
-    {
-        return (__lhs.c == __rhs.c) && (__lhs.l == __rhs.l);
-    }
+        { return (__lhs.c == __rhs.c) && (__lhs.l == __rhs.l); }
 
     /**
      * @brief Inequality operator for card_bid
@@ -157,9 +155,7 @@ namespace bridge::analyzer::types::card::bidding
         const card_bid& __lhs,
         const card_bid& __rhs
     ) noexcept
-    {
-        return !(__lhs == __rhs);
-    }
+        { return !(__lhs == __rhs); }
 
     /**
      * @brief Less-than operator for card_bid
@@ -195,9 +191,7 @@ namespace bridge::analyzer::types::card::bidding
         const card_bid& __lhs,
         const card_bid& __rhs
     ) noexcept
-    {
-        return !(__lhs == __rhs) && (__rhs < __lhs);
-    }
+        { return !(__lhs == __rhs) && (__rhs < __lhs); }
 
     /**
      * @brief Less-equal operator for card_bid
@@ -212,9 +206,7 @@ namespace bridge::analyzer::types::card::bidding
         const card_bid& __lhs,
         const card_bid& __rhs
     ) noexcept
-    {
-        return (__lhs == __rhs) || (__rhs < __lhs);
-    }
+        { return (__lhs == __rhs) || (__rhs < __lhs); }
 
     /**
      * @brief Greater-equal operator for card_bid
@@ -229,9 +221,7 @@ namespace bridge::analyzer::types::card::bidding
         const card_bid& __lhs,
         const card_bid& __rhs
     ) noexcept
-    {
-        return !(__lhs < __rhs);
-    }
+        { return !(__lhs < __rhs); }
 
     /**
      * @brief Inserts a card_bid to an output stream
