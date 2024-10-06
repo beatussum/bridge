@@ -24,8 +24,13 @@ project(
     LANGUAGES CXX
 )
 
+option(ENABLE_WERROR "Make all warnings into errors" ON)
 option(WITH_DOC "Enable building of documentation" OFF)
 option(WITH_TESTS "Enable building of the tests" OFF)
+
+if (ENABLE_WERROR)
+    list(APPEND BRIDGE_CXX_GNU_FLAGS -Werror)
+endif()
 
 if (WITH_DOC)
     find_package(Doxygen REQUIRED)
