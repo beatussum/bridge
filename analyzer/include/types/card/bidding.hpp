@@ -87,6 +87,47 @@ namespace bridge::analyzer::types::card::bidding
         >;
 
     /**
+     * @brief Inserts a color to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, color __value)
+    {
+        switch (__value) {
+            case color::club:
+                __os << "club";
+                break;
+
+            case color::diamond:
+                __os << "diamond";
+                break;
+
+            case color::heart:
+                __os << "heart";
+                break;
+
+            case color::spade:
+                __os << "spade";
+                break;
+
+            case color::notrump:
+                __os << "notrump";
+                break;
+
+            default:
+                __os << "(undefined)";
+                break;
+        }
+
+        return __os;
+    }
+
+    /**
      * @brief Equality operator for card_bid
      *
      * @param[in] __lhs The left hand side operand
@@ -204,37 +245,13 @@ namespace bridge::analyzer::types::card::bidding
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card_bid& __value)
     {
-        __os << "card_bid { color = ";
-
-        switch (__value.c) {
-            case color::club:
-                __os << "club";
-                break;
-
-            case color::diamond:
-                __os << "diamond";
-                break;
-
-            case color::heart:
-                __os << "heart";
-                break;
-
-            case color::spade:
-                __os << "spade";
-                break;
-
-            case color::notrump:
-                __os << "notrump";
-                break;
-
-            default:
-                __os << "(undefined)";
-                break;
-        }
-
-        __os << ", level = " << static_cast<int>(__value.l) << " }";
-
-        return __os;
+        return
+            __os
+                << "card_bid { color = "
+                << __value.c
+                << ", level = "
+                << static_cast<int>(__value.l)
+                << " }";
     }
 
     /**
