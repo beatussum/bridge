@@ -21,11 +21,11 @@
 
 using namespace bridge::analyzer::types::card::bidding;
 
-class less_test
+class card_bid_less_test
     : public testing::TestWithParam<std::pair<card_bid, card_bid>>
 {};
 
-TEST_P(less_test, less)
+TEST_P(card_bid_less_test, less)
 {
     std::pair tested = GetParam();
 
@@ -36,7 +36,7 @@ TEST_P(less_test, less)
 
 INSTANTIATE_TEST_SUITE_P(
     different_color,
-    less_test,
+    card_bid_less_test,
 
     testing::Values(
         std::make_pair(
@@ -53,7 +53,7 @@ INSTANTIATE_TEST_SUITE_P(
 
 INSTANTIATE_TEST_SUITE_P(
     same_color,
-    less_test,
+    card_bid_less_test,
 
     testing::Values(
         std::make_pair(
@@ -68,11 +68,11 @@ INSTANTIATE_TEST_SUITE_P(
     )
 );
 
-class equal_test
+class card_bid_equal_test
     : public testing::TestWithParam<std::pair<card_bid, card_bid>>
 {};
 
-TEST_P(equal_test, equal)
+TEST_P(card_bid_equal_test, equal)
 {
     std::pair tested = GetParam();
     ASSERT_EQ(tested.first, tested.second);
@@ -80,7 +80,7 @@ TEST_P(equal_test, equal)
 
 INSTANTIATE_TEST_SUITE_P(
     equal,
-    equal_test,
+    card_bid_equal_test,
 
     testing::Values(
         std::make_pair(
