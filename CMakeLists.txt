@@ -25,6 +25,7 @@ project(
 )
 
 option(WITH_DOC "Enable building of documentation" OFF)
+option(WITH_TESTS "Enable building of the tests" OFF)
 
 if (WITH_DOC)
     find_package(Doxygen REQUIRED)
@@ -41,6 +42,41 @@ endif()
 macro (bridge_add_to_doc __headers)
     list(APPEND BRIDGE_DOC_HPP "${__headers}")
 endmacro()
+
+if (WITH_TESTS)
+    set(TEST_RESULT_DIR "${CMAKE_BINARY_DIR}/test-results/" CACHE PATH "The path where the JUnit4 XML report of the unit tests is written")
+
+    find_package(GTest REQUIRED)
+    include(GoogleTest)
+
+    enable_testing()
+
+    function (bridge_add_unit_tests __tests)
+        foreach (test ${__tests})
+            set(target "${PROJECT_NAME}-${test}")
+
+            add_executable("${target}" "src/${test}_test.cpp")
+            target_link_libraries("${target}" GTest::gtest GTest::gtest_main)
+
+            set_target_properties(
+                "${target}"
+
+                PROPERTIES
+                    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/unit-tests/"
+                    RUNTIME_OUTPUT_NAME "${test}"
+            )
+
+            gtest_discover_tests(
+                "${target}"
+                TEST_PREFIX "${PROJECT_NAME}."
+                XML_OUTPUT_DIR "${TEST_RESULT_DIR}"
+            )
+        endforeach()
+    endfunction()
+else()
+    function (bridge_add_unit_tests __tests)
+    endfunction()
+endif()
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
