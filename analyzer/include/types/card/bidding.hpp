@@ -497,6 +497,93 @@ namespace bridge::analyzer::types::card::bidding
     {
         return __os << "card_redouble {}";
     }
+
+    /**
+     * @brief Equality operator for card_stop
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return `true`
+     */
+
+    constexpr bool operator==(card_stop __lhs, card_stop __rhs) noexcept
+       { return true; }
+
+    /**
+     * @brief Inequality operator for card_stop
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return `false`
+     */
+
+    constexpr bool operator!=(card_stop __lhs, card_stop __rhs) noexcept
+        { return false; }
+
+    /**
+     * @brief Less-than operator for card_stop
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return `false`
+     */
+
+    constexpr bool operator<(card_stop __lhs, card_stop __rhs) noexcept
+        { return false; }
+
+    /**
+     * @brief Greater-than operator for card_stop
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return `false`
+     */
+
+    constexpr bool operator>(card_stop __lhs, card_stop __rhs) noexcept
+        { return false; }
+
+    /**
+     * @brief Less-equal operator for card_stop
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return `true`
+     */
+
+    constexpr bool operator<=(card_stop __lhs, card_stop __rhs) noexcept
+        { return true; }
+
+    /**
+     * @brief Greater-equal operator for card_stop
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return `false`
+     */
+
+    constexpr bool operator>=(card_stop __lhs, card_stop __rhs) noexcept
+        { return true; }
+
+    /**
+     * @brief Inserts a card_stop to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, card_stop __value)
+    {
+        return __os << "card_stop {}";
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_BIDDING_HPP
