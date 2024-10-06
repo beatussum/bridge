@@ -21,8 +21,8 @@
 
 using namespace bridge::analyzer::types::card::playing;
 
-TEST(card_test, equal)
+TEST(card_equal_test, equal)
 {
-    card c { color::club, rank::ace };
-    ASSERT_EQ(c, c);
+    card tested { color::club, rank::ace };
+    ASSERT_EQ(tested, tested);
 }

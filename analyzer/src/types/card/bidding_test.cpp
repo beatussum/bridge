@@ -27,11 +27,11 @@ class card_bid_less_test
 
 TEST_P(card_bid_less_test, less)
 {
-    std::pair tested = GetParam();
+    const auto& [first, second] = GetParam();
 
-    ASSERT_NE(tested.first, tested.second);
-    ASSERT_LT(tested.first, tested.second);
-    ASSERT_GT(tested.second, tested.first);
+    ASSERT_NE(first, second);
+    ASSERT_LT(first, second);
+    ASSERT_GT(second, first);
 }
 
 INSTANTIATE_TEST_SUITE_P(
@@ -74,8 +74,8 @@ class card_bid_equal_test
 
 TEST_P(card_bid_equal_test, equal)
 {
-    std::pair tested = GetParam();
-    ASSERT_EQ(tested.first, tested.second);
+    const auto& [lhs, rhs] = GetParam();
+    ASSERT_EQ(lhs, rhs);
 }
 
 INSTANTIATE_TEST_SUITE_P(
