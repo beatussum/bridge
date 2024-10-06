@@ -34,6 +34,7 @@ set(
     types/deal.hpp
     types/metadata.hpp
     types/trick.hpp
+    core.hpp
     types.hpp
 )
 
