@@ -46,19 +46,19 @@ TEST(deal_unit_print_test, basic)
 
     std::string_view expected =
         "deal_unit [ "
-        "card { color = club, rank = 2 }, "
-        "card { color = club, rank = 3 }, "
-        "card { color = club, rank = 4 }, "
-        "card { color = club, rank = 5 }, "
-        "card { color = club, rank = 6 }, "
-        "card { color = club, rank = 7 }, "
-        "card { color = club, rank = 8 }, "
-        "card { color = club, rank = 9 }, "
-        "card { color = club, rank = 10 }, "
-        "card { color = club, rank = J }, "
-        "card { color = club, rank = Q }, "
-        "card { color = club, rank = K }, "
-        "card { color = club, rank = A } "
+        "card { C2 }, "
+        "card { C3 }, "
+        "card { C4 }, "
+        "card { C5 }, "
+        "card { C6 }, "
+        "card { C7 }, "
+        "card { C8 }, "
+        "card { C9 }, "
+        "card { C10 }, "
+        "card { CJ }, "
+        "card { CQ }, "
+        "card { CK }, "
+        "card { CA } "
         "]";
 
     ASSERT_EQ(to_string(tested), expected);

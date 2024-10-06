@@ -90,23 +90,23 @@ namespace bridge::analyzer::types::card::playing
     {
         switch (__value) {
             case color::club:
-                __os << "club";
+                __os << 'C';
                 break;
 
             case color::diamond:
-                __os << "diamond";
+                __os << 'D';
                 break;
 
             case color::heart:
-                __os << "heart";
+                __os << 'H';
                 break;
 
             case color::spade:
-                __os << "spade";
+                __os << 'S';
                 break;
 
             default:
-                __os << "(undefined)";
+                __os << '?';
                 break;
         }
 
@@ -198,13 +198,7 @@ namespace bridge::analyzer::types::card::playing
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
     {
-        __os
-            << "card { color = "
-            << __value.c
-            << ", rank = "
-            << __value.r
-            << " }";
-
+        __os << "card { " << __value.c << __value.r << " }";
         return __os;
     }
 }

@@ -100,27 +100,27 @@ namespace bridge::analyzer::types::card::bidding
     {
         switch (__value) {
             case color::club:
-                __os << "club";
+                __os << 'C';
                 break;
 
             case color::diamond:
-                __os << "diamond";
+                __os << 'D';
                 break;
 
             case color::heart:
-                __os << "heart";
+                __os << 'H';
                 break;
 
             case color::spade:
-                __os << "spade";
+                __os << 'S';
                 break;
 
             case color::notrump:
-                __os << "notrump";
+                __os << 'N';
                 break;
 
             default:
-                __os << "(undefined)";
+                __os << '?';
                 break;
         }
 
@@ -235,13 +235,7 @@ namespace bridge::analyzer::types::card::bidding
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card_bid& __value)
     {
-        __os
-            << "card_bid { color = "
-            << __value.c
-            << ", level = "
-            << static_cast<int>(__value.l)
-            << " }";
-
+        __os << "card_bid { " << __value.c << __value.l << " }";
         return __os;
     }
 
