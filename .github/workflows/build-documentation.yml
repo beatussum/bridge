@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4.1.7
 
       - name: Run CMake
-        run: cmake -B build -DWITH_DOC=ON .
+        run: cmake -B build -D WITH_DOC=ON -G Ninja .
 
       - name: Build documentation
         run: ninja -C build doc
