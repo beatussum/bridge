@@ -85,6 +85,157 @@ namespace bridge::analyzer::types::card::bidding
             card_redouble,
             card_stop
         >;
+
+    /**
+     * @brief Equality operator for card_bid
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    constexpr bool operator==(
+        const card_bid& __lhs,
+        const card_bid& __rhs
+    ) noexcept
+    {
+        return (__lhs.c == __rhs.c) && (__lhs.l == __rhs.l);
+    }
+
+    /**
+     * @brief Inequality operator for card_bid
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    constexpr bool operator!=(
+        const card_bid& __lhs,
+        const card_bid& __rhs
+    ) noexcept
+    {
+        return !(__lhs == __rhs);
+    }
+
+    /**
+     * @brief Less-than operator for card_bid
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is lesser than `rhs`
+     */
+
+    constexpr bool operator<(
+        const card_bid& __lhs,
+        const card_bid& __rhs
+    ) noexcept
+    {
+        if (__lhs.c == __rhs.c) {
+            return __lhs.l < __rhs.l;
+        } else {
+            return __lhs.c < __rhs.c;
+        }
+    }
+
+    /**
+     * @brief Greater-than operator for card_bid
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is greater than `rhs`
+     */
+
+    constexpr bool operator>(
+        const card_bid& __lhs,
+        const card_bid& __rhs
+    ) noexcept
+    {
+        return !(__lhs == __rhs) && (__rhs < __lhs);
+    }
+
+    /**
+     * @brief Less-equal operator for card_bid
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is lesser than or equal to `rhs`
+     */
+
+    constexpr bool operator<=(
+        const card_bid& __lhs,
+        const card_bid& __rhs
+    ) noexcept
+    {
+        return (__lhs == __rhs) || (__rhs < __lhs);
+    }
+
+    /**
+     * @brief Greater-equal operator for card_bid
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is greater than or equal to `rhs`
+     */
+
+    constexpr bool operator>=(
+        const card_bid& __lhs,
+        const card_bid& __rhs
+    ) noexcept
+    {
+        return !(__lhs < __rhs);
+    }
+
+    /**
+     * @brief Inserts a card_bid to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const card_bid& __value)
+    {
+        __os << "card_bid { color = ";
+
+        switch (__value.c) {
+            case color::club:
+                __os << "club";
+                break;
+
+            case color::diamond:
+                __os << "diamond";
+                break;
+
+            case color::heart:
+                __os << "heart";
+                break;
+
+            case color::spade:
+                __os << "spade";
+                break;
+
+            case color::notrump:
+                __os << "notrump";
+                break;
+
+            default:
+                __os << "(undefined)";
+                break;
+        }
+
+        __os << ", level = " << static_cast<int>(__value.l) << " }";
+
+        return __os;
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_BIDDING_HPP

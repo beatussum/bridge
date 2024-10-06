@@ -84,7 +84,8 @@ if (WITH_TESTS)
         endif()
 
         foreach (test ${BRIDGE_ADD_UNIT_TEST_TESTS})
-            set(target "${BRIDGE_ADD_UNIT_TEST_SCOPE_NAME}-${test}")
+            string(REPLACE "/" "-" scope "${test}")
+            set(target "${BRIDGE_ADD_UNIT_TEST_SCOPE_NAME}-${scope}")
 
             add_executable("${target}" "src/${test}_test.cpp")
 
@@ -104,7 +105,7 @@ if (WITH_TESTS)
                     RUNTIME_OUTPUT_DIRECTORY
                         "${CMAKE_CURRENT_BINARY_DIR}/unit-tests/"
 
-                    RUNTIME_OUTPUT_NAME "${test}"
+                    RUNTIME_OUTPUT_NAME "${scope}"
             )
 
             gtest_discover_tests(
