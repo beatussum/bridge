@@ -27,14 +27,14 @@ project(
 list(APPEND CMAKE_MODULE_PATH "cmake/")
 
 set(
-	ANALYZER_INTERFACE_HPP
-	types/card/bidding.hpp
-	types/card/playing.hpp
-	types/card.hpp
-	types/deal.hpp
-	types/metadata.hpp
-	types/trick.hpp
-	types.hpp
+    ANALYZER_INTERFACE_HPP
+    types/card/bidding.hpp
+    types/card/playing.hpp
+    types/card.hpp
+    types/deal.hpp
+    types/metadata.hpp
+    types/trick.hpp
+    types.hpp
 )
 
 list(TRANSFORM ANALYZER_INTERFACE_HPP PREPEND "include/")
@@ -43,12 +43,12 @@ add_library(analyzer INTERFACE)
 target_include_directories(analyzer INTERFACE "include/")
 
 target_sources(
-	analyzer
+    analyzer
 
-	INTERFACE
-		FILE_SET HEADERS
-		TYPE HEADERS
-		FILES "${ANALYZER_INTERFACE_HPP}"
+    INTERFACE
+        FILE_SET HEADERS
+        TYPE HEADERS
+        FILES "${ANALYZER_INTERFACE_HPP}"
 )
 
 bridge_add_to_doc("${ANALYZER_INTERFACE_HPP}")
