@@ -1,6 +1,10 @@
 name: Run tests
 on: push
 
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 permissions:
   checks: write
 
