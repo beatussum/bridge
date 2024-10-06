@@ -198,14 +198,14 @@ namespace bridge::analyzer::types::card::playing
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
     {
-        return
-            __os
-                << "card { color = "
-                << __value.c
-                << ", rank = "
-                << __value.r
-                << "}";
+        __os
+            << "card { color = "
+            << __value.c
+            << ", rank = "
+            << __value.r
+            << "}";
 
+        return __os;
     }
 }
 

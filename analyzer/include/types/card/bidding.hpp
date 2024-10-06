@@ -235,13 +235,14 @@ namespace bridge::analyzer::types::card::bidding
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card_bid& __value)
     {
-        return
-            __os
-                << "card_bid { color = "
-                << __value.c
-                << ", level = "
-                << static_cast<int>(__value.l)
-                << " }";
+        __os
+            << "card_bid { color = "
+            << __value.c
+            << ", level = "
+            << static_cast<int>(__value.l)
+            << " }";
+
+        return __os;
     }
 
     /**
@@ -327,7 +328,10 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_double __value)
-        { return __os << "card_redouble {}"; }
+    {
+        __os << "card_redouble {}";
+        return __os;
+    }
 
     /**
      * @brief Equality operator for card_pass
@@ -412,7 +416,10 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_pass __value)
-        { return __os << "card_pass {}"; }
+    {
+        __os << "card_pass {}";
+        return __os;
+    }
 
     /**
      * @brief Equality operator for card_redouble
@@ -497,7 +504,10 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_redouble __value)
-        { return __os << "card_redouble {}"; }
+    {
+        __os << "card_redouble {}";
+        return __os;
+    }
 
     /**
      * @brief Equality operator for card_stop
@@ -582,7 +592,10 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_stop __value)
-        { return __os << "card_stop {}"; }
+    {
+        __os << "card_stop {}";
+        return __os;
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_BIDDING_HPP
