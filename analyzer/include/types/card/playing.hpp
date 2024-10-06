@@ -75,6 +75,138 @@ namespace bridge::analyzer::types::card::playing
         color c; ///< The color of the playing card
         rank r;  ///< The rank of the playing card
     };
+
+    /**
+     * @brief Inserts a color to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, color __value)
+    {
+        switch (__value) {
+            case color::club:
+                __os << "club";
+                break;
+
+            case color::diamond:
+                __os << "diamond";
+                break;
+
+            case color::heart:
+                __os << "heart";
+                break;
+
+            case color::spade:
+                __os << "spade";
+                break;
+
+            default:
+                __os << "(undefined)";
+                break;
+        }
+
+        return __os;
+    }
+
+    /**
+     * @brief Inserts a rank to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, rank __value)
+    {
+        switch (__value) {
+            case rank::two:
+            case rank::three:
+            case rank::four:
+            case rank::five:
+            case rank::six:
+            case rank::seven:
+            case rank::eight:
+            case rank::nine:
+            case rank::ten:
+                __os << std::to_string(static_cast<int>(__value));
+                break;
+
+            case rank::jack:
+                __os << 'J';
+                break;
+
+            case rank::queen:
+                __os << 'Q';
+                break;
+
+            case rank::king:
+                __os << 'K';
+                break;
+
+            case rank::ace:
+                __os << 'A';
+                break;
+
+            default:
+                __os << "(undefined)";
+                break;
+        }
+
+        return __os;
+    }
+
+    /**
+     * @brief Equality operator for card
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    constexpr bool operator==(const card& __lhs, const card& __rhs) noexcept
+        { return (__lhs.c == __rhs.c) && (__lhs.r == __rhs.r); }
+
+    /**
+     * @brief Inequality operator for card
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    constexpr bool operator!=(const card& __lhs, const card& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Inserts a card to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
+    {
+        return
+            __os
+                << "card { color = "
+                << __value.c
+                << ", rank = "
+                << __value.r
+                << "}";
+
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_PLAYING_HPP

@@ -52,4 +52,11 @@ target_sources(
 )
 
 bridge_add_to_doc("${ANALYZER_INTERFACE_HPP}")
-bridge_add_unit_tests(TESTS types/card/bidding EXTRA_LIBS analyzer)
+
+bridge_add_unit_tests(
+    TESTS
+        types/card/bidding
+        types/card/playing
+
+    EXTRA_LIBS analyzer
+)
