@@ -48,6 +48,37 @@ namespace bridge::analyzer::types
     };
 
     /**
+     * @brief Inserts a deal_unit to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template <class Ostream>
+    Ostream&& operator<<(Ostream&& __os, const deal_unit& __value)
+    {
+        __os << "deal_unit [";
+
+        if (__value.empty()) {
+            __os << ']';
+        } else {
+            __os << ' ';
+
+            auto end = __value.cend() - 1;
+
+            for (auto i = __value.cbegin(); i < end; ++i) {
+                __os << *i << ", ";
+            }
+
+            __os << __value.back() << " ]";
+        }
+
+        return __os;
+    }
+
+    /**
      * @brief Equality operator for deal
      *
      * @param[in] __lhs The left hand side operand
@@ -76,6 +107,32 @@ namespace bridge::analyzer::types
 
     inline bool operator!=(const deal& __lhs, const deal& __rhs) noexcept
         { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Inserts a deal to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template <class Ostream>
+    Ostream&& operator<<(Ostream&& __os, const deal& __value)
+    {
+        __os
+            << "deal { north = "
+            << __value.north
+            << ", west = "
+            << __value.west
+            << ", south = "
+            << __value.south
+            << ", east = "
+            << __value.east
+            << " }";
+
+        return __os;
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_DEAL_HPP

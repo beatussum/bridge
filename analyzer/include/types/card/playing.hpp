@@ -203,7 +203,7 @@ namespace bridge::analyzer::types::card::playing
             << __value.c
             << ", rank = "
             << __value.r
-            << "}";
+            << " }";
 
         return __os;
     }
