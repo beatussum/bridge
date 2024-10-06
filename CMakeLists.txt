@@ -116,8 +116,6 @@ endif()
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
-include(CompilerFlags)
-
 find_package(Ccache MODULE)
 enable_ccache()
 
@@ -125,38 +123,44 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_EXTENSIONS FALSE)
 
-add_gcc_cxx_flags(
-    -fmessage-length=75
-    -fno-gnu-keywords
-    -fno-operator-names
-    -funsigned-char
-    -pipe
-    -Wall
-    -Wconversion
-    -Wdouble-promotion
-    -Wduplicated-branches
-    -Wduplicated-cond
-    -Wfloat-equal
-    -Wignored-qualifiers
-    -Wimplicit-fallthrough=5
-    -Wmissing-field-initializers
-    -Wmissing-include-dirs
-    -Wno-div-by-zero
-    -Wnoexcept
-    -Wold-style-cast
-    -Woverloaded-virtual
-    -Wpedantic
-    -Wsuggest-attribute=const
-    -Wsuggest-attribute=noreturn
-    -Wsuggest-attribute=pure
-    -Wsuggest-final-methods
-    -Wsuggest-final-types
-    -Wsuggest-final-types
-    -Wsuggest-override
-    -Wsuggest-override
-    -Wundef
-    -Wuninitialized
+list(
+    APPEND BRIDGE_CXX_GNU_FLAGS
+
+        -fmessage-length=80
+        -fno-operator-names
+        -funsigned-char
+        -Wall
+        -Wconversion
+        -Wdouble-promotion
+        -Wduplicated-branches
+        -Wduplicated-cond
+        -Wfloat-equal
+        -Wignored-qualifiers
+        -Wimplicit-fallthrough=5
+        -Wmissing-field-initializers
+        -Wmissing-include-dirs
+        -Wno-div-by-zero
+        -Wnoexcept
+        -Wold-style-cast
+        -Woverloaded-virtual
+        -Wpedantic
+        -Wsuggest-attribute=const
+        -Wsuggest-attribute=noreturn
+        -Wsuggest-attribute=pure
+        -Wsuggest-final-methods
+        -Wsuggest-final-types
+        -Wsuggest-final-types
+        -Wsuggest-override
+        -Wsuggest-override
+        -Wundef
+        -Wuninitialized
 )
+
+foreach (flag IN LISTS BRIDGE_CXX_GNU_FLAGS)
+    add_compile_options(
+        $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:GNU>>:${flag}>
+    )
+endforeach ()
 
 add_subdirectory(analyzer)
 
