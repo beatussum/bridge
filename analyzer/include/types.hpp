@@ -127,6 +127,34 @@ namespace bridge::analyzer::types
     };
 
     /**
+     * @brief Equality operator for auction
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    bool operator==(const auction& __lhs, const auction& __rhs) noexcept
+    {
+        return
+            (__lhs.first_player == __rhs.first_player) &&
+            (__lhs.bidding_cards == __rhs.bidding_cards);
+    }
+
+    /**
+     * @brief Inequality operator for auction
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    bool operator!=(const auction& __lhs, const auction& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
      * @brief Equality operator for player
      *
      * @param[in] __lhs The left hand side operand
