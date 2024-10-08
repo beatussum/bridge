@@ -38,6 +38,22 @@ namespace bridge::analyzer::types::card
      */
 
     using card = std::variant<bidding::card, playing::card>;
+
+    /**
+     * @brief Inserts a card to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template <class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
+    {
+        std::visit([&] (const auto& value) { __os << value; }, __value);
+        return __os;
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_HPP
