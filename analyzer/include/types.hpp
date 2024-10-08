@@ -127,6 +127,47 @@ namespace bridge::analyzer::types
     };
 
     /**
+     * @brief Inserts a positioning to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, positioning __value)
+    {
+        switch (__value) {
+            case positioning::north:
+                __os << "north";
+                break;
+
+            case positioning::west:
+                __os << "west";
+                break;
+
+            case positioning::south:
+                __os << "south";
+                break;
+
+            case positioning::east:
+                __os << "east";
+                break;
+
+            case positioning::none:
+                __os << "none";
+                break;
+
+            default:
+                __os << "(undefined)";
+                break;
+        }
+
+        return __os;
+    }
+
+    /**
      * @brief Cast a type to std::string
      *
      * @param[in] __value The type to cast

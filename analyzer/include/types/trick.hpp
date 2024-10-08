@@ -39,8 +39,8 @@ namespace bridge::analyzer::types
 
     struct trick_unit
     {
-        card::playing::card card; ///< The card played by the associated player
-        positioning p;            ///< The positioning of the associated player
+        card::playing::card c; ///< The card played by the associated player
+        positioning p;         ///< The positioning of the associated player
     };
 
     /**
@@ -59,6 +59,58 @@ namespace bridge::analyzer::types
 
         metadata m; ///< The metadata of the trick
     };
+
+    /**
+     * @brief Equality operator for trick_unit
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    constexpr bool operator==(
+        const trick_unit& __lhs,
+        const trick_unit& __rhs
+    ) noexcept
+        { return (__lhs.c == __rhs.c) && (__lhs.p == __rhs.p); }
+
+    /**
+     * @brief Inequality operator for trick_unit
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    constexpr bool operator!=(
+        const trick_unit& __lhs,
+        const trick_unit& __rhs
+    ) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Inserts a trick_unit to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value)
+    {
+        __os
+            << "trick_unit { card = "
+            << __value.c
+            << ", positioning = "
+            << __value.p
+            << " }";
+
+        return __os;
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_TRICK_HPP
