@@ -127,6 +127,110 @@ namespace bridge::analyzer::types
     };
 
     /**
+     * @brief Equality operator for player
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    bool operator==(const player& __lhs, const player& __rhs) noexcept
+    {
+        return
+            (__lhs.first_name == __rhs.first_name) &&
+            (__lhs.last_name == __rhs.last_name);
+    }
+
+    /**
+     * @brief Inequality operator for player
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    bool operator!=(const player& __lhs, const player& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Less-than operator for player
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is lesser than `rhs`
+     */
+
+    bool operator<(const player& __lhs, const player& __rhs) noexcept
+    {
+        if (__lhs.last_name == __rhs.last_name) {
+            return __lhs.first_name < __rhs.first_name;
+        } else {
+            return __lhs.last_name < __rhs.last_name;
+        }
+    }
+
+    /**
+     * @brief Greater-than operator for player
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is greater than `rhs`
+     */
+
+    bool operator>(const player& __lhs, const player& __rhs) noexcept
+        { return !(__lhs == __rhs) && (__rhs < __lhs); }
+
+    /**
+     * @brief Less-equal operator for player
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is lesser than or equal to `rhs`
+     */
+
+    bool operator<=(const player& __lhs, const player& __rhs) noexcept
+        { return (__lhs == __rhs) || (__rhs < __lhs); }
+
+    /**
+     * @brief Greater-equal operator for player
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is greater than or equal to `rhs`
+     */
+
+    bool operator>=(const player& __lhs, const player& __rhs) noexcept
+        { return !(__lhs < __rhs); }
+
+    /**
+     * @brief Inserts a player to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    Ostream&& operator<<(Ostream&& __os, const player& __value)
+    {
+        __os
+            << "player { first_name = "
+            << __value.first_name
+            << ", last_name = "
+            << __value.last_name
+            << " }";
+
+        return __os;
+    }
+
+    /**
      * @brief Inserts a positioning to an output stream
      *
      * @param[in] __os The output stream
