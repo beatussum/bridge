@@ -231,6 +231,35 @@ namespace bridge::analyzer::types
     }
 
     /**
+     * @brief Inserts a phase to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, phase __value)
+    {
+        switch (__value) {
+            case phase::bidding:
+                __os << "bidding";
+                break;
+
+            case phase::card:
+                __os << "card";
+                break;
+
+            default:
+                __os << "(undefined)";
+                break;
+        }
+
+        return __os;
+    }
+
+    /**
      * @brief Inserts a positioning to an output stream
      *
      * @param[in] __os The output stream
