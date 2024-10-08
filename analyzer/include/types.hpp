@@ -259,6 +259,39 @@ namespace bridge::analyzer::types
     }
 
     /**
+     * @brief Equality operator for game
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    inline bool operator==(const game& __lhs, const game& __rhs) noexcept
+    {
+        return
+            (__lhs.north == __rhs.north) &&
+            (__lhs.west == __rhs.west) &&
+            (__lhs.south == __rhs.south) &&
+            (__lhs.east == __rhs.east) &&
+            (__lhs.a == __rhs.a) &&
+            (__lhs.d == __rhs.d) &&
+            (__lhs.tricks == __rhs.tricks);
+    }
+
+    /**
+     * @brief Inequality operator for game
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    inline bool operator!=(const game& __lhs, const game& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
      * @brief Inserts a phase to an output stream
      *
      * @param[in] __os The output stream
