@@ -362,6 +362,62 @@ namespace bridge::analyzer::types
     }
 
     /**
+     * @brief Equality operator for raw_trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    bool operator==(const raw_trick& __lhs, const raw_trick& __rhs) noexcept
+    {
+        return
+            (__lhs.north == __rhs.north) &&
+            (__lhs.west == __rhs.west) &&
+            (__lhs.south == __rhs.south) &&
+            (__lhs.east == __rhs.east);
+    }
+
+    /**
+     * @brief Inequality operator for raw_trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    bool operator!=(const raw_trick& __lhs, const raw_trick& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Inserts a raw_trick to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, raw_trick __value)
+    {
+        __os
+            << "raw_trick { north = "
+            << __value.north
+            << ", west = "
+            << __value.west
+            << ", south = "
+            << __value.south
+            << ", east = "
+            << __value.east
+            << " }";
+
+        return __os;
+    }
+
+    /**
      * @brief Cast a type to std::string
      *
      * @param[in] __value The type to cast
