@@ -146,7 +146,7 @@ namespace bridge::analyzer::types
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, const trick& __value)
+    Ostream&& operator<<(Ostream&& __os, const trick& __value)
     {
         __os
             << "trick { first = "

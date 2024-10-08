@@ -135,7 +135,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is equal to `rhs`
      */
 
-    bool operator==(const auction& __lhs, const auction& __rhs) noexcept
+    inline bool operator==(const auction& __lhs, const auction& __rhs) noexcept
     {
         return
             (__lhs.first_player == __rhs.first_player) &&
@@ -151,7 +151,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is different from `rhs`
      */
 
-    bool operator!=(const auction& __lhs, const auction& __rhs) noexcept
+    inline bool operator!=(const auction& __lhs, const auction& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
@@ -163,7 +163,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is equal to `rhs`
      */
 
-    bool operator==(const player& __lhs, const player& __rhs) noexcept
+    inline bool operator==(const player& __lhs, const player& __rhs) noexcept
     {
         return
             (__lhs.first_name == __rhs.first_name) &&
@@ -179,7 +179,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is different from `rhs`
      */
 
-    bool operator!=(const player& __lhs, const player& __rhs) noexcept
+    inline bool operator!=(const player& __lhs, const player& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
@@ -191,7 +191,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is lesser than `rhs`
      */
 
-    bool operator<(const player& __lhs, const player& __rhs) noexcept
+    inline bool operator<(const player& __lhs, const player& __rhs) noexcept
     {
         if (__lhs.last_name == __rhs.last_name) {
             return __lhs.first_name < __rhs.first_name;
@@ -209,7 +209,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is greater than `rhs`
      */
 
-    bool operator>(const player& __lhs, const player& __rhs) noexcept
+    inline bool operator>(const player& __lhs, const player& __rhs) noexcept
         { return !(__lhs == __rhs) && (__rhs < __lhs); }
 
     /**
@@ -221,7 +221,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is lesser than or equal to `rhs`
      */
 
-    bool operator<=(const player& __lhs, const player& __rhs) noexcept
+    inline bool operator<=(const player& __lhs, const player& __rhs) noexcept
         { return (__lhs == __rhs) || (__rhs < __lhs); }
 
     /**
@@ -233,7 +233,7 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is greater than or equal to `rhs`
      */
 
-    bool operator>=(const player& __lhs, const player& __rhs) noexcept
+    inline bool operator>=(const player& __lhs, const player& __rhs) noexcept
         { return !(__lhs < __rhs); }
 
     /**
@@ -370,7 +370,10 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is equal to `rhs`
      */
 
-    bool operator==(const raw_trick& __lhs, const raw_trick& __rhs) noexcept
+    inline bool operator==(
+        const raw_trick& __lhs,
+        const raw_trick& __rhs
+    ) noexcept
     {
         return
             (__lhs.north == __rhs.north) &&
@@ -388,7 +391,10 @@ namespace bridge::analyzer::types
      * @return If `__lhs` is different from `rhs`
      */
 
-    bool operator!=(const raw_trick& __lhs, const raw_trick& __rhs) noexcept
+    inline bool operator!=(
+        const raw_trick& __lhs,
+        const raw_trick& __rhs
+    ) noexcept
         { return !(__lhs == __rhs); }
 
     /**
