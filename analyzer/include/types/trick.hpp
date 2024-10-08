@@ -91,6 +91,30 @@ namespace bridge::analyzer::types
         { return !(__lhs == __rhs); }
 
     /**
+     * @brief Equality operator for trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is equal to `rhs`
+     */
+
+    inline bool operator==(const trick& __lhs, const trick& __rhs) noexcept
+        { return __lhs.units == __rhs.units; }
+
+    /**
+     * @brief Inequality operator for trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If `__lhs` is different from `rhs`
+     */
+
+    inline bool operator!=(const trick& __lhs, const trick& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
      * @brief Inserts a trick_unit to an output stream
      *
      * @param[in] __os The output stream
