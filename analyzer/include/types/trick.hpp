@@ -111,6 +111,32 @@ namespace bridge::analyzer::types
 
         return __os;
     }
+
+    /**
+     * @brief Inserts a trick to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const trick& __value)
+    {
+        __os
+            << "trick { first = "
+            << __value.units[0]
+            << ", second = "
+            << __value.units[1]
+            << ", third = "
+            << __value.units[2]
+            << ", fourth = "
+            << __value.units[3]
+            << " }";
+
+        return __os;
+    }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_TRICK_HPP
