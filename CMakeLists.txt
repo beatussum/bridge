@@ -140,7 +140,6 @@ list(
         -Wdouble-promotion
         -Wduplicated-branches
         -Wduplicated-cond
-        -Wfloat-equal
         -Wignored-qualifiers
         -Wimplicit-fallthrough=5
         -Wmissing-field-initializers

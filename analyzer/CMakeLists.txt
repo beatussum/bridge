@@ -34,12 +34,15 @@ set(
     types/deal.hpp
     types/metadata.hpp
     types/trick.hpp
+    transformed.hpp
     types.hpp
 )
 
 list(TRANSFORM ANALYZER_INTERFACE_HPP PREPEND "include/")
 
+find_package(OpenCV REQUIRED COMPONENTS imgproc)
 add_library(analyzer INTERFACE)
+target_link_libraries(analyzer INTERFACE opencv_imgproc)
 target_include_directories(analyzer INTERFACE "include/")
 
 target_sources(
