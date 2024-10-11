@@ -26,7 +26,11 @@
  * @brief The base header of the namespace bridge::analyzer::types::metadata
  */
 
-namespace bridge::analyzer::types
+/**
+ * @brief This namespace describes the metadata type
+ */
+
+namespace bridge::analyzer::types::metadata
 {
     using metadata = std::any; ///< A metadata
 }

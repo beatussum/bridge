@@ -94,7 +94,7 @@ namespace bridge::analyzer::types::deal
         deal_unit south; ///< The deal unit of the south player
         deal_unit east;  ///< The deal unit of the north player
 
-        metadata m; ///< The metadata of the deal
+        metadata::metadata m; ///< The metadata of the deal
     };
 
     /**

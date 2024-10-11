@@ -58,7 +58,7 @@ namespace bridge::analyzer::types
 
         std::vector<card::bidding::card> bidding_cards;
 
-        metadata m; ///< The metadata of the auction
+        metadata::metadata m; ///< The metadata of the auction
     };
 
     /**
@@ -70,7 +70,7 @@ namespace bridge::analyzer::types
         std::string first_name; ///< The first name of the player
         std::string last_name;  ///< The last name of the player
 
-        metadata m; ///< The metadata of the player
+        metadata::metadata m; ///< The metadata of the player
     };
 
     /**
@@ -88,7 +88,7 @@ namespace bridge::analyzer::types
         deal::deal d;                     ///< The deal of the game
         std::vector<trick::trick> tricks; ///< The tricks of the game
 
-        metadata m; ///< The metadata of the game
+        metadata::metadata m; ///< The metadata of the game
     };
 
     /**

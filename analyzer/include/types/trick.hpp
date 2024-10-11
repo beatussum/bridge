@@ -64,7 +64,7 @@ namespace bridge::analyzer::types::trick
 
         std::array<trick_unit, 4> units;
 
-        metadata m; ///< The metadata of the trick
+        metadata::metadata m; ///< The metadata of the trick
     };
 
     /**
