@@ -21,6 +21,12 @@
 
 using namespace bridge::analyzer::types::card::bidding;
 
+TEST(level_test, domain_error)
+{
+    ASSERT_THROW(level(0), std::domain_error);
+    ASSERT_THROW(level(8), std::domain_error);
+}
+
 class card_bid_less_test
     : public testing::TestWithParam<std::pair<card_bid, card_bid>>
 {};
@@ -40,13 +46,13 @@ INSTANTIATE_TEST_SUITE_P(
 
     testing::Values(
         std::make_pair(
-            card_bid { color::club, 2 },
-            card_bid { color::notrump, 2 }
+            card_bid { color::club, 2_lvl },
+            card_bid { color::notrump, 2_lvl }
         ),
 
         std::make_pair(
-            card_bid { color::diamond, 5 },
-            card_bid { color::heart, 5 }
+            card_bid { color::diamond, 5_lvl },
+            card_bid { color::heart, 5_lvl }
         )
     )
 );
@@ -57,13 +63,13 @@ INSTANTIATE_TEST_SUITE_P(
 
     testing::Values(
         std::make_pair(
-            card_bid { color::club, 2 },
-            card_bid { color::club, 3 }
+            card_bid { color::club, 2_lvl },
+            card_bid { color::club, 3_lvl }
         ),
 
         std::make_pair(
-            card_bid { color::diamond, 5 },
-            card_bid { color::diamond, 7 }
+            card_bid { color::diamond, 5_lvl },
+            card_bid { color::diamond, 7_lvl }
         )
     )
 );
@@ -84,13 +90,13 @@ INSTANTIATE_TEST_SUITE_P(
 
     testing::Values(
         std::make_pair(
-            card_bid { color::club, 2 },
-            card_bid { color::club, 2 }
+            card_bid { color::club, 2_lvl },
+            card_bid { color::club, 2_lvl }
         ),
 
         std::make_pair(
-            card_bid { color::diamond, 5 },
-            card_bid { color::diamond, 5 }
+            card_bid { color::diamond, 5_lvl },
+            card_bid { color::diamond, 5_lvl }
         )
     )
 );

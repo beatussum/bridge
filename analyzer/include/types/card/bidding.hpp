@@ -56,7 +56,78 @@ namespace bridge::analyzer::types::card::bidding
      * otherwise, the behavior of the associated bid is undefined.
      */
 
-    using level = std::uint_fast8_t;
+    class level
+    {
+    public:
+        /**
+         * @brief The underlying type of a level
+         */
+
+        using underlying_type = std::uint_fast8_t;
+    public:
+        /**
+         * @brief Default constructor of level
+         */
+
+        constexpr level() noexcept
+            : m_level(1)
+        {}
+
+        /**
+         * @brief Copy constructor of level
+         *
+         * @param[in] __other The other level to copy
+         */
+
+        constexpr level(const level& __other) noexcept = default;
+
+        /**
+         * @brief Move constructor of level
+         *
+         * @param[in] __other The other level to move
+         */
+
+        constexpr level(level&& __other) noexcept = default;
+
+        ~level() noexcept = default; ///< Destructor of level
+    public:
+        /**
+         * @brief Constructs a level from an integer
+         *
+         * @param[in] __level The level value (must be between 1 and 7)
+         * @throw std::domain_error If the level is not between 1 and 7
+         */
+
+        explicit constexpr level(underlying_type __level);
+
+        /**
+         * @brief Casts a level to an integer
+         *
+         * @return A level as an integer
+         */
+
+        constexpr operator underlying_type() const noexcept { return m_level; }
+    public:
+        /**
+         * @brief Copy assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned level
+         */
+
+        constexpr level& operator=(const level& __rhs) noexcept = default;
+
+        /**
+         * @brief Move assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned level
+         */
+
+        constexpr level& operator=(level&& __rhs) noexcept = default;
+    private:
+        underlying_type m_level; ///< The value of a level
+    };
 
     /**
      * @brief A bid
@@ -77,14 +148,62 @@ namespace bridge::analyzer::types::card::bidding
      * @brief A bidding card
      */
 
-    using card =
-        std::variant<
+    class card :
+        public std::variant<
             card_bid,
             card_double,
             card_pass,
             card_redouble,
             card_stop
-        >;
+        >
+    {
+    public:
+        using std::variant<
+            card_bid,
+            card_double,
+            card_pass,
+            card_redouble,
+            card_stop
+        >::variant;
+
+        constexpr card() noexcept = default; ///< Default constructor of card
+
+        /**
+         * @brief Copy constructor of card
+         *
+         * @param[in] __other The other card to copy
+         */
+
+        constexpr card(const card& __other) = default;
+
+        /**
+         * @brief Move constructor of card
+         *
+         * @param[in] __other The other card to move
+         */
+
+        constexpr card(card&& __other) noexcept = default;
+
+        ~card() = default; ///< Destructor of card
+    public:
+        /**
+         * @brief Copy assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned card
+         */
+
+        constexpr card& operator=(const card& __rhs) = default;
+
+        /**
+         * @brief Move assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned card
+         */
+
+        constexpr card& operator=(card&& __rhs) noexcept = default;
+    };
 
     /**
      * @brief Inserts a color to an output stream
@@ -97,6 +216,17 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, color __value);
+
+    /**
+     * @brief A user-defined literal for level
+     *
+     * @param[in] __level The value of the level
+     * @return A level corresponding to the given value
+     * @throw std::domain_error If the level is not between 1 and 7
+     */
+
+    constexpr level operator ""_lvl(unsigned long long __level)
+        { return level(static_cast<level::underlying_type>(__level)); }
 
     /**
      * @brief Equality operator for card_bid

@@ -37,7 +37,49 @@ namespace bridge::analyzer::types::card
      * @brief A variant type representing a bidding or playing card
      */
 
-    using card = std::variant<bidding::card, playing::card>;
+    class card : public std::variant<bidding::card, playing::card>
+    {
+    public:
+        using std::variant<bidding::card, playing::card>::variant;
+
+        constexpr card() noexcept = default; ///< Default constructor of card
+
+        /**
+         * @brief Copy constructor of card
+         *
+         * @param[in] __other The other card to copy
+         */
+
+        constexpr card(const card& __other) = default;
+
+        /**
+         * @brief Move constructor of card
+         *
+         * @param[in] __other The other card to move
+         */
+
+        constexpr card(card&& __other) noexcept = default;
+
+        ~card() = default; ///< Destructor of card
+    public:
+        /**
+         * @brief Copy assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned card
+         */
+
+        constexpr card& operator=(const card& __rhs) = default;
+
+        /**
+         * @brief Move assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned card
+         */
+
+        constexpr card& operator=(card&& __rhs) noexcept = default;
+    };
 
     /**
      * @brief Inserts a card to an output stream

@@ -18,6 +18,14 @@
 
 namespace bridge::analyzer::types::card::bidding
 {
+    constexpr level::level(underlying_type __level)
+        : m_level(__level)
+    {
+        if ((__level < 1) || (__level > 7)) {
+            throw std::domain_error("A level must be between 1 and 7");
+        }
+    }
+
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, color __value)
     {
