@@ -23,7 +23,7 @@
 
 /**
  * @file
- * @brief This file defines the type used for metadata
+ * @brief The base header of the namespace bridge::analyzer::types::metadata
  */
 
 namespace bridge::analyzer::types

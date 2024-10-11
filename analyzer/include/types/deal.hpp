@@ -26,6 +26,10 @@
 
 /**
  * @file
+ * @brief The base header of the namespace bridge::analyzer::types::deal
+ */
+
+/**
  * @brief This namespace describes the deal type and its associated types
  */
 

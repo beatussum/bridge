@@ -31,6 +31,10 @@ namespace bridge::analyzer::types
 
 /**
  * @file
+ * @brief The base header of the namespace bridge::analyzer::types::trick
+ */
+
+/**
  * @brief This namespace describes the trick type and its associated types
  */
 

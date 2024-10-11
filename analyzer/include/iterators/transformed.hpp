@@ -24,6 +24,7 @@
 
 /**
  * @file
+ *
  * @brief The base header of the namespace
  * bridge::analyzer::iterators::transformed
  */

@@ -19,6 +19,15 @@
 #ifndef BRIDGE_ANALYZER_CORE_HPP
 #define BRIDGE_ANALYZER_CORE_HPP
 
+/**
+ * @file
+ * @brief The base header of the namespace bridge::analyzer::core
+ */
+
+/**
+ * @brief This namespace describes various core utilities
+ */
+
 namespace bridge::analyzer::core
 {
     /**
