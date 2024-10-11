@@ -16,15 +16,16 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_TRANSFORMED_HPP
-#define BRIDGE_ANALYZER_TRANSFORMED_HPP
+#ifndef BRIDGE_ANALYZER_ITERATORS_TRANSFORMED_HPP
+#define BRIDGE_ANALYZER_ITERATORS_TRANSFORMED_HPP
 
 #include <opencv2/imgproc.hpp>
 #include <type_traits>
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::transformed
+ * @brief The base header of the namespace
+ * bridge::analyzer::iterators::transformed
  */
 
 /**
@@ -32,7 +33,7 @@
  * transformed_iterator
  */
 
-namespace bridge::analyzer::transformed
+namespace bridge::analyzer::iterators::transformed
 {
     /**
      * @brief The transformation parameters used by transformed_iterator
@@ -477,4 +478,4 @@ namespace bridge::analyzer::transformed
         { return transformed_parameters { __angle, __center, __roi, __size }; }
 }
 
-#endif // BRIDGE_ANALYZER_TRANSFORMED_HPP
+#endif // BRIDGE_ANALYZER_ITERATORS_TRANSFORMED_HPP

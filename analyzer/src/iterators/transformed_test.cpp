@@ -16,10 +16,10 @@
  */
 
 
-#include "transformed.hpp"
+#include "iterators/transformed.hpp"
 #include <gtest/gtest.h>
 
-using namespace bridge::analyzer::transformed;
+using namespace bridge::analyzer::iterators::transformed;
 
 namespace cv
 {

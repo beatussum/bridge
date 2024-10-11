@@ -34,7 +34,8 @@ set(
     types/deal.hpp
     types/metadata.hpp
     types/trick.hpp
-    transformed.hpp
+    iterators/transformed.hpp
+    iterators.hpp
     types.hpp
 )
 
@@ -61,7 +62,7 @@ bridge_add_unit_tests(
         types/card/bidding
         types/card/playing
         types/deal
-        transformed
+        iterators/transformed
 
     EXTRA_LIBS analyzer
 )
