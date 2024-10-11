@@ -86,14 +86,14 @@ namespace bridge::analyzer::transformed
          * the transformed_iterator
          */
 
-        using pointer_type = const cv::Mat*;
+        using pointer = const cv::Mat*;
 
         /**
          * @brief The type of the pointer referencing to the value referenced by
          * the transformed_iterator
          */
 
-        using reference_type = const cv::Mat&;
+        using reference = const cv::Mat&;
 
         /**
          * @brief The type of the value referenced by the transformed_iterator
@@ -109,24 +109,24 @@ namespace bridge::analyzer::transformed
 
         static_assert(
             std::conjunction_v<
-                std::is_same<
-                    pointer_type,
-                    typename std::iterator_traits<Iterator>::pointer_type
+                std::is_convertible<
+                    typename std::iterator_traits<Iterator>::pointer,
+                    pointer
                 >,
 
-                std::is_same<
-                    reference_type,
-                    typename std::iterator_traits<Iterator>::reference_type
+                std::is_convertible<
+                    typename std::iterator_traits<Iterator>::reference,
+                    reference
                 >,
 
-                std::is_same<
-                    value_type,
-                    typename std::iterator_traits<Iterator>::value_type
+                std::is_convertible<
+                    typename std::iterator_traits<Iterator>::value_type,
+                    value_type
                 >,
 
                 std::is_base_of<
                     iterator_category,
-                    typename std::iterator_traits<iterator_category>
+                    typename std::iterator_traits<Iterator>::iterator_category
                 >
             >,
 
@@ -270,7 +270,7 @@ namespace bridge::analyzer::transformed
          * @return The value of the dereferenced transformed_iterator
          */
 
-        reference_type operator*() const
+        reference operator*()
         {
             if (m_need_update) {
                 m_content = m_inner->clone();
@@ -297,7 +297,7 @@ namespace bridge::analyzer::transformed
             return m_content;
         }
 
-        pointer_type operator->() const { return &**this; }
+        pointer operator->() { return &**this; }
     private:
         Iterator m_inner; ///< The inner iterator
 

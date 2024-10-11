@@ -61,6 +61,7 @@ bridge_add_unit_tests(
         types/card/bidding
         types/card/playing
         types/deal
+        transformed
 
     EXTRA_LIBS analyzer
 )
