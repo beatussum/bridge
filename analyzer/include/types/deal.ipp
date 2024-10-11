@@ -16,7 +16,7 @@
  */
 
 
-namespace bridge::analyzer::types
+namespace bridge::analyzer::types::deal
 {
     template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const deal_unit& __value)

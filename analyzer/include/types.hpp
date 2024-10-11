@@ -85,7 +85,7 @@ namespace bridge::analyzer::types
         player east;  ///< The east player of the game
 
         auction a;                 ///< The auction of the game
-        deal d;                    ///< The deal of the game
+        deal::deal d;              ///< The deal of the game
         std::vector<trick> tricks; ///< The tricks of the game
 
         metadata m; ///< The metadata of the game

@@ -21,27 +21,27 @@
 #include "types/deal.hpp"
 #include "types.hpp"
 
-using namespace bridge::analyzer::types;
+using namespace bridge::analyzer::types::deal;
+using bridge::analyzer::types::to_string;
 
 TEST(deal_unit_print_test, basic)
 {
-    using card::playing::color;
-    using card::playing::rank;
+    using namespace bridge::analyzer::types::card::playing;
 
     deal_unit tested {
-        card::playing::card { color::club, rank::two },
-        card::playing::card { color::club, rank::three },
-        card::playing::card { color::club, rank::four },
-        card::playing::card { color::club, rank::five },
-        card::playing::card { color::club, rank::six },
-        card::playing::card { color::club, rank::seven },
-        card::playing::card { color::club, rank::eight },
-        card::playing::card { color::club, rank::nine },
-        card::playing::card { color::club, rank::ten },
-        card::playing::card { color::club, rank::jack },
-        card::playing::card { color::club, rank::queen },
-        card::playing::card { color::club, rank::king },
-        card::playing::card { color::club, rank::ace }
+        card { color::club, rank::two },
+        card { color::club, rank::three },
+        card { color::club, rank::four },
+        card { color::club, rank::five },
+        card { color::club, rank::six },
+        card { color::club, rank::seven },
+        card { color::club, rank::eight },
+        card { color::club, rank::nine },
+        card { color::club, rank::ten },
+        card { color::club, rank::jack },
+        card { color::club, rank::queen },
+        card { color::club, rank::king },
+        card { color::club, rank::ace }
     };
 
     std::string_view expected =

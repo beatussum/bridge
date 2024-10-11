@@ -29,9 +29,55 @@
  * @brief This namespace describes the deal type and its associated types
  */
 
-namespace bridge::analyzer::types
+namespace bridge::analyzer::types::deal
 {
-    using deal_unit = std::vector<card::playing::card>; ///< A deal unit
+    /**
+     * @brief A deal unit
+     */
+
+    class deal_unit : public std::vector<card::playing::card>
+    {
+    public:
+        using std::vector<card::playing::card>::vector;
+
+        deal_unit() noexcept = default; ///< Default constructor of deal_unit
+
+        /**
+         * @brief Copy constructor of deal_unit
+         *
+         * @param[in] __other The other deal_unit to copy
+         */
+
+        deal_unit(const deal_unit& __other) = default;
+
+        /**
+         * @brief Move constructor of deal_unit
+         *
+         * @param[in] __other The other deal_unit to move
+         */
+
+        deal_unit(deal_unit&& __other) = default;
+
+        ~deal_unit() = default; ///< Destructor of deal_unit
+    public:
+        /**
+         * @brief Copy assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned deal_unit
+         */
+
+        deal_unit& operator=(const deal_unit& __rhs) = default;
+
+        /**
+         * @brief Move assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned deal_unit
+         */
+
+        deal_unit& operator=(deal_unit&& __rhs) noexcept = default;
+    };
 
     /**
      * @brief An aggregate describing a deal
