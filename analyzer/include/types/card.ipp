@@ -16,42 +16,12 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_TYPES_CARD_HPP
-#define BRIDGE_ANALYZER_TYPES_CARD_HPP
-
-#include "card/bidding.hpp"
-#include "card/playing.hpp"
-
-/**
- * @file
- * @brief The base header of the namespace bridge::analyzer::types::card
- */
-
-/**
- * @brief This namespace describes different card types
- */
-
 namespace bridge::analyzer::types::card
 {
-    /**
-     * @brief A variant type representing a bidding or playing card
-     */
-
-    using card = std::variant<bidding::card, playing::card>;
-
-    /**
-     * @brief Inserts a card to an output stream
-     *
-     * @param[in] __os The output stream
-     * @param[in] __value The value to insert
-     *
-     * @return The modified output stream
-     */
-
     template <class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, const card& __value);
+    constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
+    {
+        std::visit([&] (const auto& value) { __os << value; }, __value);
+        return __os;
+    }
 }
-
-#include "card.ipp"
-
-#endif // BRIDGE_ANALYZER_TYPES_CARD_HPP

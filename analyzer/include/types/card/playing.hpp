@@ -86,32 +86,7 @@ namespace bridge::analyzer::types::card::playing
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, color __value)
-    {
-        switch (__value) {
-            case color::club:
-                __os << 'C';
-                break;
-
-            case color::diamond:
-                __os << 'D';
-                break;
-
-            case color::heart:
-                __os << 'H';
-                break;
-
-            case color::spade:
-                __os << 'S';
-                break;
-
-            default:
-                __os << '?';
-                break;
-        }
-
-        return __os;
-    }
+    constexpr Ostream&& operator<<(Ostream&& __os, color __value);
 
     /**
      * @brief Inserts a rank to an output stream
@@ -123,44 +98,7 @@ namespace bridge::analyzer::types::card::playing
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, rank __value)
-    {
-        switch (__value) {
-            case rank::two:
-            case rank::three:
-            case rank::four:
-            case rank::five:
-            case rank::six:
-            case rank::seven:
-            case rank::eight:
-            case rank::nine:
-            case rank::ten:
-                __os << std::to_string(static_cast<int>(__value));
-                break;
-
-            case rank::jack:
-                __os << 'J';
-                break;
-
-            case rank::queen:
-                __os << 'Q';
-                break;
-
-            case rank::king:
-                __os << 'K';
-                break;
-
-            case rank::ace:
-                __os << 'A';
-                break;
-
-            default:
-                __os << "(undefined)";
-                break;
-        }
-
-        return __os;
-    }
+    constexpr Ostream&& operator<<(Ostream&& __os, rank __value);
 
     /**
      * @brief Equality operator for card
@@ -197,10 +135,9 @@ namespace bridge::analyzer::types::card::playing
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
-    {
-        __os << "card { " << __value.c << __value.r << " }";
-        return __os;
-    }
+        { return __os << "card { " << __value.c << __value.r << " }", __os; }
 }
+
+#include "playing.ipp"
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_PLAYING_HPP

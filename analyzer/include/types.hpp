@@ -193,11 +193,10 @@ namespace bridge::analyzer::types
 
     inline bool operator<(const player& __lhs, const player& __rhs) noexcept
     {
-        if (__lhs.last_name == __rhs.last_name) {
-            return __lhs.first_name < __rhs.first_name;
-        } else {
-            return __lhs.last_name < __rhs.last_name;
-        }
+        return
+            (__lhs.last_name == __rhs.last_name) ?
+            (__lhs.first_name < __rhs.first_name) :
+            (__lhs.last_name < __rhs.last_name);
     }
 
     /**
@@ -246,17 +245,7 @@ namespace bridge::analyzer::types
      */
 
     template<class Ostream>
-    Ostream&& operator<<(Ostream&& __os, const player& __value)
-    {
-        __os
-            << "player { first_name = "
-            << __value.first_name
-            << ", last_name = "
-            << __value.last_name
-            << " }";
-
-        return __os;
-    }
+    Ostream&& operator<<(Ostream&& __os, const player& __value);
 
     /**
      * @brief Equality operator for game
@@ -301,24 +290,7 @@ namespace bridge::analyzer::types
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, phase __value)
-    {
-        switch (__value) {
-            case phase::bidding:
-                __os << "bidding";
-                break;
-
-            case phase::card:
-                __os << "card";
-                break;
-
-            default:
-                __os << "(undefined)";
-                break;
-        }
-
-        return __os;
-    }
+    constexpr Ostream&& operator<<(Ostream&& __os, phase __value);
 
     /**
      * @brief Inserts a positioning to an output stream
@@ -330,36 +302,7 @@ namespace bridge::analyzer::types
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, positioning __value)
-    {
-        switch (__value) {
-            case positioning::north:
-                __os << "north";
-                break;
-
-            case positioning::west:
-                __os << "west";
-                break;
-
-            case positioning::south:
-                __os << "south";
-                break;
-
-            case positioning::east:
-                __os << "east";
-                break;
-
-            case positioning::none:
-                __os << "none";
-                break;
-
-            default:
-                __os << "(undefined)";
-                break;
-        }
-
-        return __os;
-    }
+    constexpr Ostream&& operator<<(Ostream&& __os, positioning __value);
 
     /**
      * @brief Equality operator for raw_trick
@@ -405,11 +348,9 @@ namespace bridge::analyzer::types
      */
 
     template <class T>
-    std::string to_string(const T& __value)
-    {
-        std::ostringstream ss;
-        return (ss << __value).str();
-    }
+    std::string to_string(const T& __value);
 }
+
+#include "types.ipp"
 
 #endif // BRIDGE_ANALYZER_TYPES_HPP

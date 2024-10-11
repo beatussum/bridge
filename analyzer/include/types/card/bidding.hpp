@@ -96,36 +96,7 @@ namespace bridge::analyzer::types::card::bidding
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, color __value)
-    {
-        switch (__value) {
-            case color::club:
-                __os << 'C';
-                break;
-
-            case color::diamond:
-                __os << 'D';
-                break;
-
-            case color::heart:
-                __os << 'H';
-                break;
-
-            case color::spade:
-                __os << 'S';
-                break;
-
-            case color::notrump:
-                __os << 'N';
-                break;
-
-            default:
-                __os << '?';
-                break;
-        }
-
-        return __os;
-    }
+    constexpr Ostream&& operator<<(Ostream&& __os, color __value);
 
     /**
      * @brief Equality operator for card_bid
@@ -171,11 +142,10 @@ namespace bridge::analyzer::types::card::bidding
         const card_bid& __rhs
     ) noexcept
     {
-        if (__lhs.c == __rhs.c) {
-            return __lhs.l < __rhs.l;
-        } else {
-            return __lhs.c < __rhs.c;
-        }
+        return
+            (__lhs.c == __rhs.c) ?
+            (__lhs.l < __rhs.l) :
+            (__lhs.c < __rhs.c);
     }
 
     /**
@@ -235,8 +205,7 @@ namespace bridge::analyzer::types::card::bidding
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card_bid& __value)
     {
-        __os << "card_bid { " << __value.c << __value.l << " }";
-        return __os;
+        return __os << "card_bid { " << __value.c << __value.l << " }", __os;
     }
 
     /**
@@ -322,10 +291,7 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_double __value)
-    {
-        __os << "card_redouble {}";
-        return __os;
-    }
+        { return __os << "card_redouble {}", __os; }
 
     /**
      * @brief Equality operator for card_pass
@@ -410,10 +376,7 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_pass __value)
-    {
-        __os << "card_pass {}";
-        return __os;
-    }
+        { return __os << "card_pass {}", __os; }
 
     /**
      * @brief Equality operator for card_redouble
@@ -498,10 +461,7 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_redouble __value)
-    {
-        __os << "card_redouble {}";
-        return __os;
-    }
+        { return __os << "card_redouble {}", __os; }
 
     /**
      * @brief Equality operator for card_stop
@@ -586,10 +546,7 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_stop __value)
-    {
-        __os << "card_stop {}";
-        return __os;
-    }
+        { return __os << "card_stop {}", __os; }
 
     /**
      * @brief Inserts a card to an output stream
@@ -601,11 +558,9 @@ namespace bridge::analyzer::types::card::bidding
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
-    {
-        std::visit([&] (const auto& value) { __os << value; }, __value);
-        return __os;
-    }
+    constexpr Ostream&& operator<<(Ostream&& __os, const card& __value);
 }
+
+#include "bidding.ipp"
 
 #endif // BRIDGE_ANALYZER_TYPES_CARD_BIDDING_HPP

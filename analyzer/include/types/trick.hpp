@@ -124,17 +124,7 @@ namespace bridge::analyzer::types
      */
 
     template<class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value)
-    {
-        __os
-            << "trick_unit { card = "
-            << __value.c
-            << ", positioning = "
-            << __value.p
-            << " }";
-
-        return __os;
-    }
+    constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value);
 
     /**
      * @brief Inserts a trick to an output stream
@@ -146,21 +136,9 @@ namespace bridge::analyzer::types
      */
 
     template<class Ostream>
-    Ostream&& operator<<(Ostream&& __os, const trick& __value)
-    {
-        __os
-            << "trick { first = "
-            << __value.units[0]
-            << ", second = "
-            << __value.units[1]
-            << ", third = "
-            << __value.units[2]
-            << ", fourth = "
-            << __value.units[3]
-            << " }";
-
-        return __os;
-    }
+    Ostream&& operator<<(Ostream&& __os, const trick& __value);
 }
+
+#include "trick.ipp"
 
 #endif // BRIDGE_ANALYZER_TYPES_TRICK_HPP

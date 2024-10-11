@@ -57,26 +57,7 @@ namespace bridge::analyzer::types
      */
 
     template <class Ostream>
-    Ostream&& operator<<(Ostream&& __os, const deal_unit& __value)
-    {
-        __os << "deal_unit [";
-
-        if (__value.empty()) {
-            __os << ']';
-        } else {
-            __os << ' ';
-
-            auto end = __value.cend() - 1;
-
-            for (auto i = __value.cbegin(); i < end; ++i) {
-                __os << *i << ", ";
-            }
-
-            __os << __value.back() << " ]";
-        }
-
-        return __os;
-    }
+    Ostream&& operator<<(Ostream&& __os, const deal_unit& __value);
 
     /**
      * @brief Equality operator for deal
@@ -118,21 +99,9 @@ namespace bridge::analyzer::types
      */
 
     template <class Ostream>
-    Ostream&& operator<<(Ostream&& __os, const deal& __value)
-    {
-        __os
-            << "deal { north = "
-            << __value.north
-            << ", west = "
-            << __value.west
-            << ", south = "
-            << __value.south
-            << ", east = "
-            << __value.east
-            << " }";
-
-        return __os;
-    }
+    Ostream&& operator<<(Ostream&& __os, const deal& __value);
 }
+
+#include "deal.ipp"
 
 #endif // BRIDGE_ANALYZER_TYPES_DEAL_HPP

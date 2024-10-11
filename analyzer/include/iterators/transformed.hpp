@@ -228,11 +228,7 @@ namespace bridge::analyzer::iterators::transformed
          * @return A reference to the assigned iterator
          */
 
-        transformed_iterator& operator=(transformed_iterator __rhs)
-        {
-            swap(*this, __rhs);
-            return *this;
-        }
+        transformed_iterator& operator=(transformed_iterator __rhs);
     public:
         /**
          * @brief Pre-increment operator
@@ -240,12 +236,7 @@ namespace bridge::analyzer::iterators::transformed
          * @return The new value of the transformed_iterator
          */
 
-        transformed_iterator& operator++()
-        {
-            ++m_inner;
-            m_need_update = true;
-            return *this;
-        }
+        transformed_iterator& operator++();
 
         /**
          * @brief Post-increment operator
@@ -253,12 +244,7 @@ namespace bridge::analyzer::iterators::transformed
          * @return The old value of the transformed_iterator
          */
 
-        transformed_iterator operator++(int)
-        {
-            transformed_iterator ret = *this;
-            ++*this;
-            return ret;
-        }
+        transformed_iterator operator++(int);
 
         /**
          * @brief Dereference operator
@@ -271,32 +257,7 @@ namespace bridge::analyzer::iterators::transformed
          * @return The value of the dereferenced transformed_iterator
          */
 
-        reference operator*()
-        {
-            if (m_need_update) {
-                m_content = m_inner->clone();
-
-                cv::warpAffine(
-                    m_content,
-                    m_content,
-
-                    cv::getRotationMatrix2D(
-                        m_parameters.center,
-                        m_parameters.angle,
-                        1.
-                    ),
-
-                    m_content.size()
-                );
-
-                m_content = cv::Mat(m_content, m_parameters.roi);
-                cv::resize(m_content, m_content, m_parameters.size);
-
-                m_need_update = false;
-            }
-
-            return m_content;
-        }
+        reference operator*();
 
         /**
          * @brief Member access of pointer
@@ -363,18 +324,10 @@ namespace bridge::analyzer::iterators::transformed
      * @param[in] __rhs The right hand side parameter
      */
 
-    inline void swap(
+    void swap(
         transformed_parameters& __lhs,
         transformed_parameters& __rhs
-    ) noexcept
-    {
-        using std::swap;
-
-        swap(__lhs.angle, __rhs.angle);
-        swap(__lhs.center, __rhs.center);
-        swap(__lhs.roi, __rhs.roi);
-        swap(__lhs.size, __rhs.size);
-    }
+    ) noexcept;
 
     /**
      * @brief Equality operator for transformed_iterator
@@ -429,15 +382,7 @@ namespace bridge::analyzer::iterators::transformed
     void swap(
         transformed_iterator<Iterator>& __lhs,
         transformed_iterator<Iterator>& __rhs
-    )
-    {
-        using std::swap;
-
-        swap(__lhs.m_inner, __rhs.m_inner);
-        swap(__lhs.m_parameters, __rhs.m_parameters);
-        swap(__lhs.m_content, __rhs.m_content);
-        swap(__lhs.m_need_update, __rhs.m_need_update);
-    }
+    );
 
     /**
      * @brief Pipe operator for transformed_iterator
@@ -485,5 +430,7 @@ namespace bridge::analyzer::iterators::transformed
     )
         { return transformed_parameters { __angle, __center, __roi, __size }; }
 }
+
+#include "transformed.ipp"
 
 #endif // BRIDGE_ANALYZER_ITERATORS_TRANSFORMED_HPP

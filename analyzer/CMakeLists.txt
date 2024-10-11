@@ -27,7 +27,7 @@ project(
 list(APPEND CMAKE_MODULE_PATH "cmake/")
 
 set(
-    ANALYZER_INTERFACE_HPP
+    ANALYZER_PUBLIC_HPP
     types/card/bidding.hpp
     types/card/playing.hpp
     types/card.hpp
@@ -39,23 +39,43 @@ set(
     types.hpp
 )
 
-list(TRANSFORM ANALYZER_INTERFACE_HPP PREPEND "include/")
+list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
+
+set(
+    ANALYZER_PUBLIC_IPP
+    types/card/bidding.ipp
+    types/card/playing.ipp
+    types/card.ipp
+    types/deal.ipp
+    types/trick.ipp
+    types.ipp
+    iterators/transformed.ipp
+)
+
+list(TRANSFORM ANALYZER_PUBLIC_IPP PREPEND "include/")
+
+set(
+    ANALYZER_CPP
+    iterators/transformed.cpp
+)
+
+list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 
 find_package(OpenCV REQUIRED COMPONENTS imgproc)
-add_library(analyzer INTERFACE)
-target_link_libraries(analyzer INTERFACE opencv_imgproc)
-target_include_directories(analyzer INTERFACE "include/")
+add_library(analyzer STATIC "${ANALYZER_CPP}")
+target_link_libraries(analyzer PUBLIC opencv_imgproc)
+target_include_directories(analyzer PUBLIC "include/")
 
 target_sources(
     analyzer
 
-    INTERFACE
+    PUBLIC
         FILE_SET HEADERS
         TYPE HEADERS
-        FILES "${ANALYZER_INTERFACE_HPP}"
+        FILES "${ANALYZER_PUBLIC_HPP}" "${ANALYZER_PUBLIC_IPP}"
 )
 
-bridge_add_to_doc("${ANALYZER_INTERFACE_HPP}")
+bridge_add_to_doc("${ANALYZER_PUBLIC_HPP}")
 
 bridge_add_unit_tests(
     TESTS
