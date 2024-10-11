@@ -24,15 +24,18 @@
 
 #include <array>
 
+namespace bridge::analyzer::types
+{
+    enum struct positioning;
+}
+
 /**
  * @file
  * @brief This namespace describes the trick type and its associated types
  */
 
-namespace bridge::analyzer::types
+namespace bridge::analyzer::types::trick
 {
-    enum struct positioning;
-
     /**
      * @brief An aggregate describing a trick unit
      */

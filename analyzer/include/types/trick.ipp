@@ -16,7 +16,7 @@
  */
 
 
-namespace bridge::analyzer::types
+namespace bridge::analyzer::types::trick
 {
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value)
