@@ -339,16 +339,6 @@ namespace bridge::analyzer::types
         const raw_trick& __rhs
     ) noexcept
         { return !(__lhs == __rhs); }
-
-    /**
-     * @brief Cast a type to std::string
-     *
-     * @param[in] __value The type to cast
-     * @return A std::string representing the type
-     */
-
-    template <class T>
-    std::string to_string(const T& __value);
 }
 
 #include "types.ipp"

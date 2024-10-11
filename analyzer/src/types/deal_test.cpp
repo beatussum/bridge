@@ -19,10 +19,10 @@
 #include <gtest/gtest.h>
 
 #include "types/deal.hpp"
-#include "types.hpp"
+#include "core.hpp"
 
 using namespace bridge::analyzer::types::deal;
-using bridge::analyzer::types::to_string;
+using bridge::analyzer::core::to_string;
 
 TEST(deal_unit_print_test, basic)
 {

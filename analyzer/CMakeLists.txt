@@ -35,6 +35,7 @@ set(
     types/metadata.hpp
     types/trick.hpp
     iterators/transformed.hpp
+    core.hpp
     iterators.hpp
     types.hpp
 )
@@ -48,6 +49,7 @@ set(
     types/card.ipp
     types/deal.ipp
     types/trick.ipp
+    core.ipp
     types.ipp
     iterators/transformed.ipp
 )

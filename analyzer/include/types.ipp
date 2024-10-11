@@ -82,11 +82,4 @@ namespace bridge::analyzer::types
 
         return __os;
     }
-
-    template <class T>
-    std::string to_string(const T& __value)
-    {
-        std::ostringstream ss;
-        return (ss << __value).str();
-    }
 }
