@@ -298,6 +298,14 @@ namespace bridge::analyzer::iterators::transformed
             return m_content;
         }
 
+        /**
+         * @brief Member access of pointer
+         *
+         * This method uses operator*() and has, therefore, the same behavior.
+         *
+         * @return A pointer to the member accessed
+         */
+
         pointer operator->() { return &**this; }
     private:
         Iterator m_inner; ///< The inner iterator
