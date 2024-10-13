@@ -40,6 +40,23 @@ namespace bridge::analyzer::core
     namespace details
     {
         /**
+         * @brief Enable to_string if supported
+         *
+         * @tparam T The type which could potentially be casted to std::string
+         */
+
+        template <class T>
+        using enable_to_string =
+            std::enable_if_t<
+                std::is_same_v<
+                    std::ostringstream&&,
+                    decltype(std::ostringstream() << std::declval<T>())
+                >,
+
+                std::string
+            >;
+
+        /**
          * @brief Enable operator<< if supported
          *
          * @tparam Ostream The output stream type
@@ -95,7 +112,7 @@ namespace bridge::analyzer::core
      */
 
     template <class T>
-    std::string to_string(const T& __value);
+    details::enable_to_string<T> to_string(const T& __value);
 
     /**
      * @brief The formatted output function for iterable types

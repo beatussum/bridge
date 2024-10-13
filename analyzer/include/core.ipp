@@ -19,7 +19,7 @@
 namespace bridge::analyzer::core
 {
     template <class T>
-    std::string to_string(const T& __value)
+    details::enable_to_string<T> to_string(const T& __value)
     {
         std::ostringstream ss;
         return (ss << __value).str();
