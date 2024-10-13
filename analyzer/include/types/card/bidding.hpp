@@ -20,6 +20,7 @@
 #define BRIDGE_ANALYZER_TYPES_CARD_BIDDING_HPP
 
 #include <cstdint>
+#include <stdexcept>
 #include <variant>
 
 /**
