@@ -116,18 +116,6 @@ namespace bridge::analyzer::types
     };
 
     /**
-     * @brief A trick as analyzed by the IA model
-     */
-
-    struct raw_trick
-    {
-        std::vector<card::card> north; ///< North's cards on the table
-        std::vector<card::card> west;  ///< West's cards on the table
-        std::vector<card::card> south; ///< South's cards on the table
-        std::vector<card::card> east;  ///< East's cards on the table
-    };
-
-    /**
      * @brief Equality operator for auction
      *
      * @param[in] __lhs The left hand side operand
@@ -328,42 +316,6 @@ namespace bridge::analyzer::types
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, positioning __value);
-
-    /**
-     * @brief Equality operator for raw_trick
-     *
-     * @param[in] __lhs The left hand side operand
-     * @param[in] __rhs The right hand side operand
-     *
-     * @return If `__lhs` is equal to `rhs`
-     */
-
-    inline bool operator==(
-        const raw_trick& __lhs,
-        const raw_trick& __rhs
-    ) noexcept
-    {
-        return
-            (__lhs.north == __rhs.north) &&
-            (__lhs.west == __rhs.west) &&
-            (__lhs.south == __rhs.south) &&
-            (__lhs.east == __rhs.east);
-    }
-
-    /**
-     * @brief Inequality operator for raw_trick
-     *
-     * @param[in] __lhs The left hand side operand
-     * @param[in] __rhs The right hand side operand
-     *
-     * @return If `__lhs` is different from `rhs`
-     */
-
-    inline bool operator!=(
-        const raw_trick& __lhs,
-        const raw_trick& __rhs
-    ) noexcept
-        { return !(__lhs == __rhs); }
 }
 
 #include "types.ipp"

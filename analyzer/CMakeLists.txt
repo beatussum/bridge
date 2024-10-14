@@ -30,6 +30,7 @@ set(
     ANALYZER_PUBLIC_HPP
     types/card/bidding.hpp
     types/card/playing.hpp
+    types/trick/raw.hpp
     types/card.hpp
     types/deal.hpp
     types/metadata.hpp
@@ -46,6 +47,7 @@ set(
     ANALYZER_PUBLIC_IPP
     types/card/bidding.ipp
     types/card/playing.ipp
+    types/trick/raw.ipp
     types/card.ipp
     types/deal.ipp
     types/trick.ipp
@@ -83,6 +85,7 @@ bridge_add_unit_tests(
     TESTS
         types/card/bidding
         types/card/playing
+        types/trick/raw
         types/deal
         iterators/transformed
         types
