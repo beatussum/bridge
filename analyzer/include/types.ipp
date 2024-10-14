@@ -97,4 +97,29 @@ namespace bridge::analyzer::types
 
         return __os;
     }
+
+    template<class Ostream>
+    Ostream&& operator<<(Ostream&& __os, const game& __value)
+    {
+        using bridge::analyzer::core::operator<<;
+
+        __os
+            << "game { north = "
+            << __value.north
+            << ", west = "
+            << __value.west
+            << ", south = "
+            << __value.south
+            << ", east = "
+            << __value.east
+            << ", auction = "
+            << __value.a
+            << ", deal = "
+            << __value.d
+            << ", tricks = "
+            << __value.tricks
+            << " }";
+
+        return __os;
+    }
 }

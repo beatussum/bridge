@@ -295,6 +295,18 @@ namespace bridge::analyzer::types
         { return !(__lhs == __rhs); }
 
     /**
+     * @brief Inserts a game to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    Ostream&& operator<<(Ostream&& __os, const game& __value);
+
+    /**
      * @brief Inserts a phase to an output stream
      *
      * @param[in] __os The output stream
