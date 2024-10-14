@@ -30,7 +30,7 @@
 
 /**
  * @file
- * @brief This header describes basic types used by the analyzer
+ * @brief The base header of the namespace bridge::analyzer::types
  */
 
 /**

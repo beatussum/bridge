@@ -33,14 +33,14 @@ namespace bridge::analyzer::core
     /**
      * @brief The detail namespace of bridge::analyzer::core
      *
-     * @important This namespace should never been used directly: it exists only
+     * @warning This namespace should never been used directly: it exists only
      * for implementation reason.
      */
 
     namespace details
     {
         /**
-         * @brief Enable to_string if supported
+         * @brief Enable bridge::analyzer::core::to_string if supported
          *
          * @tparam T The type which could potentially be casted to std::string
          */
@@ -57,7 +57,7 @@ namespace bridge::analyzer::core
             >;
 
         /**
-         * @brief Enable operator<< if supported
+         * @brief Enable bridge::analyzer::core::operator<<() if supported
          *
          * @tparam Ostream The output stream type
          * @tparam T The potentially iterable type
