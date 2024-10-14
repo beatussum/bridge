@@ -321,8 +321,8 @@ namespace bridge::analyzer::iterators::transformed
     /**
      * @brief Swaps two transformed_parameters
      *
-     * @param[in] __lhs The left hand side parameter
-     * @param[in] __rhs The right hand side parameter
+     * @param[in out] __lhs The left hand side parameter
+     * @param[in out] __rhs The right hand side parameter
      */
 
     void swap(
@@ -375,8 +375,8 @@ namespace bridge::analyzer::iterators::transformed
      *
      * @tparam Iterator The inner iterator used to get the input
      *
-     * @param[in] __lhs The left hand side parameter
-     * @param[in] __rhs The right hand side parameter
+     * @param[in out] __lhs The left hand side parameter
+     * @param[in out] __rhs The right hand side parameter
      */
 
     template <class Iterator>

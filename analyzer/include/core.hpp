@@ -120,7 +120,7 @@ namespace bridge::analyzer::core
      * @tparam Ostream The output stream type
      * @tparam T The iterable type
      *
-     * @param[in out] __os The output stream
+     * @param[in] __os The output stream
      * @param[in] __iterable The iterable
      *
      * @return The modified stream
