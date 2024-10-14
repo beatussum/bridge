@@ -155,7 +155,6 @@ namespace bridge::analyzer::types
     inline bool operator!=(const auction& __lhs, const auction& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
-
     /**
      * @brief Inserts a auction to an output stream
      *
