@@ -24,4 +24,27 @@ namespace bridge::analyzer::core
         std::ostringstream ss;
         return (ss << __value).str();
     }
+
+    template <class Ostream, class T>
+    details::enable_iterable_formatted_output_function<Ostream, T>
+    operator<<(Ostream&& __os, const T& __iterable)
+    {
+        __os << '[';
+
+        if (__iterable.empty()) {
+            __os << ']';
+        } else {
+            __os << ' ';
+
+            auto end = --__iterable.cend();
+
+            for (auto i = __iterable.cbegin(); i != end; ++i) {
+                __os << *i << ", ";
+            }
+
+            __os << *end << " ]";
+        }
+
+        return __os;
+    }
 }

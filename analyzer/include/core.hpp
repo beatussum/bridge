@@ -31,6 +31,62 @@
 namespace bridge::analyzer::core
 {
     /**
+     * @brief The detail namespace of bridge::analyzer::core
+     *
+     * @important This namespace should never been used directly: it exists only
+     * for implementation reason.
+     */
+
+    namespace details
+    {
+        /**
+         * @brief Enable operator<< if supported
+         *
+         * @tparam Ostream The output stream type
+         * @tparam T The potentially iterable type
+         */
+
+        template <class Ostream, class T>
+        using enable_iterable_formatted_output_function =
+            std::enable_if_t<
+                std::conjunction_v<
+                    std::is_invocable_r<bool, decltype(&T::empty), const T&>,
+
+                    std::is_invocable_r<
+                        typename T::const_iterator,
+                        decltype(&T::cend),
+                        const T&
+                    >,
+
+                    std::is_invocable_r<
+                        typename T::const_iterator,
+                        decltype(&T::cbegin),
+                        const T&
+                    >,
+
+                    std::is_same<
+                        typename T::const_iterator&,
+                        decltype(--std::declval<typename T::const_iterator>())
+                    >,
+
+                    std::is_invocable_r<
+                        bool,
+                        std::not_equal_to<typename T::const_iterator>,
+                        const typename T::const_iterator&,
+                        const typename T::const_iterator&
+                    >,
+
+                    std::is_same<
+                        typename T::const_reference,
+                        decltype(*std::declval<typename T::const_iterator>())
+                    >
+                >,
+
+                Ostream&&
+            >;
+    }
+
+    /**
      * @brief Cast a type to std::string
      *
      * @tparam T The type of the value to cast
@@ -40,6 +96,22 @@ namespace bridge::analyzer::core
 
     template <class T>
     std::string to_string(const T& __value);
+
+    /**
+     * @brief The formatted output function for iterable types
+     *
+     * @tparam Ostream The output stream type
+     * @tparam T The iterable type
+     *
+     * @param[in out] __os The output stream
+     * @param[in] __iterable The iterable
+     *
+     * @return The modified stream
+     */
+
+    template <class Ostream, class T>
+    details::enable_iterable_formatted_output_function<Ostream, T>
+    operator<<(Ostream&& __os, const T& __iterable);
 }
 
 #include "core.ipp"

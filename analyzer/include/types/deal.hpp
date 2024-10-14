@@ -20,6 +20,7 @@
 #define BRIDGE_ANALYZER_TYPES_DEAL_HPP
 
 #include "card/playing.hpp"
+#include "core.hpp"
 #include "metadata.hpp"
 
 #include <vector>

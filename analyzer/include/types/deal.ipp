@@ -21,21 +21,11 @@ namespace bridge::analyzer::types::deal
     template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const deal_unit& __value)
     {
-        __os << "deal_unit [";
+        using bridge::analyzer::core::operator<<;
 
-        if (__value.empty()) {
-            __os << ']';
-        } else {
-            __os << ' ';
-
-            auto end = __value.cend() - 1;
-
-            for (auto i = __value.cbegin(); i < end; ++i) {
-                __os << *i << ", ";
-            }
-
-            __os << __value.back() << " ]";
-        }
+        __os
+            << "deal_unit "
+            << static_cast<std::vector<card::playing::card>>(__value);
 
         return __os;
     }
