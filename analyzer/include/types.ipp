@@ -19,6 +19,21 @@
 namespace bridge::analyzer::types
 {
     template<class Ostream>
+    Ostream&& operator<<(Ostream&& __os, const auction& __value)
+    {
+        using bridge::analyzer::core::operator<<;
+
+        __os
+            << "auction { first_player = "
+            << __value.first_player
+            << ", bidding_card = "
+            << __value.bidding_cards
+            << " }";
+
+        return __os;
+    }
+
+    template<class Ostream>
     Ostream&& operator<<(Ostream&& __os, const player& __value)
     {
         __os

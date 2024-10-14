@@ -85,6 +85,7 @@ bridge_add_unit_tests(
         types/card/playing
         types/deal
         iterators/transformed
+        types
 
     EXTRA_LIBS analyzer
 )

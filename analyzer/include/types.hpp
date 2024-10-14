@@ -23,6 +23,7 @@
 #include "types/deal.hpp"
 #include "types/metadata.hpp"
 #include "types/trick.hpp"
+#include "core.hpp"
 
 #include <string>
 #include <vector>
@@ -153,6 +154,19 @@ namespace bridge::analyzer::types
 
     inline bool operator!=(const auction& __lhs, const auction& __rhs) noexcept
         { return !(__lhs == __rhs); }
+
+
+    /**
+     * @brief Inserts a auction to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    Ostream&& operator<<(Ostream&& __os, const auction& __value);
 
     /**
      * @brief Equality operator for player
