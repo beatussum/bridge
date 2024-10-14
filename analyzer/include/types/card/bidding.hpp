@@ -59,6 +59,8 @@ namespace bridge::analyzer::types::card::bidding
 
     class level
     {
+        template<class Ostream>
+        friend constexpr Ostream&& operator<<(Ostream&&, const level&);
     public:
         /**
          * @brief The underlying type of a level
@@ -217,6 +219,19 @@ namespace bridge::analyzer::types::card::bidding
 
     template<class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, color __value);
+
+    /**
+     * @brief Inserts a level to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template<class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const level& __value)
+        { return __os << static_cast<unsigned int>(__value.m_level), __os; }
 
     /**
      * @brief A user-defined literal for level
