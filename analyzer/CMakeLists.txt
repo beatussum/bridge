@@ -28,6 +28,7 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 
 set(
     ANALYZER_PUBLIC_HPP
+    iterators/transformed.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
     types/trick/raw.hpp
@@ -35,7 +36,6 @@ set(
     types/deal.hpp
     types/metadata.hpp
     types/trick.hpp
-    iterators/transformed.hpp
     core.hpp
     iterators.hpp
     types.hpp
@@ -45,6 +45,7 @@ list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
 set(
     ANALYZER_PUBLIC_IPP
+    iterators/transformed.ipp
     types/card/bidding.ipp
     types/card/playing.ipp
     types/trick/raw.ipp
@@ -53,7 +54,6 @@ set(
     types/trick.ipp
     core.ipp
     types.ipp
-    iterators/transformed.ipp
 )
 
 list(TRANSFORM ANALYZER_PUBLIC_IPP PREPEND "include/")
