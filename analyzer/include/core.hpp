@@ -115,7 +115,7 @@ namespace bridge::analyzer::core
     details::enable_to_string<T> to_string(const T& __value);
 
     /**
-     * @brief The formatted output function for iterable types
+     * @brief Inserts an iterable type to an output stream
      *
      * @tparam Ostream The output stream type
      * @tparam T The iterable type
@@ -123,7 +123,7 @@ namespace bridge::analyzer::core
      * @param[in] __os The output stream
      * @param[in] __iterable The iterable
      *
-     * @return The modified stream
+     * @return The modified output stream
      */
 
     template <class Ostream, class T>
