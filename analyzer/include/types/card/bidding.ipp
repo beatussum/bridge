@@ -16,6 +16,8 @@
  */
 
 
+#include <stdexcept>
+
 namespace bridge::analyzer::types::card::bidding
 {
     constexpr level::level(underlying_type __level)

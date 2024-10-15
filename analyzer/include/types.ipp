@@ -16,12 +16,14 @@
  */
 
 
+#include "core.hpp"
+
 namespace bridge::analyzer::types
 {
     template<class Ostream>
     Ostream&& operator<<(Ostream&& __os, const auction& __value)
     {
-        using bridge::analyzer::core::operator<<;
+        using core::operator<<;
 
         __os
             << "auction { first_player = "
@@ -101,7 +103,7 @@ namespace bridge::analyzer::types
     template<class Ostream>
     Ostream&& operator<<(Ostream&& __os, const game& __value)
     {
-        using bridge::analyzer::core::operator<<;
+        using core::operator<<;
 
         __os
             << "game { north = "

@@ -16,12 +16,14 @@
  */
 
 
+#include "core.hpp"
+
 namespace bridge::analyzer::types::deal
 {
     template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const deal_unit& __value)
     {
-        using bridge::analyzer::core::operator<<;
+        using core::operator<<;
 
         __os
             << "deal_unit "

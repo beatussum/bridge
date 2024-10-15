@@ -23,10 +23,6 @@
 #include "types/deal.hpp"
 #include "types/metadata.hpp"
 #include "types/trick.hpp"
-#include "core.hpp"
-
-#include <string>
-#include <vector>
 
 /**
  * @file
