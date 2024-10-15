@@ -20,7 +20,7 @@
 
 namespace bridge::analyzer::types
 {
-    template<class Ostream>
+    template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const auction& __value)
     {
         using core::operator<<;
@@ -35,7 +35,7 @@ namespace bridge::analyzer::types
         return __os;
     }
 
-    template<class Ostream>
+    template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const player& __value)
     {
         __os
@@ -48,7 +48,7 @@ namespace bridge::analyzer::types
         return __os;
     }
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, phase __value)
     {
         switch (__value) {
@@ -68,7 +68,7 @@ namespace bridge::analyzer::types
         return __os;
     }
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, positioning __value)
     {
         switch (__value) {
@@ -100,7 +100,7 @@ namespace bridge::analyzer::types
         return __os;
     }
 
-    template<class Ostream>
+    template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const game& __value)
     {
         using core::operator<<;

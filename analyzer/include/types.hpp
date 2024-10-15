@@ -148,7 +148,7 @@ namespace bridge::analyzer::types
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const auction& __value);
 
     /**
@@ -241,7 +241,7 @@ namespace bridge::analyzer::types
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const player& __value);
 
     /**
@@ -286,7 +286,7 @@ namespace bridge::analyzer::types
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const game& __value);
 
     /**
@@ -298,7 +298,7 @@ namespace bridge::analyzer::types
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, phase __value);
 
     /**
@@ -310,7 +310,7 @@ namespace bridge::analyzer::types
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, positioning __value);
 }
 

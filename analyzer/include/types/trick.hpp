@@ -135,7 +135,7 @@ namespace bridge::analyzer::types::trick
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value);
 
     /**
@@ -147,7 +147,7 @@ namespace bridge::analyzer::types::trick
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     Ostream&& operator<<(Ostream&& __os, const trick& __value);
 }
 

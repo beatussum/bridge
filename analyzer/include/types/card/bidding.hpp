@@ -55,7 +55,7 @@ namespace bridge::analyzer::types::card::bidding
 
     class level
     {
-        template<class Ostream>
+        template <class Ostream>
         friend constexpr Ostream&& operator<<(Ostream&&, const level&);
     public:
         /**
@@ -217,7 +217,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, color __value);
 
     /**
@@ -229,7 +229,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const level& __value)
         { return __os << static_cast<unsigned int>(__value.m_level), __os; }
 
@@ -348,7 +348,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card_bid& __value)
     {
         return __os << "card_bid { " << __value.c << __value.l << " }", __os;
@@ -435,7 +435,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_double __value)
         { return __os << "card_redouble {}", __os; }
 
@@ -520,7 +520,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_pass __value)
         { return __os << "card_pass {}", __os; }
 
@@ -605,7 +605,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_redouble __value)
         { return __os << "card_redouble {}", __os; }
 
@@ -690,7 +690,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, card_stop __value)
         { return __os << "card_stop {}", __os; }
 
@@ -703,7 +703,7 @@ namespace bridge::analyzer::types::card::bidding
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value);
 }
 

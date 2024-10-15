@@ -20,7 +20,7 @@
 
 namespace bridge::analyzer::types::trick::raw
 {
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value)
     {
         using core::operator<<;

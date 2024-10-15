@@ -28,7 +28,7 @@ namespace bridge::analyzer::types::card::bidding
         }
     }
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, color __value)
     {
         switch (__value) {
@@ -60,7 +60,7 @@ namespace bridge::analyzer::types::card::bidding
         return __os;
     }
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
     {
         std::visit([&] (const auto& value) { __os << value; }, __value);

@@ -85,7 +85,7 @@ namespace bridge::analyzer::types::card::playing
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, color __value);
 
     /**
@@ -97,7 +97,7 @@ namespace bridge::analyzer::types::card::playing
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, rank __value);
 
     /**
@@ -133,7 +133,7 @@ namespace bridge::analyzer::types::card::playing
      * @return The modified output stream
      */
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
         { return __os << "card { " << __value.c << __value.r << " }", __os; }
 }

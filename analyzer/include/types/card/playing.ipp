@@ -20,7 +20,7 @@
 
 namespace bridge::analyzer::types::card::playing
 {
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, color __value)
     {
         switch (__value) {
@@ -48,7 +48,7 @@ namespace bridge::analyzer::types::card::playing
         return __os;
     }
 
-    template<class Ostream>
+    template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, rank __value)
     {
         switch (__value) {
