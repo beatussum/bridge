@@ -23,7 +23,7 @@
  * @file
  *
  * @brief The base header of the namespace
- * bridge::analyzer::types::card::playing
+ * \ref bridge::analyzer::types::card::playing
  */
 
 /**
@@ -72,12 +72,12 @@ namespace bridge::analyzer::types::card::playing
 
     struct card
     {
-        color c; ///< The color of the playing card
-        rank r;  ///< The rank of the playing card
+        color c; ///< The \ref color of the playing card
+        rank r;  ///< The \ref rank of the playing card
     };
 
     /**
-     * @brief Inserts a color to an output stream
+     * @brief Inserts a \ref color to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -89,7 +89,7 @@ namespace bridge::analyzer::types::card::playing
     constexpr Ostream&& operator<<(Ostream&& __os, color __value);
 
     /**
-     * @brief Inserts a rank to an output stream
+     * @brief Inserts a \ref rank to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -101,31 +101,31 @@ namespace bridge::analyzer::types::card::playing
     constexpr Ostream&& operator<<(Ostream&& __os, rank __value);
 
     /**
-     * @brief Equality operator for card
+     * @brief Equality operator for \ref card
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     constexpr bool operator==(const card& __lhs, const card& __rhs) noexcept
         { return (__lhs.c == __rhs.c) && (__lhs.r == __rhs.r); }
 
     /**
-     * @brief Inequality operator for card
+     * @brief Inequality operator for \ref card
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is different from `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     constexpr bool operator!=(const card& __lhs, const card& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Inserts a card to an output stream
+     * @brief Inserts a \ref card to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert

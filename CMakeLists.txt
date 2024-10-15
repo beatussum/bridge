@@ -42,6 +42,7 @@ if (WITH_DOC)
         "The path where the documention is built"
     )
 
+    set(DOXYGEN_AUTOLINK_SUPPORT NO)
     set(DOXYGEN_EXTRACT_STATIC YES)
     set(DOXYGEN_FILE_PATTERNS "*.hpp")
     set(DOXYGEN_INLINE_INHERITED_MEMB YES)

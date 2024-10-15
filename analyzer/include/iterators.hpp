@@ -21,7 +21,7 @@
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::iterators
+ * @brief The base header of the namespace \ref bridge::analyzer::iterators
  */
 
 /**

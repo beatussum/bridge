@@ -21,7 +21,7 @@
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::core
+ * @brief The base header of the namespace \ref bridge::analyzer::core
  */
 
 /**
@@ -31,7 +31,7 @@
 namespace bridge::analyzer::core
 {
     /**
-     * @brief The detail namespace of bridge::analyzer::core
+     * @brief The detail namespace of \ref bridge::analyzer::core
      *
      * @warning This namespace should never been used directly: it exists only
      * for implementation reason.
@@ -40,7 +40,7 @@ namespace bridge::analyzer::core
     namespace details
     {
         /**
-         * @brief Enable bridge::analyzer::core::to_string if supported
+         * @brief Enable \ref bridge::analyzer::core::to_string() if supported
          *
          * @tparam T The type which could potentially be casted to std::string
          */
@@ -57,7 +57,7 @@ namespace bridge::analyzer::core
             >;
 
         /**
-         * @brief Enable bridge::analyzer::core::operator<<() if supported
+         * @brief Enable \ref bridge::analyzer::core::operator<<() if supported
          *
          * @tparam Ostream The output stream type
          * @tparam T The potentially iterable type

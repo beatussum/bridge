@@ -30,7 +30,7 @@
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::types
+ * @brief The base header of the namespace \ref bridge::analyzer::types
  */
 
 /**
@@ -46,7 +46,7 @@ namespace bridge::analyzer::types
     struct auction
     {
         /**
-         * @brief The positioning of the first player to call
+         * @brief The \ref positioning of the first player to call
          */
 
         positioning first_player;
@@ -59,7 +59,7 @@ namespace bridge::analyzer::types
 
         std::vector<card::bidding::card> bidding_cards;
 
-        metadata::metadata m; ///< The metadata of the auction
+        metadata::metadata m; ///< The \ref metadata of the \ref auction
     };
 
     /**
@@ -68,10 +68,10 @@ namespace bridge::analyzer::types
 
     struct player
     {
-        std::string first_name; ///< The first name of the player
-        std::string last_name;  ///< The last name of the player
+        std::string first_name; ///< The first name of the \ref player
+        std::string last_name;  ///< The last name of the \ref player
 
-        metadata::metadata m; ///< The metadata of the player
+        metadata::metadata m; ///< The \ref metadata of the \ref player
     };
 
     /**
@@ -80,16 +80,16 @@ namespace bridge::analyzer::types
 
     struct game
     {
-        player north; ///< The north player of the game
-        player west;  ///< The west player of the game
-        player south; ///< The south player of the game
-        player east;  ///< The east player of the game
+        player north; ///< The north \ref player of the \ref game
+        player west;  ///< The west \ref player of the \ref game
+        player south; ///< The south \ref player of the \ref game
+        player east;  ///< The east \ref player of the \ref game
 
-        auction a;                        ///< The auction of the game
-        deal::deal d;                     ///< The deal of the game
-        std::vector<trick::trick> tricks; ///< The tricks of the game
+        auction a;                        ///< The \ref auction of the \ref game
+        deal::deal d;                     ///< The \ref deal of the \ref game
+        std::vector<trick::trick> tricks; ///< The tricks of the \ref game
 
-        metadata::metadata m; ///< The metadata of the game
+        metadata::metadata m; ///< The \ref metadata of the \ref game
     };
 
     /**
@@ -112,16 +112,16 @@ namespace bridge::analyzer::types
         west,  ///< This is the western player
         south, ///< This is the southern player
         east,  ///< This is the eastern player
-        none   ///< The positioning is not specified
+        none   ///< The \ref positioning is not specified
     };
 
     /**
-     * @brief Equality operator for auction
+     * @brief Equality operator for \ref auction
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     inline bool operator==(const auction& __lhs, const auction& __rhs) noexcept
@@ -132,19 +132,19 @@ namespace bridge::analyzer::types
     }
 
     /**
-     * @brief Inequality operator for auction
+     * @brief Inequality operator for \ref auction
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is different from `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     inline bool operator!=(const auction& __lhs, const auction& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Inserts a auction to an output stream
+     * @brief Inserts a \ref auction to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -156,12 +156,12 @@ namespace bridge::analyzer::types
     Ostream&& operator<<(Ostream&& __os, const auction& __value);
 
     /**
-     * @brief Equality operator for player
+     * @brief Equality operator for \ref player
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     inline bool operator==(const player& __lhs, const player& __rhs) noexcept
@@ -172,24 +172,24 @@ namespace bridge::analyzer::types
     }
 
     /**
-     * @brief Inequality operator for player
+     * @brief Inequality operator for \ref player
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is different from `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     inline bool operator!=(const player& __lhs, const player& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Less-than operator for player
+     * @brief Less-than operator for \ref player
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is lesser than `rhs`
+     * @return If \p __lhs is lesser than \p __rhs
      */
 
     inline bool operator<(const player& __lhs, const player& __rhs) noexcept
@@ -201,43 +201,43 @@ namespace bridge::analyzer::types
     }
 
     /**
-     * @brief Greater-than operator for player
+     * @brief Greater-than operator for \ref player
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is greater than `rhs`
+     * @return If \p __lhs is greater than \p __rhs
      */
 
     inline bool operator>(const player& __lhs, const player& __rhs) noexcept
         { return !(__lhs == __rhs) && (__rhs < __lhs); }
 
     /**
-     * @brief Less-equal operator for player
+     * @brief Less-equal operator for \ref player
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is lesser than or equal to `rhs`
+     * @return If \p __lhs is lesser than or equal to \p __rhs
      */
 
     inline bool operator<=(const player& __lhs, const player& __rhs) noexcept
         { return (__lhs == __rhs) || (__rhs < __lhs); }
 
     /**
-     * @brief Greater-equal operator for player
+     * @brief Greater-equal operator for \ref player
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is greater than or equal to `rhs`
+     * @return If \p __lhs is greater than or equal to \p __rhs
      */
 
     inline bool operator>=(const player& __lhs, const player& __rhs) noexcept
         { return !(__lhs < __rhs); }
 
     /**
-     * @brief Inserts a player to an output stream
+     * @brief Inserts a \ref player to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -249,12 +249,12 @@ namespace bridge::analyzer::types
     Ostream&& operator<<(Ostream&& __os, const player& __value);
 
     /**
-     * @brief Equality operator for game
+     * @brief Equality operator for \ref game
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     inline bool operator==(const game& __lhs, const game& __rhs) noexcept
@@ -270,19 +270,19 @@ namespace bridge::analyzer::types
     }
 
     /**
-     * @brief Inequality operator for game
+     * @brief Inequality operator for \ref game
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is different from `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     inline bool operator!=(const game& __lhs, const game& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Inserts a game to an output stream
+     * @brief Inserts a \ref game to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -294,7 +294,7 @@ namespace bridge::analyzer::types
     Ostream&& operator<<(Ostream&& __os, const game& __value);
 
     /**
-     * @brief Inserts a phase to an output stream
+     * @brief Inserts a \ref phase to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -306,7 +306,7 @@ namespace bridge::analyzer::types
     constexpr Ostream&& operator<<(Ostream&& __os, phase __value);
 
     /**
-     * @brief Inserts a positioning to an output stream
+     * @brief Inserts a \ref positioning to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert

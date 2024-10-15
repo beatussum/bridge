@@ -24,21 +24,23 @@
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::types::trick::raw
+ *
+ * @brief The base header of the namespace
+ * \ref bridge::analyzer::types::trick::raw
  */
 
 /**
- * @brief This namespace describes different types related to trick
+ * @brief This namespace describes different types related to \ref trick
  *
  * The types defined is this namespace are related to their associated types in
- * bridge::analyzer::types::trick. These types describe outputs of the neural
- * network.
+ * \ref bridge::analyzer::types::trick. These types describe outputs of the
+ * neural network.
  */
 
 namespace bridge::analyzer::types::trick::raw
 {
     /**
-     * @brief A deal unit
+     * @brief A trick unit
      */
 
     class trick_unit : public std::vector<card::card>
@@ -46,12 +48,16 @@ namespace bridge::analyzer::types::trick::raw
     public:
         using std::vector<card::card>::vector;
 
-        trick_unit() noexcept = default; ///< Default constructor of trick_unit
+        /**
+         * @brief Default constructor of \ref trick_unit
+         */
+
+        trick_unit() noexcept = default;
 
         /**
-         * @brief Copy constructor of trick_unit
+         * @brief Copy constructor of \ref trick_unit
          *
-         * @param[in] __other The other trick_unit to copy
+         * @param[in] __other The other \ref trick_unit to copy
          */
 
         trick_unit(const trick_unit& __other) = default;
@@ -59,18 +65,18 @@ namespace bridge::analyzer::types::trick::raw
         /**
          * @brief Move constructor of trick_unit
          *
-         * @param[in] __other The other trick_unit to move
+         * @param[in] __other The other \ref trick_unit to move
          */
 
         trick_unit(trick_unit&& __other) = default;
 
-        ~trick_unit() = default; ///< Destructor of trick_unit
+        ~trick_unit() = default; ///< Destructor of \ref trick_unit
     public:
         /**
          * @brief Copy assignment operator
          *
          * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned trick_unit
+         * @return A reference to the assigned \ref trick_unit
          */
 
         trick_unit& operator=(const trick_unit& __rhs) = default;
@@ -79,7 +85,7 @@ namespace bridge::analyzer::types::trick::raw
          * @brief Move assignment operator
          *
          * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned trick_unit
+         * @return A reference to the assigned \ref trick_unit
          */
 
         trick_unit& operator=(trick_unit&& __rhs) noexcept = default;
@@ -98,7 +104,7 @@ namespace bridge::analyzer::types::trick::raw
     };
 
     /**
-     * @brief Inserts a trick_unit to an output stream
+     * @brief Inserts a \ref trick_unit to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -110,12 +116,12 @@ namespace bridge::analyzer::types::trick::raw
     constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value);
 
     /**
-     * @brief Equality operator for trick
+     * @brief Equality operator for \ref trick
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     inline bool operator==(const trick& __lhs, const trick& __rhs) noexcept
@@ -128,19 +134,19 @@ namespace bridge::analyzer::types::trick::raw
     }
 
     /**
-     * @brief Inequality operator for trick
+     * @brief Inequality operator for \ref trick
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is different from `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     inline bool operator!=(const trick& __lhs, const trick& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Inserts a trick to an output stream
+     * @brief Inserts a \ref trick to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert

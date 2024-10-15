@@ -23,7 +23,9 @@
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::types::metadata
+ *
+ * @brief The base header of the namespace
+ * \ref bridge::analyzer::types::metadata
  */
 
 /**

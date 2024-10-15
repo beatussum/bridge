@@ -24,7 +24,7 @@
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::types::card
+ * @brief The base header of the namespace \ref bridge::analyzer::types::card
  */
 
 /**
@@ -42,31 +42,35 @@ namespace bridge::analyzer::types::card
     public:
         using std::variant<bidding::card, playing::card>::variant;
 
-        constexpr card() noexcept = default; ///< Default constructor of card
+        /**
+         * @brief Default constructor of \ref card
+         */
+
+        constexpr card() noexcept = default;
 
         /**
-         * @brief Copy constructor of card
+         * @brief Copy constructor of \ref card
          *
-         * @param[in] __other The other card to copy
+         * @param[in] __other The other \ref card to copy
          */
 
         constexpr card(const card& __other) = default;
 
         /**
-         * @brief Move constructor of card
+         * @brief Move constructor of \ref card
          *
-         * @param[in] __other The other card to move
+         * @param[in] __other The other \ref card to move
          */
 
         constexpr card(card&& __other) noexcept = default;
 
-        ~card() = default; ///< Destructor of card
+        ~card() = default; ///< Destructor of \ref card
     public:
         /**
          * @brief Copy assignment operator
          *
          * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned card
+         * @return A reference to the assigned \ref card
          */
 
         constexpr card& operator=(const card& __rhs) = default;
@@ -75,14 +79,14 @@ namespace bridge::analyzer::types::card
          * @brief Move assignment operator
          *
          * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned card
+         * @return A reference to the assigned \ref card
          */
 
         constexpr card& operator=(card&& __rhs) noexcept = default;
     };
 
     /**
-     * @brief Inserts a card to an output stream
+     * @brief Inserts a \ref card to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert

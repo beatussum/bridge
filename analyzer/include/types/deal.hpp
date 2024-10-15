@@ -27,7 +27,7 @@
 
 /**
  * @file
- * @brief The base header of the namespace bridge::analyzer::types::deal
+ * @brief The base header of the namespace \ref bridge::analyzer::types::deal
  */
 
 /**
@@ -45,31 +45,35 @@ namespace bridge::analyzer::types::deal
     public:
         using std::vector<card::playing::card>::vector;
 
-        deal_unit() noexcept = default; ///< Default constructor of deal_unit
+        /**
+         * @brief Default constructor of \ref deal_unit
+         */
+
+        deal_unit() noexcept = default;
 
         /**
-         * @brief Copy constructor of deal_unit
+         * @brief Copy constructor of \ref deal_unit
          *
-         * @param[in] __other The other deal_unit to copy
+         * @param[in] __other The other \ref deal_unit to copy
          */
 
         deal_unit(const deal_unit& __other) = default;
 
         /**
-         * @brief Move constructor of deal_unit
+         * @brief Move constructor of \ref deal_unit
          *
-         * @param[in] __other The other deal_unit to move
+         * @param[in] __other The other \ref deal_unit to move
          */
 
         deal_unit(deal_unit&& __other) = default;
 
-        ~deal_unit() = default; ///< Destructor of deal_unit
+        ~deal_unit() = default; ///< Destructor of \ref deal_unit
     public:
         /**
          * @brief Copy assignment operator
          *
          * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned deal_unit
+         * @return A reference to the assigned \ref deal_unit
          */
 
         deal_unit& operator=(const deal_unit& __rhs) = default;
@@ -78,7 +82,7 @@ namespace bridge::analyzer::types::deal
          * @brief Move assignment operator
          *
          * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned deal_unit
+         * @return A reference to the assigned \ref deal_unit
          */
 
         deal_unit& operator=(deal_unit&& __rhs) noexcept = default;
@@ -95,11 +99,11 @@ namespace bridge::analyzer::types::deal
         deal_unit south; ///< The deal unit of the south player
         deal_unit east;  ///< The deal unit of the north player
 
-        metadata::metadata m; ///< The metadata of the deal
+        metadata::metadata m; ///< The \ref metadata of the deal
     };
 
     /**
-     * @brief Inserts a deal_unit to an output stream
+     * @brief Inserts a \ref deal_unit to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert
@@ -111,12 +115,12 @@ namespace bridge::analyzer::types::deal
     Ostream&& operator<<(Ostream&& __os, const deal_unit& __value);
 
     /**
-     * @brief Equality operator for deal
+     * @brief Equality operator for \ref deal
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     inline bool operator==(const deal& __lhs, const deal& __rhs) noexcept
@@ -129,19 +133,19 @@ namespace bridge::analyzer::types::deal
     }
 
     /**
-     * @brief Inequality operator for deal
+     * @brief Inequality operator for \ref deal
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is different from `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     inline bool operator!=(const deal& __lhs, const deal& __rhs) noexcept
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Inserts a deal to an output stream
+     * @brief Inserts a \ref deal to an output stream
      *
      * @param[in] __os The output stream
      * @param[in] __value The value to insert

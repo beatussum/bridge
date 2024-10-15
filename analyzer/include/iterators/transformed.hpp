@@ -26,18 +26,18 @@
  * @file
  *
  * @brief The base header of the namespace
- * bridge::analyzer::iterators::transformed
+ * \ref bridge::analyzer::iterators::transformed
  */
 
 /**
  * @brief This namespace describes different utilities related to
- * transformed_iterator
+ * \ref transformed_iterator
  */
 
 namespace bridge::analyzer::iterators::transformed
 {
     /**
-     * @brief The transformation parameters used by transformed_iterator
+     * @brief The transformation parameters used by \ref transformed_iterator
      */
 
     struct transformed_parameters
@@ -77,7 +77,7 @@ namespace bridge::analyzer::iterators::transformed
     public:
         /**
          * @brief The type of the value returned by the difference between two
-         * transformed_iterator
+         * \ref transformed_iterator
          */
 
         using difference_type =
@@ -85,26 +85,27 @@ namespace bridge::analyzer::iterators::transformed
 
         /**
          * @brief The type of the pointer pointing to the value referenced by
-         * the transformed_iterator
+         * the \ref transformed_iterator
          */
 
         using pointer = const cv::Mat*;
 
         /**
          * @brief The type of the pointer referencing to the value referenced by
-         * the transformed_iterator
+         * the \ref transformed_iterator
          */
 
         using reference = const cv::Mat&;
 
         /**
-         * @brief The type of the value referenced by the transformed_iterator
+         * @brief The type of the value referenced by the
+         * \ref transformed_iterator
          */
 
         using value_type = cv::Mat;
 
         /**
-         * @brief The iterator category of the transformed_iterator
+         * @brief The iterator category of the \ref transformed_iterator
          */
 
         using iterator_category = std::forward_iterator_tag;
@@ -136,7 +137,7 @@ namespace bridge::analyzer::iterators::transformed
         );
     public:
         /**
-         * @brief Default constructor of transformed_iterator
+         * @brief Default constructor of \ref transformed_iterator
          */
 
         transformed_iterator()
@@ -147,13 +148,13 @@ namespace bridge::analyzer::iterators::transformed
         {}
 
         /**
-         * @brief Destructor of transformed_iterator
+         * @brief Destructor of \ref transformed_iterator
          */
 
         ~transformed_iterator() noexcept = default;
 
         /**
-         * @brief Copy constructor of transformed_iterator
+         * @brief Copy constructor of \ref transformed_iterator
          *
          * @param[in] __iterator The iterator to copy
          */
@@ -166,7 +167,7 @@ namespace bridge::analyzer::iterators::transformed
         {}
 
         /**
-         * @brief Move constructor of transformed_iterator
+         * @brief Move constructor of \ref transformed_iterator
          *
          * @param[in] __iterator The iterator to move
          */
@@ -174,7 +175,8 @@ namespace bridge::analyzer::iterators::transformed
         transformed_iterator(transformed_iterator&& __iterator) = default;
 
         /**
-         * @brief Constructs a transformed_iterator with the given parameters
+         * @brief Constructs a \ref transformed_iterator with the given
+         * parameters
          *
          * @param[in] __inner The inner iterator
          * @param[in] __parameters The parameters used for the transformation
@@ -192,7 +194,9 @@ namespace bridge::analyzer::iterators::transformed
 
         /**
          * @overload
-         * @brief Constructs a transformed_iterator with the given parameters
+         *
+         * @brief Constructs a \ref transformed_iterator with the given
+         * parameters
          *
          * @param[in] __inner The inner iterator
          * @param[in] __angle The angle used for the rotation
@@ -234,7 +238,7 @@ namespace bridge::analyzer::iterators::transformed
         /**
          * @brief Pre-increment operator
          *
-         * @return The new value of the transformed_iterator
+         * @return The new value of the \ref transformed_iterator
          */
 
         transformed_iterator& operator++();
@@ -242,7 +246,7 @@ namespace bridge::analyzer::iterators::transformed
         /**
          * @brief Post-increment operator
          *
-         * @return The old value of the transformed_iterator
+         * @return The old value of the \ref transformed_iterator
          */
 
         transformed_iterator operator++(int);
@@ -250,12 +254,12 @@ namespace bridge::analyzer::iterators::transformed
         /**
          * @brief Dereference operator
          *
-         * If the current transformed_iterator has never been dereferenced, this
-         * method updates the cached content by applying the suitable
+         * If the current \ref transformed_iterator has never been dereferenced,
+         * this method updates the cached content by applying the suitable
          * transformations; otherwise, this operator only returns the cached
          * value.
          *
-         * @return The value of the dereferenced transformed_iterator
+         * @return The value of the dereferenced \ref transformed_iterator
          */
 
         reference operator*();
@@ -263,7 +267,8 @@ namespace bridge::analyzer::iterators::transformed
         /**
          * @brief Member access of pointer
          *
-         * This method uses operator*() and has, therefore, the same behavior.
+         * This method uses \ref operator*() and has, therefore, the same
+         * behavior.
          *
          * @return A pointer to the member accessed
          */
@@ -279,16 +284,16 @@ namespace bridge::analyzer::iterators::transformed
         transformed_parameters m_parameters;
 
         value_type m_content; ///< The current cached transformed value
-        bool m_need_update;   ///< If m_content needs to be updated
+        bool m_need_update;   ///< If \ref m_content needs to be updated
     };
 
     /**
-     * @brief Equality operator for transformed_parameters
+     * @brief Equality operator for \ref transformed_parameters
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     inline bool operator==(
@@ -304,12 +309,12 @@ namespace bridge::analyzer::iterators::transformed
     }
 
     /**
-     * @brief Inequality operator for transformed_parameters
+     * @brief Inequality operator for \ref transformed_parameters
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     inline bool operator!=(
@@ -319,10 +324,10 @@ namespace bridge::analyzer::iterators::transformed
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Swaps two transformed_parameters
+     * @brief Swaps two \ref transformed_parameters
      *
-     * @param[in out] __lhs The left hand side parameter
-     * @param[in out] __rhs The right hand side parameter
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
      */
 
     void swap(
@@ -331,14 +336,14 @@ namespace bridge::analyzer::iterators::transformed
     ) noexcept;
 
     /**
-     * @brief Equality operator for transformed_iterator
+     * @brief Equality operator for \ref transformed_iterator
      *
      * @tparam Iterator The inner iterator used to get the input
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is equal to \p __rhs
      */
 
     template <class Iterator>
@@ -353,14 +358,14 @@ namespace bridge::analyzer::iterators::transformed
     }
 
     /**
-     * @brief Inequality operator for transformed_iterator
+     * @brief Inequality operator for \ref transformed_iterator
      *
      * @tparam Iterator The inner iterator used to get the input
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
      *
-     * @return If `__lhs` is equal to `rhs`
+     * @return If \p __lhs is different from \p __rhs
      */
 
     template <class Iterator>
@@ -371,12 +376,12 @@ namespace bridge::analyzer::iterators::transformed
         { return !(__lhs == __rhs); }
 
     /**
-     * @brief Swaps two transformed_iterator
+     * @brief Swaps two \ref transformed_iterator
      *
      * @tparam Iterator The inner iterator used to get the input
      *
-     * @param[in out] __lhs The left hand side parameter
-     * @param[in out] __rhs The right hand side parameter
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
      */
 
     template <class Iterator>
@@ -386,17 +391,17 @@ namespace bridge::analyzer::iterators::transformed
     );
 
     /**
-     * @brief Pipe operator for transformed_iterator
+     * @brief Pipe operator for \ref transformed_iterator
      *
      * This operator aims to provides a convenient way to construct a
-     * transformed_iterator.
+     * \ref transformed_iterator.
      *
      * @tparam Iterator The inner iterator used to get the input
      *
      * @param[in] __lhs The inner iterator
      * @param[in] __rhs The parameters used for the transformation
      *
-     * @return The transformed_iterator
+     * @return The \ref transformed_iterator
      */
 
     template <class Iterator>
@@ -413,14 +418,14 @@ namespace bridge::analyzer::iterators::transformed
     }
 
     /**
-     * @brief A constructor for transformed_parameters
+     * @brief A constructor for \ref transformed_parameters
      *
      * @param[in] __angle The angle used for the rotation
      * @param[in] __center The center used for the rotation
      * @param[in] __roi The region of interest
      * @param[in] __size The size used for the resizing
      *
-     * @return The constructed transformed_parameters
+     * @return The constructed \ref transformed_parameters
      */
 
     inline transformed_parameters transformed(
