@@ -16,6 +16,8 @@
  */
 
 
+#include <string>
+
 namespace bridge::analyzer::types::card::playing
 {
     template<class Ostream>
