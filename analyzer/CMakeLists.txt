@@ -45,6 +45,7 @@ list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
 set(
     ANALYZER_PUBLIC_IPP
+    iterators/map.ipp
     iterators/transformed.ipp
     types/card/bidding.ipp
     types/card/playing.ipp
@@ -83,11 +84,12 @@ bridge_add_to_doc("${ANALYZER_PUBLIC_HPP}")
 
 bridge_add_unit_tests(
     TESTS
+        iterators/map
+        iterators/transformed
         types/card/bidding
         types/card/playing
         types/trick/raw
         types/deal
-        iterators/transformed
         types
 
     EXTRA_LIBS analyzer

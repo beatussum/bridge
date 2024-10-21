@@ -19,6 +19,9 @@
 #ifndef BRIDGE_ANALYZER_CORE_HPP
 #define BRIDGE_ANALYZER_CORE_HPP
 
+#include <sstream>
+#include <type_traits>
+
 /**
  * @file
  * @brief The base header of the namespace \ref bridge::analyzer::core
@@ -102,6 +105,96 @@ namespace bridge::analyzer::core
                 Ostream&&
             >;
     }
+
+    /**
+     * @brief Determines the function signature of a callable type
+     *
+     * @tparam F The callable type
+     */
+
+    template <class F>
+    struct function_signature;
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) & noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) && noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) const noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) const & noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) const && noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) volatile noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) volatile & noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) volatile && noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) const volatile noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) const volatile & noexcept(nx)>
+        { using type = R(Args...); };
+
+    /// @private
+
+    template <class R, class T, bool nx, class... Args>
+    struct function_signature<R (T::*) (Args...) const volatile && noexcept(nx)>
+        { using type = R(Args...); };
+
+    /**
+     * @brief The function signature of a callable type
+     *
+     * @tparam F The callable type
+     */
+
+    template <class F>
+    using function_signature_t = typename function_signature<F>::type;
 
     /**
      * @brief Cast a type to std::string
