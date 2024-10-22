@@ -21,6 +21,81 @@
 
 using namespace bridge::analyzer::mappers::transform;
 
+namespace
+{
+    class resizing_test : public testing::Test
+    {
+    public:
+        using value_type = cv::Mat;
+    public:
+        resizing_test()
+            : input(4, 4, CV_8UC1, cv::Scalar(0))
+        {
+            input.at<uchar>(1, 1) = 254; // OOOO
+            input.at<uchar>(1, 2) = 254; // OXXO
+            input.at<uchar>(2, 1) = 254; // OXXO
+            input.at<uchar>(2, 2) = 254; // OOOO
+        }
+    protected:
+        value_type input;
+    };
+
+    class rotation_test
+        : public testing::TestWithParam<
+            std::tuple<
+                double,
+                cv::Point2f,
+                cv::Rect,
+                cv::Point
+            >
+        >
+    {
+    public:
+        using value_type = std::array<cv::Mat, 4>;
+    public:
+        rotation_test()
+            : input {
+                cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00)),
+                cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00)),
+                cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00)),
+                cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00))
+            }
+        {
+            input[0].at<uchar>(1, 1) = 0xff; // OOOO
+            input[0].at<uchar>(1, 2) = 0x00; // OXOO
+            input[0].at<uchar>(2, 1) = 0xff; // OXXO
+            input[0].at<uchar>(2, 2) = 0xff; // OOOO
+
+            input[1].at<uchar>(1, 1) = 0x00; // OOOO
+            input[1].at<uchar>(1, 2) = 0xff; // OOXO
+            input[1].at<uchar>(2, 1) = 0xff; // OXXO
+            input[1].at<uchar>(2, 2) = 0xff; // OOOO
+
+            input[2].at<uchar>(1, 1) = 0xff; // OOOO
+            input[2].at<uchar>(1, 2) = 0xff; // OXXO
+            input[2].at<uchar>(2, 1) = 0x00; // OOXO
+            input[2].at<uchar>(2, 2) = 0xff; // OOOO
+
+            input[3].at<uchar>(1, 1) = 0xff; // OOOO
+            input[3].at<uchar>(1, 2) = 0xff; // OXXO
+            input[3].at<uchar>(2, 1) = 0xff; // OXOO
+            input[3].at<uchar>(2, 2) = 0x00; // OOOO
+        }
+    protected:
+        value_type input;
+    };
+
+    bool mat_equal(const cv::Mat& __lhs, const cv::Mat& __rhs)
+    {
+        return
+            std::equal(
+                __lhs.begin<uchar>(),
+                __lhs.end<uchar>(),
+                __rhs.begin<uchar>()
+            );
+    }
+}
+
 namespace cv
 {
     void PrintTo(const cv::Mat& __mat, std::ostream* __os)
@@ -28,33 +103,6 @@ namespace cv
         *__os << "\n\n" << __mat << '\n';
     }
 }
-
-bool mat_equal(const cv::Mat& __lhs, const cv::Mat& __rhs)
-{
-    return
-        std::equal(
-            __lhs.begin<uchar>(),
-            __lhs.end<uchar>(),
-            __rhs.begin<uchar>()
-        );
-}
-
-class resizing_test : public testing::Test
-{
-public:
-    using value_type = cv::Mat;
-public:
-    resizing_test()
-        : input(4, 4, CV_8UC1, cv::Scalar(0))
-    {
-        input.at<uchar>(1, 1) = 254; // OOOO
-        input.at<uchar>(1, 2) = 254; // OXXO
-        input.at<uchar>(2, 1) = 254; // OXXO
-        input.at<uchar>(2, 2) = 254; // OOOO
-    }
-protected:
-    value_type input;
-};
 
 TEST_F(resizing_test, down)
 {
@@ -102,51 +150,6 @@ TEST_F(resizing_test, up)
 
     ASSERT_PRED2(mat_equal, tested, expected);
 }
-
-class rotation_test
-    : public testing::TestWithParam<
-        std::tuple<
-            double,
-            cv::Point2f,
-            cv::Rect,
-            cv::Point
-        >
-    >
-{
-public:
-    using value_type = std::array<cv::Mat, 4>;
-public:
-    rotation_test()
-        : input {
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00)),
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00)),
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00)),
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0x00))
-        }
-    {
-        input[0].at<uchar>(1, 1) = 0xff; // OOOO
-        input[0].at<uchar>(1, 2) = 0x00; // OXOO
-        input[0].at<uchar>(2, 1) = 0xff; // OXXO
-        input[0].at<uchar>(2, 2) = 0xff; // OOOO
-
-        input[1].at<uchar>(1, 1) = 0x00; // OOOO
-        input[1].at<uchar>(1, 2) = 0xff; // OOXO
-        input[1].at<uchar>(2, 1) = 0xff; // OXXO
-        input[1].at<uchar>(2, 2) = 0xff; // OOOO
-
-        input[2].at<uchar>(1, 1) = 0xff; // OOOO
-        input[2].at<uchar>(1, 2) = 0xff; // OXXO
-        input[2].at<uchar>(2, 1) = 0x00; // OOXO
-        input[2].at<uchar>(2, 2) = 0xff; // OOOO
-
-        input[3].at<uchar>(1, 1) = 0xff; // OOOO
-        input[3].at<uchar>(1, 2) = 0xff; // OXXO
-        input[3].at<uchar>(2, 1) = 0xff; // OXOO
-        input[3].at<uchar>(2, 2) = 0x00; // OOOO
-    }
-protected:
-    value_type input;
-};
 
 TEST_P(rotation_test, identity)
 {
