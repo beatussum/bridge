@@ -16,10 +16,10 @@
  */
 
 
-#include "types/trick/raw.hpp"
+#include "types/raw/uncounted.hpp"
 #include <gtest/gtest.h>
 
-using namespace bridge::analyzer::types::trick::raw;
+using namespace bridge::analyzer::types::raw::uncounted;
 using namespace bridge::analyzer::types::card;
 using bridge::analyzer::core::to_string;
 

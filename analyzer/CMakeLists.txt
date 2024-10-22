@@ -31,10 +31,11 @@ set(
     mappers/transform.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
-    types/trick/raw.hpp
+    types/raw/uncounted.hpp
     types/card.hpp
     types/deal.hpp
     types/metadata.hpp
+    types/raw.hpp
     types/trick.hpp
     core.hpp
     map.hpp
@@ -48,7 +49,7 @@ set(
     ANALYZER_PUBLIC_IPP
     types/card/bidding.ipp
     types/card/playing.ipp
-    types/trick/raw.ipp
+    types/raw/uncounted.ipp
     types/card.ipp
     types/deal.ipp
     types/trick.ipp
@@ -83,7 +84,7 @@ bridge_add_unit_tests(
         mappers/transform
         types/card/bidding
         types/card/playing
-        types/trick/raw
+        types/raw/uncounted
         types/deal
         map
         types

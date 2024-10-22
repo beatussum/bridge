@@ -16,8 +16,8 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_TYPES_TRICK_RAW_HPP
-#define BRIDGE_ANALYZER_TYPES_TRICK_RAW_HPP
+#ifndef BRIDGE_ANALYZER_TYPES_UNSIGNED_HPP
+#define BRIDGE_ANALYZER_TYPES_UNSIGNED_HPP
 
 #include "../card.hpp"
 #include <vector>
@@ -26,7 +26,7 @@
  * @file
  *
  * @brief The base header of the namespace
- * \ref bridge::analyzer::types::trick::raw
+ * \ref bridge::analyzer::types::raw::uncounted
  */
 
 /**
@@ -37,7 +37,7 @@
  * neural network.
  */
 
-namespace bridge::analyzer::types::trick::raw
+namespace bridge::analyzer::types::raw::uncounted
 {
     /**
      * @brief A trick unit
@@ -158,6 +158,6 @@ namespace bridge::analyzer::types::trick::raw
     constexpr Ostream&& operator<<(Ostream&& __os, const trick& __value);
 }
 
-#include "raw.ipp"
+#include "uncounted.ipp"
 
-#endif // BRIDGE_ANALYZER_TYPES_TRICK_RAW_HPP
+#endif // BRIDGE_ANALYZER_TYPES_UNSIGNED_HPP

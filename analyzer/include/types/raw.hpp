@@ -16,33 +16,22 @@
  */
 
 
-#include "core.hpp"
+#ifndef BRIDGE_ANALYZER_TYPES_RAW_HPP
+#define BRIDGE_ANALYZER_TYPES_RAW_HPP
 
-namespace bridge::analyzer::types::trick::raw
-{
-    template <class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value)
-    {
-        using core::operator<<;
+/**
+ * @file
+ * @brief The base header of the namespace \ref bridge::analyzer::types::raw
+ */
 
-        __os << "trick_unit " << static_cast<std::vector<card::card>>(__value);
-        return __os;
-    }
+/**
+ * @brief This namespace describes different types related to raw types
+ *
+ * The types defined is this namespace are related to their associated types in
+ * \ref bridge::analyzer::types. These types describe outputs of the neural
+ * network or intermediate states.
+ */
 
-    template <class Ostream>
-    constexpr Ostream&& operator<<(Ostream&& __os, const trick& __value)
-    {
-        __os
-            << "trick [ north = "
-            << __value.north
-            << ", west = "
-            << __value.west
-            << ", south = "
-            << __value.south
-            << ", east = "
-            << __value.east
-            << " ]";
+namespace bridge::analyzer::types::raw {}
 
-        return __os;
-    }
-}
+#endif // BRIDGE_ANALYZER_TYPES_RAW_HPP
