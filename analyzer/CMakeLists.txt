@@ -63,9 +63,10 @@ list(TRANSFORM ANALYZER_PUBLIC_IPP PREPEND "include/")
 set(ANALYZER_CPP mappers/transform.cpp)
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 
+find_package(Boost REQUIRED)
 find_package(OpenCV REQUIRED COMPONENTS imgproc)
 add_library(analyzer STATIC "${ANALYZER_CPP}")
-target_link_libraries(analyzer PUBLIC opencv_imgproc)
+target_link_libraries(analyzer PUBLIC Boost::boost opencv_imgproc)
 target_include_directories(analyzer PUBLIC "include/")
 
 target_sources(
