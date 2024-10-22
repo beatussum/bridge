@@ -19,10 +19,7 @@
 #include "mappers/transform.hpp"
 #include <gtest/gtest.h>
 
-#include "map.hpp"
-
 using namespace bridge::analyzer::mappers::transform;
-using namespace bridge::analyzer::map;
 
 namespace cv
 {
@@ -45,22 +42,15 @@ bool mat_equal(const cv::Mat& __lhs, const cv::Mat& __rhs)
 class resizing_test : public testing::Test
 {
 public:
-    using value_type = std::array<cv::Mat, 4>;
+    using value_type = cv::Mat;
 public:
     resizing_test()
-        : input {
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0)),
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0)),
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0)),
-            cv::Mat(4, 4, CV_8UC1, cv::Scalar(0))
-        }
+        : input(4, 4, CV_8UC1, cv::Scalar(0))
     {
-        for (cv::Mat& m : input) {
-            m.at<uchar>(1, 1) = 254; // OOOO
-            m.at<uchar>(1, 2) = 254; // OXXO
-            m.at<uchar>(2, 1) = 254; // OXXO
-            m.at<uchar>(2, 2) = 254; // OOOO
-        }
+        input.at<uchar>(1, 1) = 254; // OOOO
+        input.at<uchar>(1, 2) = 254; // OXXO
+        input.at<uchar>(2, 1) = 254; // OXXO
+        input.at<uchar>(2, 2) = 254; // OOOO
     }
 protected:
     value_type input;
@@ -75,19 +65,15 @@ TEST_F(resizing_test, down)
     expected.at<uchar>(1, 0) = 64;
     expected.at<uchar>(1, 1) = 64;
 
-    auto it =
-        input.cbegin()
+    cv::Mat tested =
+        transform(
+            0.,
+            cv::Point2f(0.f, 0.f),
+            cv::Rect(0, 0, 4, 4),
+            cv::Size(2, 2)
+        )(input);
 
-        | map(
-            transform(
-                0.,
-                cv::Point2f(0.f, 0.f),
-                cv::Rect(0, 0, 4, 4),
-                cv::Size(2, 2)
-            )
-        );
-
-    ASSERT_PRED2(mat_equal, *it, expected);
+    ASSERT_PRED2(mat_equal, tested, expected);
 }
 
 TEST_F(resizing_test, up)
@@ -106,19 +92,15 @@ TEST_F(resizing_test, up)
 
     expected.at<uchar>(2, 2) = 254;
 
-    auto it =
-        input.cbegin()
+    cv::Mat tested =
+        transform(
+            0.,
+            cv::Point2f(0.f, 0.f),
+            cv::Rect(0, 0, 4, 4),
+            cv::Size(5, 5)
+        )(input);
 
-        | map(
-            transform(
-                0.,
-                cv::Point2f(0.f, 0.f),
-                cv::Rect(0, 0, 4, 4),
-                cv::Size(5, 5)
-            )
-        );
-
-    ASSERT_PRED2(mat_equal, *it, expected);
+    ASSERT_PRED2(mat_equal, tested, expected);
 }
 
 class rotation_test
@@ -174,14 +156,12 @@ TEST_P(rotation_test, identity)
 
     cv::Rect roi(0, 0, 4, 4);
 
-    auto it =
-        input.cbegin() |
-        map(transform(angle, center, roi, roi.size())) |
-        map(transform(-angle, center, roi, roi.size()));
+    transform tr_a = transform(angle, center, roi, roi.size());
+    transform tr_b = transform(-angle, center, roi, roi.size());
 
-    for (const cv::Mat& m : input) {
-        EXPECT_PRED2(mat_equal, *it, m);
-        ++it;
+    for (const cv::Mat& expected : input) {
+        cv::Mat tested = tr_a(tr_b(expected));
+        EXPECT_PRED2(mat_equal, tested, expected);
     }
 }
 
@@ -190,14 +170,15 @@ TEST_P(rotation_test, rotate)
     const auto& [angle, center, roi, selected_top_left] = GetParam();
 
     cv::Rect selected(selected_top_left, roi.size());
-    auto it = input.cbegin() | map(transform(angle, center, roi, roi.size()));
+    transform tr = transform(angle, center, roi, roi.size());
 
     for (value_type::size_type i = 0; i != 4; ++i) {
+        cv::Mat tested = tr(input[i]);
+
         value_type::size_type index =
             ((static_cast<value_type::size_type>(angle) / 90) + i) % 4;
 
-        EXPECT_PRED2(mat_equal, *it, cv::Mat(input[index], selected));
-        ++it;
+        EXPECT_PRED2(mat_equal, tested, cv::Mat(input[index], selected));
     }
 }
 
