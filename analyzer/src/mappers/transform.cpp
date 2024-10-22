@@ -20,7 +20,7 @@
 
 namespace bridge::analyzer::mappers::transform
 {
-    cv::Mat transform::operator()(const cv::Mat& __input)
+    cv::Mat transform::operator()(const cv::Mat& __input) const
     {
         cv::Mat ret;
 

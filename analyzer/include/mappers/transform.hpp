@@ -123,7 +123,7 @@ namespace bridge::analyzer::mappers::transform
          * @return The transformed matrix
          */
 
-        cv::Mat operator()(const cv::Mat& __input);
+        cv::Mat operator()(const cv::Mat& __input) const;
     private:
         double m_angle;       ///< The angle used for the rotation
         cv::Point2f m_center; ///< The center used for the rotation
