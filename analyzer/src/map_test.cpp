@@ -16,18 +16,23 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_ITERATORS_HPP
-#define BRIDGE_ANALYZER_ITERATORS_HPP
+#include "map.hpp"
+#include <gtest/gtest.h>
 
-/**
- * @file
- * @brief The base header of the namespace \ref bridge::analyzer::iterators
- */
+using namespace bridge::analyzer::map;
 
-/**
- * @brief This namespace describes iterator types
- */
+TEST(map_test, basic)
+{
+    std::array<std::int_fast8_t, 5> input { 1, 2, 3, 4, 5 };
 
-namespace bridge::analyzer::iterators {}
+    auto i   = input.cbegin() | map(std::negate<int_fast8_t> {});
+    auto j   = input.cbegin();
+    auto end = input.cend();
 
-#endif // BRIDGE_ANALYZER_ITERATORS_HPP
+    while (j != end) {
+        ASSERT_EQ(*i, -*j);
+
+        ++i;
+        ++j;
+    }
+}

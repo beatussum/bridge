@@ -16,7 +16,7 @@
  */
 
 
-namespace bridge::analyzer::iterators::map
+namespace bridge::analyzer::map
 {
     template <class Iterator, class Output, class Input>
     constexpr map_iterator<Iterator, Output(Input)>&

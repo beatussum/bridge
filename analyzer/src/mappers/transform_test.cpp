@@ -16,10 +16,13 @@
  */
 
 
-#include "iterators/transformed.hpp"
+#include "mappers/transform.hpp"
 #include <gtest/gtest.h>
 
-using namespace bridge::analyzer::iterators::transformed;
+#include "map.hpp"
+
+using namespace bridge::analyzer::mappers::transform;
+using namespace bridge::analyzer::map;
 
 namespace cv
 {
@@ -75,11 +78,13 @@ TEST_F(resizing_test, down)
     auto it =
         input.cbegin()
 
-        | transformed(
-            0.,
-            cv::Point2f(0.f, 0.f),
-            cv::Rect(0, 0, 4, 4),
-            cv::Size(2, 2)
+        | map(
+            transform(
+                0.,
+                cv::Point2f(0.f, 0.f),
+                cv::Rect(0, 0, 4, 4),
+                cv::Size(2, 2)
+            )
         );
 
     ASSERT_PRED2(mat_equal, *it, expected);
@@ -104,11 +109,13 @@ TEST_F(resizing_test, up)
     auto it =
         input.cbegin()
 
-        | transformed(
-            0.,
-            cv::Point2f(0.f, 0.f),
-            cv::Rect(0, 0, 4, 4),
-            cv::Size(5, 5)
+        | map(
+            transform(
+                0.,
+                cv::Point2f(0.f, 0.f),
+                cv::Rect(0, 0, 4, 4),
+                cv::Size(5, 5)
+            )
         );
 
     ASSERT_PRED2(mat_equal, *it, expected);
@@ -169,8 +176,8 @@ TEST_P(rotation_test, identity)
 
     auto it =
         input.cbegin() |
-        transformed(angle, center, roi, roi.size()) |
-        transformed(-angle, center, roi, roi.size());
+        map(transform(angle, center, roi, roi.size())) |
+        map(transform(-angle, center, roi, roi.size()));
 
     for (const cv::Mat& m : input) {
         EXPECT_PRED2(mat_equal, *it, m);
@@ -183,7 +190,7 @@ TEST_P(rotation_test, rotate)
     const auto& [angle, center, roi, selected_top_left] = GetParam();
 
     cv::Rect selected(selected_top_left, roi.size());
-    auto it = input.cbegin() | transformed(angle, center, roi, roi.size());
+    auto it = input.cbegin() | map(transform(angle, center, roi, roi.size()));
 
     for (value_type::size_type i = 0; i != 4; ++i) {
         value_type::size_type index =

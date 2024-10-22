@@ -16,20 +16,34 @@
  */
 
 
-#include "iterators/transformed.hpp"
+#include "mappers/transform.hpp"
 
-namespace bridge::analyzer::iterators::transformed
+namespace bridge::analyzer::mappers::transform
 {
-    void swap(
-        transformed_parameters& __lhs,
-        transformed_parameters& __rhs
-    ) noexcept
+    cv::Mat transform::operator()(const cv::Mat& __input)
+    {
+        cv::Mat ret;
+
+        cv::warpAffine(
+            __input,
+            ret,
+            cv::getRotationMatrix2D(m_center, m_angle, 1.),
+            __input.size()
+        );
+
+        ret = cv::Mat(ret, m_roi);
+        cv::resize(ret, ret, m_size);
+
+        return ret;
+    }
+
+    void swap(transform& __lhs, transform& __rhs) noexcept
     {
         using std::swap;
 
-        swap(__lhs.angle, __rhs.angle);
-        swap(__lhs.center, __rhs.center);
-        swap(__lhs.roi, __rhs.roi);
-        swap(__lhs.size, __rhs.size);
+        swap(__lhs.m_angle, __rhs.m_angle);
+        swap(__lhs.m_center, __rhs.m_center);
+        swap(__lhs.m_roi, __rhs.m_roi);
+        swap(__lhs.m_size, __rhs.m_size);
     }
 }

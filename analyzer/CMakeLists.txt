@@ -28,7 +28,7 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 
 set(
     ANALYZER_PUBLIC_HPP
-    iterators/transformed.hpp
+    mappers/transform.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
     types/trick/raw.hpp
@@ -37,7 +37,8 @@ set(
     types/metadata.hpp
     types/trick.hpp
     core.hpp
-    iterators.hpp
+    map.hpp
+    mappers.hpp
     types.hpp
 )
 
@@ -45,8 +46,6 @@ list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
 set(
     ANALYZER_PUBLIC_IPP
-    iterators/map.ipp
-    iterators/transformed.ipp
     types/card/bidding.ipp
     types/card/playing.ipp
     types/trick/raw.ipp
@@ -54,16 +53,13 @@ set(
     types/deal.ipp
     types/trick.ipp
     core.ipp
+    map.ipp
     types.ipp
 )
 
 list(TRANSFORM ANALYZER_PUBLIC_IPP PREPEND "include/")
 
-set(
-    ANALYZER_CPP
-    iterators/transformed.cpp
-)
-
+set(ANALYZER_CPP mappers/transform.cpp)
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 
 find_package(OpenCV REQUIRED COMPONENTS imgproc)
@@ -84,12 +80,12 @@ bridge_add_to_doc("${ANALYZER_PUBLIC_HPP}")
 
 bridge_add_unit_tests(
     TESTS
-        iterators/map
-        iterators/transformed
+        mappers/transform
         types/card/bidding
         types/card/playing
         types/trick/raw
         types/deal
+        map
         types
 
     EXTRA_LIBS analyzer

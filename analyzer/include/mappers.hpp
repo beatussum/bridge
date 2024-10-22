@@ -16,23 +16,18 @@
  */
 
 
-#include "iterators/map.hpp"
-#include <gtest/gtest.h>
+#ifndef BRIDGE_ANALYZER_MAPPERS_HPP
+#define BRIDGE_ANALYZER_MAPPERS_HPP
 
-using namespace bridge::analyzer::iterators::map;
+/**
+ * @file
+ * @brief The base header of the namespace \ref bridge::analyzer::mappers
+ */
 
-TEST(map_test, basic)
-{
-    std::array<std::int_fast8_t, 5> input { 1, 2, 3, 4, 5 };
+/**
+ * @brief This namespace describes mapper types
+ */
 
-    auto i   = input.cbegin() | map(std::negate<int_fast8_t> {});
-    auto j   = input.cbegin();
-    auto end = input.cend();
+namespace bridge::analyzer::mappers {}
 
-    while (j != end) {
-        ASSERT_EQ(*i, -*j);
-
-        ++i;
-        ++j;
-    }
-}
+#endif // BRIDGE_ANALYZER_MAPPERS_HPP

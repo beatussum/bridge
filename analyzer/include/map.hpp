@@ -16,8 +16,8 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_ITERATORS_MAP_HPP
-#define BRIDGE_ANALYZER_ITERATORS_MAP_HPP
+#ifndef BRIDGE_ANALYZER_MAP_HPP
+#define BRIDGE_ANALYZER_MAP_HPP
 
 #include "core.hpp"
 
@@ -27,14 +27,14 @@
 /**
  * @file
  *
- * @brief The base header of the namespace \ref bridge::analyzer::iterators::map
+ * @brief The base header of the namespace \ref bridge::analyzer::map
  */
 
 /**
  * @brief This namespace describes different utilities related to \ref map
  */
 
-namespace bridge::analyzer::iterators::map
+namespace bridge::analyzer::map
 {
     /**
      * @brief The map parameters used by \ref map_iterator
@@ -499,4 +499,4 @@ namespace bridge::analyzer::iterators::map
 
 #include "map.ipp"
 
-#endif // BRIDGE_ANALYZER_ITERATORS_MAP_HPP
+#endif // BRIDGE_ANALYZER_MAP_HPP
