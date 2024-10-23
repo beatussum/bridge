@@ -32,15 +32,34 @@
 
 namespace bridge::analyzer::core
 {
-    template <class T, typename>
-    std::string to_string(const T&);
-
     /**
      * @brief The detail namespace of \ref bridge::analyzer::core
      *
      * @warning This namespace should never been used directly: it exists only
      * for implementation reason.
      */
+
+    namespace details {}
+
+    namespace details
+    {
+        /**
+         * @brief Enable \ref bridge::analyzer::core::to_string() if supported
+         *
+         * @tparam T The type which could potentially be casted to std::string
+         */
+
+        template <class T>
+        using enable_to_string =
+            std::is_same<
+                std::ostringstream&&,
+                decltype(std::ostringstream() << std::declval<T>())
+            >;
+    }
+
+    template <class T>
+    std::enable_if_t<details::enable_to_string<T>::value, std::string>
+    to_string(const T&);
 
     namespace details
     {
@@ -61,19 +80,6 @@ namespace bridge::analyzer::core
                     decltype(to_string(std::declval<T>())),
                     std::string
                 >
-            >;
-
-        /**
-         * @brief Enable \ref bridge::analyzer::core::to_string() if supported
-         *
-         * @tparam T The type which could potentially be casted to std::string
-         */
-
-        template <class T>
-        using enable_to_string =
-            std::is_same<
-                std::ostringstream&&,
-                decltype(std::ostringstream() << std::declval<T>())
             >;
 
         /**
@@ -201,8 +207,9 @@ namespace bridge::analyzer::core
      * @return The hashed input
      */
 
-    template <class T, typename = details::enable_hash_value<T>>
-    std::size_t hash_value(T __input)
+    template <class T>
+    std::enable_if_t<details::enable_hash_value<T>::value, std::size_t>
+    hash_value(T __input)
         { return boost::hash<std::string>()(to_string(__input)); }
 
     /**
@@ -213,8 +220,9 @@ namespace bridge::analyzer::core
      * @return A std::string representing the type
      */
 
-    template <class T, typename = details::enable_to_string<T>>
-    std::string to_string(const T& __value);
+    template <class T>
+    std::enable_if_t<details::enable_to_string<T>::value, std::string>
+    to_string(const T& __value);
 
     /**
      * @brief Inserts an iterable type to an output stream
@@ -228,12 +236,12 @@ namespace bridge::analyzer::core
      * @return The modified output stream
      */
 
-    template <
-        class Ostream,
-        class T,
-        typename = details::enable_iterable_formatted_output_function<T>
+    template <class Ostream, class T>
+    std::enable_if_t<
+        details::enable_iterable_formatted_output_function<T>::value,
+        Ostream&&
     >
-    Ostream&& operator<<(Ostream&& __os, const T& __iterable);
+    operator<<(Ostream&& __os, const T& __iterable);
 }
 
 #include "core.ipp"
