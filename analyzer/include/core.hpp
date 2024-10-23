@@ -50,59 +50,50 @@ namespace bridge::analyzer::core
 
         template <class T>
         using enable_to_string =
-            std::enable_if_t<
-                std::is_same_v<
-                    std::ostringstream&&,
-                    decltype(std::ostringstream() << std::declval<T>())
-                >,
-
-                std::string
+            std::is_same<
+                std::ostringstream&&,
+                decltype(std::ostringstream() << std::declval<T>())
             >;
 
         /**
          * @brief Enable \ref bridge::analyzer::core::operator<<() if supported
          *
-         * @tparam Ostream The output stream type
          * @tparam T The potentially iterable type
          */
 
-        template <class Ostream, class T>
+        template <class T>
         using enable_iterable_formatted_output_function =
-            std::enable_if_t<
-                std::conjunction_v<
-                    std::is_invocable_r<bool, decltype(&T::empty), const T&>,
+            std::conjunction<
+                std::is_invocable_r<bool, decltype(&T::empty), const T&>,
 
-                    std::is_invocable_r<
-                        typename T::const_iterator,
-                        decltype(&T::cend),
-                        const T&
-                    >,
-
-                    std::is_invocable_r<
-                        typename T::const_iterator,
-                        decltype(&T::cbegin),
-                        const T&
-                    >,
-
-                    std::is_same<
-                        typename T::const_iterator&,
-                        decltype(--std::declval<typename T::const_iterator>())
-                    >,
-
-                    std::is_invocable_r<
-                        bool,
-                        std::not_equal_to<typename T::const_iterator>,
-                        const typename T::const_iterator&,
-                        const typename T::const_iterator&
-                    >,
-
-                    std::is_same<
-                        typename T::const_reference,
-                        decltype(*std::declval<typename T::const_iterator>())
-                    >
+                std::is_invocable_r<
+                    typename T::const_iterator,
+                    decltype(&T::cend),
+                    const T&
                 >,
 
-                Ostream&&
+                std::is_invocable_r<
+                    typename T::const_iterator,
+                    decltype(&T::cbegin),
+                    const T&
+                >,
+
+                std::is_same<
+                    typename T::const_iterator&,
+                    decltype(--std::declval<typename T::const_iterator>())
+                >,
+
+                std::is_invocable_r<
+                    bool,
+                    std::not_equal_to<typename T::const_iterator>,
+                    const typename T::const_iterator&,
+                    const typename T::const_iterator&
+                >,
+
+                std::is_same<
+                    typename T::const_reference,
+                    decltype(*std::declval<typename T::const_iterator>())
+                >
             >;
     }
 
@@ -197,15 +188,15 @@ namespace bridge::analyzer::core
     using function_signature_t = typename function_signature<F>::type;
 
     /**
-     * @brief Cast a type to std::string
+     * @brief Casts a type to std::string
      *
      * @tparam T The type of the value to cast
      * @param[in] __value The value to cast
      * @return A std::string representing the type
      */
 
-    template <class T>
-    details::enable_to_string<T> to_string(const T& __value);
+    template <class T, typename = details::enable_to_string<T>>
+    std::string to_string(const T& __value);
 
     /**
      * @brief Inserts an iterable type to an output stream
@@ -219,9 +210,12 @@ namespace bridge::analyzer::core
      * @return The modified output stream
      */
 
-    template <class Ostream, class T>
-    details::enable_iterable_formatted_output_function<Ostream, T>
-    operator<<(Ostream&& __os, const T& __iterable);
+    template <
+        class Ostream,
+        class T,
+        typename = details::enable_iterable_formatted_output_function<T>
+    >
+    Ostream&& operator<<(Ostream&& __os, const T& __iterable);
 }
 
 #include "core.ipp"

@@ -18,16 +18,15 @@
 
 namespace bridge::analyzer::core
 {
-    template <class T>
-    details::enable_to_string<T> to_string(const T& __value)
+    template <class T, typename>
+    std::string to_string(const T& __value)
     {
         std::ostringstream ss;
         return (ss << __value).str();
     }
 
-    template <class Ostream, class T>
-    details::enable_iterable_formatted_output_function<Ostream, T>
-    operator<<(Ostream&& __os, const T& __iterable)
+    template <class Ostream, class T, typename>
+    Ostream&& operator<<(Ostream&& __os, const T& __iterable)
     {
         __os << '[';
 
