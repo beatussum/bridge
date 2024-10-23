@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Install dependencies
-        run: sudo apt-get install -qy cmake libgtest-dev libopencv-dev ninja-build
+        run: sudo apt-get install -qy cmake libboost-dev libgtest-dev libopencv-dev ninja-build
 
       - name: Checkout
         uses: actions/checkout@v4.1.7
