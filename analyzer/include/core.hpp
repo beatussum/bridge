@@ -19,8 +19,7 @@
 #ifndef BRIDGE_ANALYZER_CORE_HPP
 #define BRIDGE_ANALYZER_CORE_HPP
 
-#include <sstream>
-#include <type_traits>
+#include <boost/container_hash/hash.hpp>
 
 /**
  * @file
@@ -33,6 +32,9 @@
 
 namespace bridge::analyzer::core
 {
+    template <class T, typename>
+    std::string to_string(const T&);
+
     /**
      * @brief The detail namespace of \ref bridge::analyzer::core
      *
@@ -42,6 +44,25 @@ namespace bridge::analyzer::core
 
     namespace details
     {
+        /**
+         * @brief Enables \ref bridge::analyzer::core::hash_value() if supported
+         *
+         * @tparam T The type which could potentially be hashed by
+         * \ref bridge::analyzer::core::hash_value()
+         */
+
+        template <class T>
+        using enable_hash_value =
+            std::conjunction<
+                std::is_empty<T>,
+                std::is_pod<T>,
+
+                std::is_same<
+                    decltype(to_string(std::declval<T>())),
+                    std::string
+                >
+            >;
+
         /**
          * @brief Enable \ref bridge::analyzer::core::to_string() if supported
          *
@@ -186,6 +207,23 @@ namespace bridge::analyzer::core
 
     template <class F>
     using function_signature_t = typename function_signature<F>::type;
+
+    /**
+     * @brief Hashes an input
+     *
+     * This overload aims to provide a convenient way to hash empty types
+     * `std::string`-castable.
+     *
+     * @remark This function is an overload of a Boost-provided function.
+     *
+     * @tparam T The type of the input to hash
+     * @param[in] __input The input to hash
+     * @return The hashed input
+     */
+
+    template <class T, typename = details::enable_hash_value<T>>
+    std::size_t hash_value(T __input)
+        { return boost::hash<std::string>()(to_string(__input)); }
 
     /**
      * @brief Casts a type to std::string
