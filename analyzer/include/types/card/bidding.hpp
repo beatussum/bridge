@@ -222,23 +222,6 @@ namespace bridge::analyzer::types::card::bidding
     constexpr Ostream&& operator<<(Ostream&& __os, color __value);
 
     /**
-     * @brief Hashes a \ref color
-     *
-     * @remark This function is an overload of a Boost-provided function.
-     *
-     * @param[in] __color The \ref color to hash
-     * @return The hashed \ref color
-     */
-
-    inline std::size_t hash_value(color __color)
-    {
-        return
-            boost::hash<std::underlying_type_t<color>>()(
-                static_cast<std::underlying_type_t<color>>(__color)
-            );
-    }
-
-    /**
      * @brief Inserts a \ref level to an output stream
      *
      * @param[in] __os The output stream
