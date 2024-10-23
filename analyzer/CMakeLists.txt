@@ -64,6 +64,7 @@ set(
     ANALYZER_CPP
     mappers/transform.cpp
     types/card/bidding.cpp
+    types/card/playing.cpp
 )
 
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")

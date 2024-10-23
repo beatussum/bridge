@@ -19,6 +19,8 @@
 #ifndef BRIDGE_ANALYZER_TYPES_CARD_PLAYING_HPP
 #define BRIDGE_ANALYZER_TYPES_CARD_PLAYING_HPP
 
+#include <cstddef>
+
 /**
  * @file
  *
@@ -136,6 +138,17 @@ namespace bridge::analyzer::types::card::playing
     template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
         { return __os << "card { " << __value.c << __value.r << " }", __os; }
+
+    /**
+     * @brief Hashes a \ref card
+     *
+     * @remark This function is an overload of a Boost-provided function.
+     *
+     * @param[in] __card The \ref card to hash
+     * @return The hashed \ref card
+     */
+
+    std::size_t hash_value(const card& __card);
 }
 
 #include "playing.ipp"
