@@ -66,7 +66,7 @@ namespace bridge::analyzer::core
         /**
          * @brief Enables \ref bridge::analyzer::core::hash_value() if supported
          *
-         * @tparam T The type which could potentially be hashed by
+         * @tparam T The type which could potentially be hashed
          * \ref bridge::analyzer::core::hash_value()
          */
 
