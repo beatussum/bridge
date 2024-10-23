@@ -19,8 +19,7 @@
 #ifndef BRIDGE_ANALYZER_TYPES_CARD_BIDDING_HPP
 #define BRIDGE_ANALYZER_TYPES_CARD_BIDDING_HPP
 
-#include <cstdint>
-#include <variant>
+#include "core.hpp"
 
 /**
  * @file
@@ -36,6 +35,8 @@
 
 namespace bridge::analyzer::types::card::bidding
 {
+    using core::hash_value;
+
     /**
      * @brief The color of a bid
      */
@@ -221,6 +222,23 @@ namespace bridge::analyzer::types::card::bidding
     constexpr Ostream&& operator<<(Ostream&& __os, color __value);
 
     /**
+     * @brief Hashes a \ref color
+     *
+     * @remark This function is an overload of a Boost-provided function.
+     *
+     * @param[in] __color The \ref color to hash
+     * @return The hashed \ref color
+     */
+
+    inline std::size_t hash_value(color __color)
+    {
+        return
+            boost::hash<std::underlying_type_t<color>>()(
+                static_cast<std::underlying_type_t<color>>(__color)
+            );
+    }
+
+    /**
      * @brief Inserts a \ref level to an output stream
      *
      * @param[in] __os The output stream
@@ -243,6 +261,18 @@ namespace bridge::analyzer::types::card::bidding
 
     constexpr level operator ""_lvl(unsigned long long __level)
         { return level(static_cast<level::underlying_type>(__level)); }
+
+    /**
+     * @brief Hashes a \ref level
+     *
+     * @remark This function is an overload of a Boost-provided function.
+     *
+     * @param[in] __level The \ref level to hash
+     * @return The hashed \ref level
+     */
+
+    inline std::size_t hash_value(level __level)
+        { return boost::hash<level::underlying_type>()(__level); }
 
     /**
      * @brief Equality operator for \ref card_bid
@@ -353,6 +383,17 @@ namespace bridge::analyzer::types::card::bidding
     {
         return __os << "card_bid { " << __value.c << __value.l << " }", __os;
     }
+
+    /**
+     * @brief Hashes a \ref card_bid
+     *
+     * @remark This function is an overload of a Boost-provided function.
+     *
+     * @param[in] __card_bid The \ref card_bid to hash
+     * @return The hashed \ref card_bid
+     */
+
+    std::size_t hash_value(const card_bid& __card_bid);
 
     /**
      * @brief Equality operator for \ref card_double

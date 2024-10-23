@@ -60,7 +60,12 @@ set(
 
 list(TRANSFORM ANALYZER_PUBLIC_IPP PREPEND "include/")
 
-set(ANALYZER_CPP mappers/transform.cpp)
+set(
+    ANALYZER_CPP
+    mappers/transform.cpp
+    types/card/bidding.cpp
+)
+
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 
 find_package(Boost REQUIRED)
