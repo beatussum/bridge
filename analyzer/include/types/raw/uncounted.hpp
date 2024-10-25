@@ -16,8 +16,8 @@
  */
 
 
-#ifndef BRIDGE_ANALYZER_TYPES_UNSIGNED_HPP
-#define BRIDGE_ANALYZER_TYPES_UNSIGNED_HPP
+#ifndef BRIDGE_ANALYZER_TYPES_UNCOUNTED_HPP
+#define BRIDGE_ANALYZER_TYPES_UNCOUNTED_HPP
 
 #include "../card.hpp"
 #include <vector>
@@ -160,4 +160,4 @@ namespace bridge::analyzer::types::raw::uncounted
 
 #include "uncounted.ipp"
 
-#endif // BRIDGE_ANALYZER_TYPES_UNSIGNED_HPP
+#endif // BRIDGE_ANALYZER_TYPES_UNCOUNTED_HPP
