@@ -114,6 +114,36 @@ namespace bridge::analyzer::types::raw::counted
         trick_unit south; ///< South's cards on the table
         trick_unit east;  ///< East's cards on the table
     };
+
+    /**
+     * @brief Equality operator for \ref trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    inline bool operator==(const trick& __lhs, const trick& __rhs) noexcept
+    {
+        return
+            (__lhs.north == __rhs.north) &&
+            (__lhs.west == __rhs.west) &&
+            (__lhs.south == __rhs.south) &&
+            (__lhs.east == __rhs.east);
+    }
+
+    /**
+     * @brief Inequality operator for \ref trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    inline bool operator!=(const trick& __lhs, const trick& __rhs) noexcept
+        { return !(__lhs == __rhs); }
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_COUNTED_HPP
