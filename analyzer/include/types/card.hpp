@@ -86,6 +86,23 @@ namespace bridge::analyzer::types::card
     };
 
     /**
+     * @brief A counted card
+     */
+
+    struct counted_card
+    {
+    public:
+        /**
+         * @brief The type used to count \ref card
+         */
+
+        using difference_type = std::int_fast8_t;
+    public:
+        difference_type n; ///< The number of card
+        card c;            ///< The type of card
+    };
+
+    /**
      * @brief Inserts a \ref card to an output stream
      *
      * @param[in] __os The output stream
