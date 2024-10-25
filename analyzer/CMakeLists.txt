@@ -31,6 +31,7 @@ set(
     mappers/transform.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
+    types/raw/counted.hpp
     types/raw/uncounted.hpp
     types/card.hpp
     types/deal.hpp
