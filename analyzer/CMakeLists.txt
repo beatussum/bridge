@@ -66,6 +66,7 @@ set(
     mappers/transform.cpp
     types/card/bidding.cpp
     types/card/playing.cpp
+    types/raw/uncounted.cpp
 )
 
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")

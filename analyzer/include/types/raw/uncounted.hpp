@@ -20,6 +20,8 @@
 #define BRIDGE_ANALYZER_TYPES_UNCOUNTED_HPP
 
 #include "../card.hpp"
+#include "counted.hpp"
+
 #include <vector>
 
 /**
@@ -89,6 +91,14 @@ namespace bridge::analyzer::types::raw::uncounted
          */
 
         trick_unit& operator=(trick_unit&& __rhs) noexcept = default;
+    public:
+        /**
+         * @brief Casts to a \ref counted::trick_unit
+         *
+         * @return The casted \ref counted::trick_unit
+         */
+
+        explicit operator counted::trick_unit() const;
     };
 
     /**
@@ -97,6 +107,23 @@ namespace bridge::analyzer::types::raw::uncounted
 
     struct trick
     {
+    public:
+        /**
+         * @brief Casts to a \ref counted::trick
+         *
+         * @return The casted \ref counted::trick
+         */
+
+        explicit operator counted::trick() const
+        {
+            return counted::trick {
+                static_cast<counted::trick_unit>(north),
+                static_cast<counted::trick_unit>(west),
+                static_cast<counted::trick_unit>(south),
+                static_cast<counted::trick_unit>(north)
+            };
+        }
+    public:
         trick_unit north; ///< North's cards on the table
         trick_unit west;  ///< West's cards on the table
         trick_unit south; ///< South's cards on the table
