@@ -27,7 +27,7 @@ namespace bridge::analyzer::types::deal
 
         __os
             << "deal_unit "
-            << static_cast<std::vector<card::playing::card>>(__value);
+            << static_cast<deal_unit::base_type>(__value);
 
         return __os;
     }

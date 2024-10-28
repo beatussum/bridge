@@ -41,6 +41,8 @@ namespace bridge::analyzer::types::deal
 
     class deal_unit : public std::vector<card::playing::card>
     {
+        template <class Ostream>
+        friend Ostream&& operator<<(Ostream&&, const deal_unit&);
     private:
         /**
          * @brief The type of the base class

@@ -25,14 +25,7 @@ namespace bridge::analyzer::types::raw::counted
 
         __os
             << "trick_unit "
-
-            << static_cast<
-                boost::unordered_set<
-                    details::counted_card,
-                    boost::hash<void>,
-                    std::equal_to<>
-                >
-            >(__value);
+            << static_cast<trick_unit::base_type>(__value);
 
         return __os;
     }

@@ -209,6 +209,8 @@ namespace bridge::analyzer::types::raw::counted
             std::equal_to<>
         >
     {
+        template <class Ostream>
+        friend constexpr Ostream&& operator<<(Ostream&&, const trick_unit&);
     private:
         /**
          * @brief The type of the base class

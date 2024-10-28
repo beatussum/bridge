@@ -25,7 +25,7 @@ namespace bridge::analyzer::types::raw::uncounted
     {
         using core::operator<<;
 
-        __os << "trick_unit " << static_cast<std::vector<card::card>>(__value);
+        __os << "trick_unit " << static_cast<trick_unit::base_type>(__value);
         return __os;
     }
 

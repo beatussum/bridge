@@ -47,6 +47,8 @@ namespace bridge::analyzer::types::raw::uncounted
 
     class trick_unit : public std::vector<card::card>
     {
+        template <class Ostream>
+        friend constexpr Ostream&& operator<<(Ostream&&, const trick_unit&);
     private:
         /**
          * @brief The type of the base class
