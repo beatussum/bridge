@@ -65,6 +65,12 @@ namespace bridge::analyzer::types::raw::counted
 
         struct counted_card : card::counted_card
         {
+            constexpr counted_card(
+                const card::counted_card& __counted_card
+            ) noexcept
+                : card::counted_card(__counted_card)
+            {}
+
             /**
              * @brief Get the \ref n object as a mutable reference
              *
