@@ -95,6 +95,7 @@ bridge_add_unit_tests(
         mappers/transform
         types/card/bidding
         types/card/playing
+        types/raw/counted
         types/raw/uncounted
         types/deal
         map
