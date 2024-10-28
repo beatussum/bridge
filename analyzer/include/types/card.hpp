@@ -39,8 +39,14 @@ namespace bridge::analyzer::types::card
 
     class card : public std::variant<bidding::card, playing::card>
     {
+    private:
+        /**
+         * @brief The type of the base class
+         */
+
+        using base_type = std::variant<bidding::card, playing::card>;
     public:
-        using std::variant<bidding::card, playing::card>::variant;
+        using base_type::variant;
 
         /**
          * @brief Default constructor of \ref card
@@ -66,6 +72,8 @@ namespace bridge::analyzer::types::card
 
         ~card() = default; ///< Destructor of \ref card
     public:
+        using base_type::operator=;
+
         /**
          * @brief Copy assignment operator
          *

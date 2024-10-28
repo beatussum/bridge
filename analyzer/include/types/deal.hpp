@@ -41,8 +41,14 @@ namespace bridge::analyzer::types::deal
 
     class deal_unit : public std::vector<card::playing::card>
     {
+    private:
+        /**
+         * @brief The type of the base class
+         */
+
+        using base_type = std::vector<card::playing::card>;
     public:
-        using std::vector<card::playing::card>::vector;
+        using base_type::vector;
 
         /**
          * @brief Default constructor of \ref deal_unit
@@ -68,6 +74,8 @@ namespace bridge::analyzer::types::deal
 
         ~deal_unit() = default; ///< Destructor of \ref deal_unit
     public:
+        using base_type::operator=;
+
         /**
          * @brief Copy assignment operator
          *

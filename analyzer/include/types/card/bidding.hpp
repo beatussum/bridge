@@ -158,14 +158,21 @@ namespace bridge::analyzer::types::card::bidding
             card_stop
         >
     {
+    private:
+        /**
+         * @brief The type of the base class
+         */
+
+        using base_type =
+            std::variant<
+                card_bid,
+                card_double,
+                card_pass,
+                card_redouble,
+                card_stop
+            >;
     public:
-        using std::variant<
-            card_bid,
-            card_double,
-            card_pass,
-            card_redouble,
-            card_stop
-        >::variant;
+        using base_type::variant;
 
         /**
          * @brief Default constructor of \ref card
@@ -191,6 +198,8 @@ namespace bridge::analyzer::types::card::bidding
 
         ~card() = default; ///< Destructor of \ref card
     public:
+        using base_type::operator=;
+
         /**
          * @brief Copy assignment operator
          *

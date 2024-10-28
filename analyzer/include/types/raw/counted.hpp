@@ -209,12 +209,19 @@ namespace bridge::analyzer::types::raw::counted
             std::equal_to<>
         >
     {
+    private:
+        /**
+         * @brief The type of the base class
+         */
+
+        using base_type =
+            boost::unordered_set<
+                details::counted_card,
+                boost::hash<void>,
+                std::equal_to<>
+            >;
     public:
-        using boost::unordered_set<
-            details::counted_card,
-            boost::hash<void>,
-            std::equal_to<>
-        >::unordered_set;
+        using base_type::unordered_set;
 
         /**
          * @brief Default constructor of \ref trick_unit
@@ -240,6 +247,8 @@ namespace bridge::analyzer::types::raw::counted
 
         ~trick_unit() = default; ///< Destructor of \ref trick_unit
     public:
+        using base_type::operator=;
+
         /**
          * @brief Copy assignment operator
          *

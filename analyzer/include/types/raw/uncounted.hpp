@@ -47,8 +47,14 @@ namespace bridge::analyzer::types::raw::uncounted
 
     class trick_unit : public std::vector<card::card>
     {
+    private:
+        /**
+         * @brief The type of the base class
+         */
+
+        using base_type = std::vector<card::card>;
     public:
-        using std::vector<card::card>::vector;
+        using base_type::vector;
 
         /**
          * @brief Default constructor of \ref trick_unit
@@ -74,6 +80,8 @@ namespace bridge::analyzer::types::raw::uncounted
 
         ~trick_unit() = default; ///< Destructor of \ref trick_unit
     public:
+        using base_type::operator=;
+
         /**
          * @brief Copy assignment operator
          *
