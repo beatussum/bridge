@@ -28,6 +28,7 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 
 set(
     ANALYZER_PUBLIC_HPP
+    core/boost.hpp
     mappers/transform.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
