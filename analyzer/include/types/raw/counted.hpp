@@ -65,12 +65,22 @@ namespace bridge::analyzer::types::raw::counted
 
         struct counted_card : card::counted_card
         {
+        public:
+            /**
+             * @brief Constructs a \ref counted_card from a
+             * \ref card::counted_card
+             *
+             * This constructor aims to make \ref counted_card transparent.
+             *
+             * @param[in] __counted_card The \ref card::counted_card
+             */
+
             constexpr counted_card(
                 const card::counted_card& __counted_card
             ) noexcept
                 : card::counted_card(__counted_card)
             {}
-
+        public:
             /**
              * @brief Get the \ref n object as a mutable reference
              *
