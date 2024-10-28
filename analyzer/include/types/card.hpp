@@ -106,8 +106,8 @@ namespace bridge::analyzer::types::card
 
         using difference_type = std::int_fast8_t;
     public:
-        difference_type n; ///< The number of card
-        card c;            ///< The type of card
+        mutable difference_type n; ///< The number of card
+        card c;                    ///< The type of card
     };
 
     /**
@@ -135,7 +135,7 @@ namespace bridge::analyzer::types::card
         const counted_card& __lhs,
         const counted_card& __rhs
     ) noexcept
-        { return (__lhs.n == __rhs.n) && (__lhs.c == __rhs.c); }
+        { return __lhs.c == __rhs.c; }
 
     /**
      * @brief Inequality operator for \ref counted_card
@@ -151,6 +151,78 @@ namespace bridge::analyzer::types::card
         const counted_card& __rhs
     ) noexcept
         { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Equality operator between a \ref counted_card and a \ref card
+     *
+     * @param[in] __lhs The left hand side operand (the \ref card)
+     * @param[in] __rhs The right hand side operand (the \ref counted_card)
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    constexpr bool operator==(
+        const card& __lhs,
+        const counted_card& __rhs
+    ) noexcept
+        { return __lhs == __rhs.c; }
+
+    /**
+     * @brief Inequality operator between a \ref counted_card and a \ref card
+     *
+     * @param[in] __lhs The left hand side operand (the \ref card)
+     * @param[in] __rhs The right hand side operand (the \ref counted_card)
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    constexpr bool operator!=(
+        const card& __lhs,
+        const counted_card& __rhs
+    ) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Equality operator between a \ref counted_card and a \ref card
+     *
+     * @param[in] __lhs The left hand side operand (the \ref counted_card)
+     * @param[in] __rhs The right hand side operand (the \ref card)
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    constexpr bool operator==(
+        const counted_card& __lhs,
+        const card& __rhs
+    ) noexcept
+        { return __rhs == __lhs; }
+
+    /**
+     * @brief Inequality operator between a \ref counted_card and a \ref card
+     *
+     * @param[in] __lhs The left hand side operand (the \ref counted_card)
+     * @param[in] __rhs The right hand side operand (the \ref card)
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    constexpr bool operator!=(
+        const counted_card& __lhs,
+        const card& __rhs
+    ) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Hashes a \ref counted_card
+     *
+     * @remark This function is an overload of a Boost-provided function.
+     *
+     * @param[in] __counted_card The \ref counted_card to hash
+     * @return The hashed \ref counted_card
+     */
+
+    std::size_t hash_value(const counted_card& __counted_card)
+        { return boost::hash<card>()(__counted_card.c); }
 
     /**
      * @brief Inserts a \ref counted_card to an output stream
