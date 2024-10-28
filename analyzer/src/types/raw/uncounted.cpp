@@ -25,7 +25,7 @@ namespace bridge::analyzer::types::raw::uncounted
         counted::trick_unit ret;
 
         for (const card::card& c : *this) {
-            ++ret.find(c)->n;
+            ++ret.insert(card::counted_card { 0, c }).first->n;
         }
 
         return ret;
