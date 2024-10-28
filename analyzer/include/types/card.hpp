@@ -106,6 +106,24 @@ namespace bridge::analyzer::types::card
 
         using difference_type = std::int_fast8_t;
     public:
+        /**
+         * @brief Unary plus operator
+         *
+         * @return An unchanged object
+         */
+
+        constexpr counted_card operator+() const noexcept
+            { return *this; }
+
+        /**
+         * @brief Unary minus operator
+         *
+         * @return An object with a negated \ref n
+         */
+
+        constexpr counted_card operator-() const noexcept
+            { return counted_card { static_cast<difference_type>(-n), c }; }
+    public:
         mutable difference_type n; ///< The number of card
         card c;                    ///< The type of card
     };
