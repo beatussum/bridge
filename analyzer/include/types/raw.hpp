@@ -19,6 +19,9 @@
 #ifndef BRIDGE_ANALYZER_TYPES_RAW_HPP
 #define BRIDGE_ANALYZER_TYPES_RAW_HPP
 
+#include "raw/counted.hpp"
+#include "raw/uncounted.hpp"
+
 /**
  * @file
  * @brief The base header of the namespace \ref bridge::analyzer::types::raw
@@ -32,6 +35,33 @@
  * network or intermediate states.
  */
 
-namespace bridge::analyzer::types::raw {}
+namespace bridge::analyzer::types::raw
+{
+    /**
+     * @brief Cast a \ref uncounted::trick_unit to a \ref counted::trick_unit
+     *
+     * @param[in] __uncounted The \ref uncounted::trick_unit to cast
+     * @return The casted \ref counted::trick_unit
+     */
+
+    counted::trick_unit count(const uncounted::trick_unit& __uncounted);
+
+    /**
+     * @brief Cast a \ref uncounted::trick to a \ref counted::trick
+     *
+     * @param[in] __uncounted The \ref uncounted::trick to cast
+     * @return The casted \ref counted::trick
+     */
+
+    inline counted::trick count(const uncounted::trick& __uncounted)
+    {
+        return counted::trick {
+            count(__uncounted.north),
+            count(__uncounted.west),
+            count(__uncounted.south),
+            count(__uncounted.east)
+        };
+    }
+}
 
 #endif // BRIDGE_ANALYZER_TYPES_RAW_HPP

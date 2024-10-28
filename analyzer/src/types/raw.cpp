@@ -16,16 +16,16 @@
  */
 
 
-#include "types/raw/uncounted.hpp"
+#include "types/raw.hpp"
 
-namespace bridge::analyzer::types::raw::uncounted
+namespace bridge::analyzer::types::raw
 {
-    trick_unit::operator counted::trick_unit() const
+    counted::trick_unit count(const uncounted::trick_unit& __uncounted)
     {
         counted::trick_unit ret;
 
-        for (const card::card& c : *this) {
-            ++ret.insert(card::counted_card { 0, c }).first->n;
+        for (card::card c : __uncounted) {
+            ++ret.insert(card::counted_card { 0, std::move(c) }).first->n;
         }
 
         return ret;

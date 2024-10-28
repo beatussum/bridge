@@ -69,7 +69,7 @@ set(
     types/card/bidding.cpp
     types/card/playing.cpp
     types/raw/counted.cpp
-    types/raw/uncounted.cpp
+    types/raw.cpp
 )
 
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")
@@ -99,6 +99,7 @@ bridge_add_unit_tests(
         types/raw/counted
         types/raw/uncounted
         types/deal
+        types/raw
         map
         types
 
