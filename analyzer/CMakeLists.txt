@@ -68,6 +68,7 @@ set(
     mappers/transform.cpp
     types/card/bidding.cpp
     types/card/playing.cpp
+    types/raw/counted.cpp
     types/raw/uncounted.cpp
 )
 

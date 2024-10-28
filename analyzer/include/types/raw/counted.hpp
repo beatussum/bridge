@@ -114,6 +114,41 @@ namespace bridge::analyzer::types::raw::counted
          */
 
         trick_unit& operator=(trick_unit&& __rhs) noexcept = default;
+    public:
+        /**
+         * @brief Addition assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return The assigned \ref trick_unit added with \p __rhs
+         */
+
+        trick_unit& operator+=(const trick_unit& __rhs);
+
+        /**
+         * @brief Substraction assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return The assigned \ref trick_unit subtracted by \p __rhs
+         */
+
+        trick_unit& operator-=(const trick_unit& __rhs);
+    public:
+        /**
+         * @brief Unary plus operator
+         *
+         * @return An unchanged object
+         */
+
+        trick_unit operator+() const
+            { return *this; }
+
+        /**
+         * @brief Unary minus operator
+         *
+         * @return An object with all items negated
+         */
+
+        trick_unit operator-() const;
     };
 
     /**
@@ -127,6 +162,29 @@ namespace bridge::analyzer::types::raw::counted
         trick_unit south; ///< South's cards on the table
         trick_unit east;  ///< East's cards on the table
     };
+
+    /**
+     * @brief Adds two \ref trick_unit
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return The addition of \p __lhs and \p __rhs
+     */
+
+    trick_unit operator+(const trick_unit& __lhs, const trick_unit& __rhs);
+
+    /**
+     * @brief Substracts two \ref trick_unit
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return The substraction of \p __lhs by \p __rhs
+     */
+
+    inline trick_unit operator-(const trick_unit& __lhs, const trick_unit& __rhs)
+        { return __lhs + -__rhs; }
 
     /**
      * @brief Inserts a \ref trick_unit to an output stream

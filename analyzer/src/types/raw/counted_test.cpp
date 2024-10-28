@@ -23,6 +23,44 @@ using namespace bridge::analyzer::types::raw::counted;
 using namespace bridge::analyzer::types::card;
 using bridge::analyzer::core::to_string;
 
+TEST(trick_unit_test, unary_minus)
+{
+    trick_unit input { counted_card { 1, bidding::card_pass {} } };
+    trick_unit expected { counted_card { -1, bidding::card_pass {} } };
+
+    ASSERT_EQ(-input, expected);
+}
+
+TEST(trick_unit_substraction_test, lhs)
+{
+    trick_unit lhs { counted_card { 1, bidding::card_pass {} } };
+    trick_unit rhs {};
+
+    trick_unit expected { counted_card { 1, bidding::card_pass {} } };
+
+    ASSERT_EQ(lhs - rhs, expected);
+}
+
+TEST(trick_unit_substraction_test, same)
+{
+    trick_unit lhs { counted_card { 1, bidding::card_pass {} } };
+    trick_unit rhs { counted_card { 1, bidding::card_pass {} } };
+
+    trick_unit expected { counted_card { 0, bidding::card_pass {} } };
+
+    ASSERT_EQ(lhs - rhs, expected);
+}
+
+TEST(trick_unit_substraction_test, rhs)
+{
+    trick_unit lhs {};
+    trick_unit rhs { counted_card { 1, bidding::card_pass {} } };
+
+    trick_unit expected { counted_card { -1, bidding::card_pass {} } };
+
+    ASSERT_EQ(lhs - rhs, expected);
+}
+
 TEST(print_test, trick_unit)
 {
     trick_unit input {
