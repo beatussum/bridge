@@ -262,6 +262,18 @@ namespace bridge::analyzer::types::raw::counted
     };
 
     /**
+     * @brief Inserts a \ref trick_unit to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template <class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const trick_unit& __value);
+
+    /**
      * @brief Equality operator for \ref trick
      *
      * @param[in] __lhs The left hand side operand
@@ -290,6 +302,20 @@ namespace bridge::analyzer::types::raw::counted
 
     inline bool operator!=(const trick& __lhs, const trick& __rhs) noexcept
         { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Inserts a \ref trick to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template <class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const trick& __value);
 }
+
+#include "counted.ipp"
 
 #endif // BRIDGE_ANALYZER_TYPES_COUNTED_HPP

@@ -51,6 +51,7 @@ set(
     ANALYZER_PUBLIC_IPP
     types/card/bidding.ipp
     types/card/playing.ipp
+    types/raw/counted.ipp
     types/raw/uncounted.ipp
     types/card.ipp
     types/deal.ipp
