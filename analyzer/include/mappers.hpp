@@ -19,7 +19,7 @@
 #ifndef BRIDGE_ANALYZER_MAPPERS_HPP
 #define BRIDGE_ANALYZER_MAPPERS_HPP
 
-#include "types/raw/counted.hpp"
+#include "types/raw.hpp"
 
 /**
  * @file
@@ -32,6 +32,30 @@
 
 namespace bridge::analyzer::mappers
 {
+    /**
+     * @brief A function object allowing to cast a
+     * \ref bridge::analyzer::types::raw::uncounted::trick to a
+     * \ref bridge::analyzer::types::raw::counted::trick
+     */
+
+    struct count
+    {
+        /**
+         * @brief casts a \ref bridge::analyzer::types::raw::uncounted::trick to
+         * a \ref bridge::analyzer::types::raw::counted::trick
+         *
+         * @param[in] __uncounted The
+         * \ref bridge::analyzer::types::raw::uncounted::trick to cast
+         *
+         * @return The casted \ref bridge::analyzer::types::raw::counted::trick
+         */
+
+        types::raw::counted::trick operator()(
+            const types::raw::uncounted::trick& __uncounted
+        )
+            { return types::raw::count(__uncounted); }
+    };
+
     /**
      * @brief A function object allowing to substract two
      * \ref bridge::analyzer::types::raw::counted::trick
