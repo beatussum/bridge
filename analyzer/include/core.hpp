@@ -93,10 +93,9 @@ namespace bridge::analyzer::core
             std::conjunction<
                 std::is_invocable_r<bool, decltype(&T::empty), const T&>,
 
-                std::is_invocable_r<
+                std::is_same<
                     typename T::const_iterator,
-                    decltype(&T::cbegin),
-                    const T&
+                    decltype(std::declval<T>().cbegin())
                 >,
 
                 std::is_invocable_r<
