@@ -221,7 +221,7 @@ namespace bridge::analyzer::types::card
      * @return The hashed \ref counted_card
      */
 
-    std::size_t hash_value(const counted_card& __counted_card)
+    inline std::size_t hash_value(const counted_card& __counted_card)
         { return boost::hash<card>()(__counted_card.c); }
 
     /**
