@@ -157,6 +157,43 @@ namespace bridge::analyzer::types::raw::counted
 
     struct trick
     {
+    public:
+        /**
+         * @brief Addition assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return The assigned \ref trick added with \p __rhs
+         */
+
+        trick& operator+=(const trick& __rhs);
+
+        /**
+         * @brief Substraction assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return The assigned \ref trick subtracted by \p __rhs
+         */
+
+        trick& operator-=(const trick& __rhs);
+    public:
+        /**
+         * @brief Unary plus operator
+         *
+         * @return An unchanged object
+         */
+
+        trick operator+() const
+            { return *this; }
+
+        /**
+         * @brief Unary minus operator
+         *
+         * @return An object with all items negated
+         */
+
+        trick operator-() const
+            { return trick { -north, -west, -south, -east }; }
+    public:
         trick_unit north; ///< North's cards on the table
         trick_unit west;  ///< West's cards on the table
         trick_unit south; ///< South's cards on the table
@@ -227,6 +264,37 @@ namespace bridge::analyzer::types::raw::counted
 
     inline bool operator!=(const trick& __lhs, const trick& __rhs) noexcept
         { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Adds two \ref trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return The addition of \p __lhs and \p __rhs
+     */
+
+    inline trick operator+(const trick& __lhs, const trick& __rhs)
+    {
+        return trick {
+            __lhs.north + __rhs.north,
+            __lhs.west + __rhs.west,
+            __lhs.south + __rhs.south,
+            __lhs.east + __rhs.east
+        };
+    }
+
+    /**
+     * @brief Substracts two \ref trick
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return The substraction of \p __lhs by \p __rhs
+     */
+
+    inline trick operator-(const trick& __lhs, const trick& __rhs)
+        { return __lhs + -__rhs; }
 
     /**
      * @brief Inserts a \ref trick to an output stream

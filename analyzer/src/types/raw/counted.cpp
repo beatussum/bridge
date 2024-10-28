@@ -45,4 +45,10 @@ namespace bridge::analyzer::types::raw::counted
 
         return ret;
     }
+
+    trick& trick::operator+=(const trick& __rhs)
+        { return *this = *this + __rhs; }
+
+    trick& trick::operator-=(const trick& __rhs)
+        { return *this = *this - __rhs; }
 }
