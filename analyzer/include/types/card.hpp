@@ -113,6 +113,48 @@ namespace bridge::analyzer::types::card
 
     template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value);
+
+    /**
+     * @brief Equality operator for \ref counted_card
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    constexpr bool operator==(
+        const counted_card& __lhs,
+        const counted_card& __rhs
+    ) noexcept
+        { return (__lhs.n == __rhs.n) && (__lhs.c == __rhs.c); }
+
+    /**
+     * @brief Inequality operator for \ref counted_card
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    constexpr bool operator!=(
+        const counted_card& __lhs,
+        const counted_card& __rhs
+    ) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Inserts a \ref counted_card to an output stream
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template <class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const counted_card& __value);
 }
 
 #include "card.ipp"

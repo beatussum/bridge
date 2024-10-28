@@ -24,4 +24,17 @@ namespace bridge::analyzer::types::card
         std::visit([&] (const auto& value) { __os << value; }, __value);
         return __os;
     }
+
+    template <class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const counted_card& __value)
+    {
+        __os
+            << "counted_card { n = "
+            << static_cast<int>(__value.n)
+            << ", card = "
+            << __value.c
+            << " }";
+
+        return __os;
+    }
 }
