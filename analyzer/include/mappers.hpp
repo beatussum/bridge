@@ -19,6 +19,8 @@
 #ifndef BRIDGE_ANALYZER_MAPPERS_HPP
 #define BRIDGE_ANALYZER_MAPPERS_HPP
 
+#include "types/raw/counted.hpp"
+
 /**
  * @file
  * @brief The base header of the namespace \ref bridge::analyzer::mappers
@@ -28,6 +30,14 @@
  * @brief This namespace describes mapper types
  */
 
-namespace bridge::analyzer::mappers {}
+namespace bridge::analyzer::mappers
+{
+    /**
+     * @brief A function object allowing to substract two
+     * \ref bridge::analyzer::types::raw::counted::trick
+     */
+
+    struct minus : std::minus<types::raw::counted::trick> {};
+}
 
 #endif // BRIDGE_ANALYZER_MAPPERS_HPP
