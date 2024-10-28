@@ -108,12 +108,6 @@ namespace bridge::analyzer::map
         );
 
         template <class It, class O, class In>
-        friend constexpr bool operator!=(
-            const map_iterator<It, O(In)>&,
-            const map_iterator<It, O(In)>&
-        );
-
-        template <class It, class O, class In>
         friend void swap(map_iterator<It, O(In)>&, map_iterator<It, O(In)>&);
     public:
         /**
@@ -207,13 +201,16 @@ namespace bridge::analyzer::map
         /**
          * @brief Constructs a \ref map_iterator with its given parameters
          *
+         * @tparam Mapper The type of the mapper
+         *
          * @param[in] __inner The inner iterator
          * @param[in] __parameters The parameters used for the mapping
          */
 
+        template <class Mapper>
         constexpr map_iterator(
             Iterator&& __inner,
-            map_parameters<Output(Input)> __parameters
+            map_parameters<Mapper> __parameters
         )
             : m_inner(std::forward<Iterator>(__inner))
             , m_parameters(std::move(__parameters))
@@ -226,6 +223,7 @@ namespace bridge::analyzer::map
          * @brief Constructs a \ref map_iterator with its given parameters
          *
          * @tparam Mapper The type of the mapper
+         *
          * @param[in] __inner The inner iterator
          * @param[in] __mapper The mapper (see \ref map_parameters::mapper)
          */
@@ -311,35 +309,37 @@ namespace bridge::analyzer::map
      *
      * This deduction handles \ref map_parameters.
      *
-     * @tparam The type of the inner iterator
+     * @tparam Iterator The type of the inner iterator
+     *
      * @tparam Output The output type
-     * @tparam Input The input type
+     * @tparam Inputs The input types
      */
 
-    template <class Iterator, class Output, class Input>
-    map_iterator(Iterator, map_parameters<Output(Input)>)
-        -> map_iterator<Iterator, Output(Input)>;
+    template <class Iterator, class Output, class... Inputs>
+    map_iterator(Iterator, map_parameters<Output(Inputs...)>)
+        -> map_iterator<Iterator, Output(Inputs...)>;
 
     /**
      * @brief Class template argument deduction for \ref map_iterator
      *
      * This deduction handles function pointer.
      *
-     * @tparam The type of the inner iterator
+     * @tparam Iterator The type of the inner iterator
+     *
      * @tparam Output The output type
-     * @tparam Input The input type
+     * @tparam Inputs The input types
      */
 
-    template <class Iterator, class Output, class Input>
-    map_iterator(Iterator, Output (*) (Input))
-        -> map_iterator<Iterator, Output(Input)>;
+    template <class Iterator, class Output, class... Inputs>
+    map_iterator(Iterator, Output (*) (Inputs...))
+        -> map_iterator<Iterator, Output(Inputs...)>;
 
     /**
      * @brief Class template argument deduction for \ref map_iterator
      *
      * This deduction handles callable types.
      *
-     * @tparam The type of the inner iterator
+     * @tparam Iterator The type of the inner iterator
      * @tparam Mapper The type of the mapper
      */
 
@@ -402,7 +402,7 @@ namespace bridge::analyzer::map
     /**
      * @brief Equality operator for \ref map_iterator
      *
-     * @tparam Mapper The type of the mapper
+     * @tparam Iterator The type of the iterator
      * @tparam Output The output type
      * @tparam Input The input type
      *
@@ -427,8 +427,7 @@ namespace bridge::analyzer::map
      * @brief Inequality operator for \ref map_iterator
      *
      * @tparam Iterator The type of the inner iterator
-     * @tparam Output The output type
-     * @tparam Input The input type
+     * @tparam Mapper The type of the Mapper
      *
      * @param[in] __lhs The left hand side operand
      * @param[in] __rhs The right hand side operand
@@ -436,10 +435,10 @@ namespace bridge::analyzer::map
      * @return If \p __lhs is different from \p __rhs
      */
 
-    template <class Iterator, class Output, class Input>
+    template <class Iterator, class Mapper>
     constexpr bool operator!=(
-        const map_iterator<Iterator, Output(Input)>& __lhs,
-        const map_iterator<Iterator, Output(Input)>& __rhs
+        const map_iterator<Iterator, Mapper>& __lhs,
+        const map_iterator<Iterator, Mapper>& __rhs
     )
         { return !(__lhs == __rhs); }
 
@@ -480,8 +479,7 @@ namespace bridge::analyzer::map
      * \ref map_iterator.
      *
      * @tparam Iterator The type of the inner iterator
-     * @tparam Output The output type
-     * @tparam Input The input type
+     * @tparam Mapper The type of the mapper
      *
      * @param[in] __lhs The inner iterator
      * @param[in] __rhs The parameters used for the mapping
@@ -489,10 +487,10 @@ namespace bridge::analyzer::map
      * @return The \ref map_iterator
      */
 
-    template <class Iterator, class Output, class Input>
-    constexpr map_iterator<Iterator, Output(Input)> operator|(
+    template <class Iterator, class Mapper>
+    constexpr map_iterator<Iterator, Mapper> operator|(
         Iterator&& __lhs,
-        map_parameters<Output(Input)> __rhs
+        map_parameters<Mapper> __rhs
     )
     { return map_iterator(std::forward<Iterator>(__lhs), std::move(__rhs)); }
 }
