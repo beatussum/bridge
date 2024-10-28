@@ -95,31 +95,14 @@ namespace bridge::analyzer::core
 
                 std::is_invocable_r<
                     typename T::const_iterator,
-                    decltype(&T::cend),
-                    const T&
-                >,
-
-                std::is_invocable_r<
-                    typename T::const_iterator,
                     decltype(&T::cbegin),
                     const T&
                 >,
 
-                std::is_same<
-                    typename T::const_iterator&,
-                    decltype(--std::declval<typename T::const_iterator>())
-                >,
-
                 std::is_invocable_r<
-                    bool,
-                    std::not_equal_to<typename T::const_iterator>,
-                    const typename T::const_iterator&,
-                    const typename T::const_iterator&
-                >,
-
-                std::is_same<
-                    typename T::const_reference,
-                    decltype(*std::declval<typename T::const_iterator>())
+                    typename T::size_type,
+                    decltype(&T::size),
+                    const T&
                 >
             >;
     }

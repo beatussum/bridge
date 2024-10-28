@@ -40,13 +40,15 @@ namespace bridge::analyzer::core
         } else {
             __os << ' ';
 
-            auto end = --__iterable.cend();
+            auto i   = __iterable.cbegin();
+            auto end = __iterable.size() - 1;
 
-            for (auto i = __iterable.cbegin(); i != end; ++i) {
+            for (; end != 0; --end) {
                 __os << *i << ", ";
+                ++i;
             }
 
-            __os << *end << " ]";
+            __os << *i << " ]";
         }
 
         return __os;
