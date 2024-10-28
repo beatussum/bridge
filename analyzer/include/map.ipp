@@ -57,4 +57,47 @@ namespace bridge::analyzer::map
         swap(__lhs.m_parameters, __rhs.m_parameters);
         swap(__lhs.m_cached, __rhs.m_cached);
     }
+
+    template <class Iterator, class Output, class Input>
+    constexpr map_iterator<Iterator, Output(Input, Input)>&
+    map_iterator<Iterator, Output(Input, Input)>::operator++()
+    {
+        m_previous = *m_inner;
+        ++m_inner;
+        m_cached.reset();
+
+        return *this;
+    }
+
+    template <class Iterator, class Output, class Input>
+    constexpr map_iterator<Iterator, Output(Input, Input)>
+    map_iterator<Iterator, Output(Input, Input)>::operator++(int)
+    {
+        map_iterator ret = *this;
+        ++*this;
+        return ret;
+    }
+
+    template <class Iterator, class Output, class Input>
+    constexpr typename map_iterator<Iterator, Output(Input, Input)>::reference
+    map_iterator<Iterator, Output(Input, Input)>::operator*()
+    {
+        if (!m_cached.has_value()) {
+            m_cached = m_parameters.mapper(m_previous, *m_inner);
+        }
+
+        return *m_cached;
+    }
+
+    template <class Iterator, class Output, class Input>
+    void swap(
+        map_iterator<Iterator, Output(Input, Input)>& __lhs,
+        map_iterator<Iterator, Output(Input, Input)>& __rhs
+    )
+    {
+        swap(__lhs.m_inner, __rhs.m_inner);
+        swap(__lhs.m_parameters, __rhs.m_parameters);
+        swap(__lhs.m_cached, __rhs.m_cached);
+        swap(__lhs.m_previous, __rhs.m_previous);
+    }
 }
