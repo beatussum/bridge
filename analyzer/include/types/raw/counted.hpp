@@ -20,7 +20,9 @@
 #define BRIDGE_ANALYZER_TYPES_COUNTED_HPP
 
 #include "../card.hpp"
-#include <unordered_map>
+#include "core/boost.hpp"
+
+#include <boost/unordered/unordered_set.hpp>
 
 /**
  * @file
@@ -43,22 +45,160 @@
 namespace bridge::analyzer::types::raw::counted
 {
     /**
+     * @brief The detail namespace of \ref bridge::analyzer::types::raw::counted
+     *
+     * @warning This namespace should never been used directly: it exists only
+     * for implementation reason.
+     */
+
+    namespace details
+    {
+        /**
+         * @brief A counted card
+         *
+         * This structure aims to provide an interface allowing to modify \ref n
+         * even if the object is constant. Indeed, this structure is intended to
+         * be used as key in an associative container; therefore, accessing to
+         * its members is read-only. However, comparison and hashing is only
+         * determined with \ref c and \ref n could be altered anyway.
+         */
+
+        struct counted_card : card::counted_card
+        {
+            /**
+             * @brief Get the \ref n object as a mutable reference
+             *
+             * @return A mutable reference to \ref n
+             */
+
+            constexpr difference_type& get_n() const noexcept
+                { return const_cast<difference_type&>(n); }
+        };
+
+        /**
+         * @brief Equality operator for \ref counted_card
+         *
+         * @param[in] __lhs The left hand side operand
+         * @param[in] __rhs The right hand side operand
+         *
+         * @return If \p __lhs is equal to \p __rhs
+         */
+
+        constexpr bool operator==(
+            const counted_card& __lhs,
+            const counted_card& __rhs
+        ) noexcept
+            { return __lhs.c == __rhs.c; }
+
+        /**
+         * @brief Inequality operator for \ref counted_card
+         *
+         * @param[in] __lhs The left hand side operand
+         * @param[in] __rhs The right hand side operand
+         *
+         * @return If \p __lhs is different from \p __rhs
+         */
+
+        constexpr bool operator!=(
+            const counted_card& __lhs,
+            const counted_card& __rhs
+        ) noexcept
+            { return !(__lhs == __rhs); }
+
+        /**
+         * @brief Equality operator between \ref counted_card and
+         * \ref card::card
+         *
+         * @param[in] __lhs The left hand side operand (the \ref counted_card)
+         * @param[in] __rhs The right hand side operand (the \ref card::card)
+         *
+         * @return If \p __lhs is equal to \p __rhs
+         */
+
+        constexpr bool operator==(
+            const counted_card& __lhs,
+            const card::card& __rhs
+        ) noexcept
+            { return __lhs.c == __rhs; }
+
+        /**
+         * @brief Inequality operator between \ref counted_card and
+         * \ref card::card
+         *
+         * @param[in] __lhs The left hand side operand (the \ref counted_card)
+         * @param[in] __rhs The right hand side operand (the \ref card::card)
+         *
+         * @return If \p __lhs is different from \p __rhs
+         */
+
+        constexpr bool operator!=(
+            const counted_card& __lhs,
+            const card::card& __rhs
+        ) noexcept
+            { return !(__lhs == __rhs); }
+
+        /**
+         * @brief Equality operator between \ref counted_card and
+         * \ref card::card
+         *
+         * @param[in] __lhs The left hand side operand (the \ref card::card)
+         * @param[in] __rhs The right hand side operand (the \ref counted_card)
+         *
+         * @return If \p __lhs is equal to \p __rhs
+         */
+
+        constexpr bool operator==(
+            const card::card& __lhs,
+            const counted_card& __rhs
+        ) noexcept
+            { return __rhs == __lhs; }
+
+        /**
+         * @brief Inequality operator between \ref counted_card and
+         * \ref card::card
+         *
+         * @param[in] __lhs The left hand side operand (the \ref card::card)
+         * @param[in] __rhs The right hand side operand (the \ref counted_card)
+         *
+         * @return If \p __lhs is different from \p __rhs
+         */
+
+        constexpr bool operator!=(
+            const card::card& __lhs,
+            const counted_card& __rhs
+        ) noexcept
+            { return !(__lhs == __rhs); }
+
+        /**
+         * @brief Hashes a \ref counted_card
+         *
+         * @remark This function is an overload of a Boost-provided function.
+         *
+         * @param[in] __counted_card The \ref counted_card to hash
+         * @return The hashed \ref counted_card
+         */
+
+        inline std::size_t hash_value(const counted_card& __counted_card)
+            { return boost::hash<card::card>()(__counted_card.c); }
+    }
+
+    /**
      * @brief A trick unit
      */
 
     class trick_unit
-        : public std::unordered_map<
-            card::card,
-            std::int_fast8_t,
-            boost::hash<card::card>
+        : public boost::unordered_set<
+            details::counted_card,
+            boost::hash<void>,
+            std::equal_to<>
         >
     {
     public:
-        using std::unordered_map<
-            card::card,
-            std::int_fast8_t,
-            boost::hash<card::card>
-        >::unordered_map;
+        using boost::unordered_set<
+            details::counted_card,
+            boost::hash<void>,
+            std::equal_to<>
+        >::unordered_set;
 
         /**
          * @brief Default constructor of \ref trick_unit
