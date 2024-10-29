@@ -46,7 +46,7 @@ namespace bridge::analyzer::mappers
          * @return A 4-dimensional matrix with NCHW dimensions order
          */
 
-        cv::Mat operator()(cv::InputArray __image) const
+        cv::Mat operator()(const cv::Mat& __image) const
             { return cv::dnn::blobFromImage(__image); }
     };
 
@@ -146,7 +146,7 @@ namespace bridge::analyzer::mappers
          * @return The forwarded matrix
          */
 
-        cv::Mat operator()(cv::InputArray __input);
+        cv::Mat operator()(const cv::Mat& __input);
     private:
         cv::dnn::Net m_net; ///< The OpenCV neural network
     };

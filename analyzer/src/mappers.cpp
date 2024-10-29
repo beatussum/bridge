@@ -32,7 +32,7 @@ namespace bridge::analyzer::mappers
         }
     }
 
-    cv::Mat forward::operator()(cv::InputArray __input)
+    cv::Mat forward::operator()(const cv::Mat& __input)
     {
         m_net.setInput(__input);
         return m_net.forward();
