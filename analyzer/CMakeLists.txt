@@ -35,6 +35,7 @@ set(
     mappers/transform.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
+    types/raw/boxed.hpp
     types/raw/counted.hpp
     types/raw/uncounted.hpp
     types/card.hpp
@@ -56,6 +57,7 @@ set(
     iterators/map.ipp
     types/card/bidding.ipp
     types/card/playing.ipp
+    types/raw/boxed.ipp
     types/raw/counted.ipp
     types/raw/uncounted.ipp
     types/card.ipp
@@ -113,6 +115,7 @@ bridge_add_unit_tests(
         mappers/transform
         types/card/bidding
         types/card/playing
+        types/raw/boxed
         types/raw/counted
         types/raw/uncounted
         types/deal
