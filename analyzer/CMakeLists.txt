@@ -29,6 +29,7 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 set(
     ANALYZER_PUBLIC_HPP
     core/boost.hpp
+    core/cv.hpp
     iterators/capture.hpp
     iterators/map.hpp
     mappers/transform.hpp
@@ -51,6 +52,7 @@ list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
 set(
     ANALYZER_PUBLIC_IPP
+    core/cv.ipp
     iterators/map.ipp
     types/card/bidding.ipp
     types/card/playing.ipp
