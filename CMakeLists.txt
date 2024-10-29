@@ -68,6 +68,55 @@ if (WITH_TESTS)
 
     enable_testing()
 
+    function (bridge_add_integration_tests)
+        set(options)
+        set(one_value_args SCOPE_NAME)
+        set(multi_value_args TESTS EXTRA_LIBS)
+
+        cmake_parse_arguments(
+            BRIDGE_ADD_INTEGRATION_TEST
+            "${options}"
+            "${one_value_args}"
+            "${multi_value_args}"
+            ${ARGN}
+        )
+
+        if (NOT DEFINED BRIDGE_ADD_INTEGRATION_TEST_SCOPE_NAME)
+            set(BRIDGE_ADD_INTEGRATION_TEST_SCOPE_NAME "${PROJECT_NAME}")
+        endif()
+
+        foreach (test ${BRIDGE_ADD_INTEGRATION_TEST_TESTS})
+            set(target "${BRIDGE_ADD_INTEGRATION_TEST_SCOPE_NAME}-${test}")
+
+            add_executable("${target}" "tests/${test}.cpp")
+
+            target_link_libraries(
+                "${target}"
+
+                PRIVATE
+                    GTest::gtest
+                    GTest::gtest_main
+                    "${BRIDGE_ADD_INTEGRATION_TEST_EXTRA_LIBS}"
+            )
+
+            set_target_properties(
+                "${target}"
+
+                PROPERTIES
+                    RUNTIME_OUTPUT_DIRECTORY
+                        "${CMAKE_CURRENT_BINARY_DIR}/integration-tests/"
+
+                    RUNTIME_OUTPUT_NAME "${scope}"
+            )
+
+            gtest_discover_tests(
+                "${target}"
+                TEST_PREFIX "${BRIDGE_ADD_INTEGRATION_TEST_SCOPE_NAME}."
+                XML_OUTPUT_DIR "${TEST_RESULT_DIR}"
+            )
+        endforeach()
+    endfunction()
+
     function (bridge_add_unit_tests)
         set(options)
         set(one_value_args SCOPE_NAME)
@@ -118,6 +167,9 @@ if (WITH_TESTS)
         endforeach()
     endfunction()
 else()
+    function (bridge_add_integration_tests)
+    endfunction()
+
     function (bridge_add_unit_tests)
     endfunction()
 endif()
