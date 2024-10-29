@@ -37,6 +37,11 @@
 
 namespace bridge::analyzer::types::raw
 {
+    namespace boxed
+    {
+        class trick;
+    }
+
     /**
      * @brief Cast a \ref uncounted::trick_unit to a \ref counted::trick_unit
      *
@@ -62,6 +67,24 @@ namespace bridge::analyzer::types::raw
             count(__uncounted.east)
         };
     }
+
+    /**
+     * @brief Cast a \ref boxed::trick to a \ref uncounted::trick
+     *
+     * If \p __boxed contains only one element, \p __center is used to affect
+     * the card to the right player; otherwise, a bounding rect is used and,
+     * therefore, all \ref card::boxed_card are compared each other.
+     *
+     * @param[in] __center The center from which \ref positioning is determined
+     * @param[in] __boxed The \ref boxed::trick to cast
+     *
+     * @return The casted \ref uncounted::trick
+     */
+
+    uncounted::trick unbox(
+        const cv::Point2f& __center,
+        const boxed::trick& __boxed
+    );
 }
 
 #endif // BRIDGE_ANALYZER_TYPES_RAW_HPP
