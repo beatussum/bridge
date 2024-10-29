@@ -22,6 +22,33 @@ namespace bridge::analyzer::mappers
 {
     namespace
     {
+        types::card::card bid_mapper(int __id)
+        {
+            using namespace types::card::bidding;
+
+            switch (__id) {
+                case 28:
+                    return card_pass {};
+
+                case 29:
+                    return card_double {};
+
+                case 30:
+                    return card_redouble {};
+
+                case 31:
+                case 32:
+                    return types::card::card {};
+
+                default:
+                    return
+                        card_bid {
+                            static_cast<color>(__id % 4),
+                            level(static_cast<level::underlying_type>(__id / 4))
+                        };
+            }
+        }
+
         void keep_positive(types::raw::counted::trick_unit& __counted)
         {
             for (const types::card::counted_card& c : __counted) {
@@ -40,6 +67,10 @@ namespace bridge::analyzer::mappers
         swap(__lhs.m_mapper, __rhs.m_mapper);
         swap(__lhs.m_size, __rhs.m_size);
     }
+
+    bid::bid(float __confidence)
+        : box(__confidence, &bid_mapper, cv::Size2f(640.f, 640.f))
+    {}
 
     cv::Mat forward::operator()(const cv::Mat& __input)
     {

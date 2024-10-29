@@ -158,6 +158,70 @@ namespace bridge::analyzer::mappers
     }
 
     /**
+     * @brief A function object allowing to cast a pure neural network
+     * output (the one for bidding card) to a
+     * \ref bridge::analyzer::types::raw::boxed::trick
+     */
+
+    class bid : public details::box
+    {
+    public:
+        /**
+         * @brief Default constructor of \ref bid
+         */
+
+        bid() = default;
+
+        /**
+         * @brief Destructor of \ref bid
+         */
+
+        ~bid() noexcept = default;
+
+        /**
+         * @brief Copy constructor of \ref bid
+         *
+         * @param[in] __other The \ref bid to copy
+         */
+
+        bid(const bid& __other) = default;
+
+        /**
+         * @brief Move constructor of \ref bid
+         *
+         * @param[in] __other The \ref bid to move
+         */
+
+        bid(bid&& __other) = default;
+    public:
+        /**
+         * @brief Constructs a new \ref bid object with its parameters
+         *
+         * @param[in] __size The size of the input image
+         */
+
+        explicit bid(float __confidence);
+    public:
+        /**
+         * @brief Copy assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned \ref bid
+         */
+
+        bid& operator=(const bid& __rhs) = default;
+
+        /**
+         * @brief Move assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned \ref bid
+         */
+
+        bid& operator=(bid&& __rhs) = default;
+    };
+
+    /**
      * @brief A function object allowing to create a blob from a input image
      */
 
