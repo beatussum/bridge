@@ -33,7 +33,7 @@ namespace bridge::analyzer::types::raw::uncounted
     constexpr Ostream&& operator<<(Ostream&& __os, const trick& __value)
     {
         __os
-            << "trick [ north = "
+            << "trick { north = "
             << __value.north
             << ", west = "
             << __value.west
@@ -41,7 +41,7 @@ namespace bridge::analyzer::types::raw::uncounted
             << __value.south
             << ", east = "
             << __value.east
-            << " ]";
+            << " }";
 
         return __os;
     }
