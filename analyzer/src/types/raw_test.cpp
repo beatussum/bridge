@@ -16,9 +16,7 @@
  */
 
 
-#include "types/raw/boxed.hpp"
 #include "types/raw.hpp"
-
 #include <gtest/gtest.h>
 
 using namespace bridge::analyzer::types::card;

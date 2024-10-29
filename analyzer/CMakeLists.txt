@@ -62,6 +62,7 @@ set(
     types/raw/uncounted.ipp
     types/card.ipp
     types/deal.ipp
+    types/raw.ipp
     types/trick.ipp
     core.ipp
     types.ipp

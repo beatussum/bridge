@@ -19,6 +19,7 @@
 #ifndef BRIDGE_ANALYZER_TYPES_RAW_HPP
 #define BRIDGE_ANALYZER_TYPES_RAW_HPP
 
+#include "raw/boxed.hpp"
 #include "raw/counted.hpp"
 #include "raw/uncounted.hpp"
 
@@ -37,10 +38,29 @@
 
 namespace bridge::analyzer::types::raw
 {
-    namespace boxed
-    {
-        class trick;
-    }
+    /**
+     * @brief Casts the output of the neural network to a \ref boxed::trick
+     *
+     * @tparam Mapper A callable object allowing to map a class index to the
+     * corresponding \ref card::card
+     *
+     * @param[in] __confidence The confidence value allowing to filter some
+     * boxes
+     *
+     * @param[in] __mapper The mapper
+     * @param[in] __size The size of the input image
+     * @param[in] __mat The matrix to cast
+     *
+     * @return A casted \ref boxed::trick
+     */
+
+    template <class Mapper>
+    boxed::trick box(
+        float __confidence,
+        const Mapper& __mapper,
+        const cv::Size2f& __size,
+        const cv::Mat& __mat
+    );
 
     /**
      * @brief Cast a \ref uncounted::trick_unit to a \ref counted::trick_unit
@@ -86,5 +106,7 @@ namespace bridge::analyzer::types::raw
         const boxed::trick& __boxed
     );
 }
+
+#include "raw.ipp"
 
 #endif // BRIDGE_ANALYZER_TYPES_RAW_HPP
