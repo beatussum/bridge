@@ -57,6 +57,43 @@ namespace bridge::analyzer::mappers
                 }
             }
         }
+
+        constexpr types::card::card play_mapper(int __id) noexcept
+        {
+            using namespace types::card::playing;
+
+            card ret {};
+
+            ret.c = static_cast<color>(__id % 4);
+
+            switch (__id /= 4) {
+                case 0:
+                    ret.r = rank::ten;
+                    break;
+
+                case 9:
+                    ret.r = rank::ace;
+                    break;
+
+                case 10:
+                    ret.r = rank::jack;
+                    break;
+
+                case 11:
+                    ret.r = rank::king;
+                    break;
+
+                case 12:
+                    ret.r = rank::queen;
+                    break;
+
+                default:
+                    ret.r = static_cast<rank>(__id + 1);
+                    break;
+            }
+
+            return ret;
+        }
     }
 
     void details::swap(box& __lhs, box& __rhs) noexcept
@@ -77,6 +114,10 @@ namespace bridge::analyzer::mappers
         m_net.setInput(__input);
         return m_net.forward();
     }
+
+    play::play(float __confidence)
+        : box(__confidence, &play_mapper, cv::Size2f(416.f, 416.f))
+    {}
 
     types::raw::counted::trick positive::operator()(
         types::raw::counted::trick __counted

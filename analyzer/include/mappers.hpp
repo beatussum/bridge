@@ -347,6 +347,71 @@ namespace bridge::analyzer::mappers
     struct minus : std::minus<types::raw::counted::trick> {};
 
     /**
+     * @brief A function object allowing to cast a pure neural network
+     * output (the one for playing card) to a
+     * \ref bridge::analyzer::types::raw::boxed::trick
+     */
+
+    class play : public details::box
+    {
+    public:
+        /**
+         * @brief Default constructor of \ref play
+         */
+
+        play() = default;
+
+        /**
+         * @brief Destructor of \ref play
+         */
+
+        ~play() noexcept = default;
+
+        /**
+         * @brief Copy constructor of \ref play
+         *
+         * @param[in] __other The \ref play to copy
+         */
+
+        play(const play& __other) = default;
+
+        /**
+         * @brief Move constructor of \ref play
+         *
+         * @param[in] __other The \ref play to move
+         */
+
+        play(play&& __other) = default;
+    public:
+        /**
+         * @brief Constructs a new \ref play object with its parameters
+         *
+         * @param[in] __confidence The confidence value allowing to filter some
+         * boxes
+         */
+
+        explicit play(float __confidence);
+    public:
+        /**
+         * @brief Copy assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned \ref play
+         */
+
+        play& operator=(const play& __rhs) = default;
+
+        /**
+         * @brief Move assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned \ref play
+         */
+
+        play& operator=(play&& __rhs) = default;
+    };
+
+    /**
      * @brief A function object allowing to keep only positive
      * \ref bridge::analyzer::types::raw::counted::trick
      */
