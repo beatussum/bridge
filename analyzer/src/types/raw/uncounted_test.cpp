@@ -76,7 +76,7 @@ TEST(print_test, trick)
     };
 
     std::string_view expected =
-        "trick [ "
+        "trick { "
         "north = trick_unit [ "
         "card { CA }, "
         "card_pass {}, "
@@ -101,7 +101,7 @@ TEST(print_test, trick)
         "card_redouble {}, "
         "card_bid { D6 } "
         "] "
-        "]";
+        "}";
 
     ASSERT_EQ(to_string(input), expected);
 }
