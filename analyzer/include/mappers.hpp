@@ -211,7 +211,7 @@ namespace bridge::analyzer::mappers
      * @param[in, out] __rhs The right hand side parameter
      */
 
-    void swap(blob& __lhs, blob& __rhs) noexcept
+    constexpr void swap(blob& __lhs, blob& __rhs) noexcept
         {}
 
     /**
@@ -245,7 +245,7 @@ namespace bridge::analyzer::mappers
      * @param[in, out] __rhs The right hand side parameter
      */
 
-    void swap(count& __lhs, count& __rhs) noexcept
+    constexpr void swap(count& __lhs, count& __rhs) noexcept
         {}
 
     /**
@@ -279,7 +279,7 @@ namespace bridge::analyzer::mappers
      * @param[in, out] __rhs The right hand side parameter
      */
 
-    void swap(minus& __lhs, minus& __rhs) noexcept
+    constexpr void swap(minus& __lhs, minus& __rhs) noexcept
         {}
 
     /**
@@ -319,7 +319,7 @@ namespace bridge::analyzer::mappers
      * @param[in, out] __rhs The right hand side parameter
      */
 
-    void swap(positive& __lhs, positive& __rhs) noexcept
+    constexpr void swap(positive& __lhs, positive& __rhs) noexcept
         {}
 }
 
