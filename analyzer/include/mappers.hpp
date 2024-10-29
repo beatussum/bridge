@@ -197,7 +197,8 @@ namespace bridge::analyzer::mappers
         /**
          * @brief Constructs a new \ref bid object with its parameters
          *
-         * @param[in] __size The size of the input image
+         * @param[in] __confidence The confidence value allowing to filter some
+         * boxes
          */
 
         explicit bid(float __confidence);
