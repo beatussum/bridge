@@ -16,7 +16,9 @@
  */
 
 
+#include "types/raw/boxed.hpp"
 #include "types/raw.hpp"
+
 #include <gtest/gtest.h>
 
 using namespace bridge::analyzer::types::card;
@@ -43,4 +45,78 @@ TEST(count_test, basic)
     };
 
     ASSERT_EQ(count(input), expected);
+}
+
+TEST(unbox_test, basic)
+{
+    boxed::trick input {
+        boxed_card { cv::Rect2f(0.f, 10.f, 1.f, 1.f), bidding::card_double {} },
+        boxed_card { cv::Rect2f(0.f, 10.f, 1.f, 1.f), bidding::card_double {} },
+
+        boxed_card { cv::Rect2f(-10.f, 0.f, 1.f, 1.f), bidding::card_pass {} },
+
+        boxed_card {
+            cv::Rect2f(-10.f, -10.f, 1.f, 1.f),
+            bidding::card_double {}
+        },
+
+        boxed_card { cv::Rect2f(10.f, 5.f, 1.f, 1.f), bidding::card_stop {} },
+        boxed_card { cv::Rect2f(10.f, 0.f, 1.f, 1.f), bidding::card_stop {} }
+    };
+
+    uncounted::trick expected {
+        uncounted::trick_unit {
+            bidding::card_double {},
+            bidding::card_double {}
+        },
+
+        uncounted::trick_unit { bidding::card_pass {} },
+        uncounted::trick_unit { bidding::card_double {} },
+
+        uncounted::trick_unit {
+            bidding::card_stop {},
+            bidding::card_stop {}
+        }
+    };
+
+    ASSERT_EQ(unbox(cv::Point2f(0.f, 0.f), input), expected);
+}
+
+TEST(unbox_test, one)
+{
+    boxed::trick input {
+        boxed_card { cv::Rect2f(0.f, 10.f, 1.f, 1.f), bidding::card_double {} }
+    };
+
+    uncounted::trick expected {
+        uncounted::trick_unit { bidding::card_double {} },
+        uncounted::trick_unit {},
+        uncounted::trick_unit {},
+        uncounted::trick_unit {}
+    };
+
+    ASSERT_EQ(unbox(cv::Point2f(0.f, 0.f), input), expected);
+}
+
+TEST(unbox_test, same)
+{
+    boxed::trick input {
+        boxed_card { cv::Rect2f(0.f, 10.f, 1.f, 1.f), bidding::card_double {} },
+        boxed_card { cv::Rect2f(0.f, 10.f, 1.f, 1.f), bidding::card_double {} },
+        boxed_card { cv::Rect2f(0.f, 10.f, 1.f, 1.f), bidding::card_pass {} }
+    };
+
+    uncounted::trick expected {
+        uncounted::trick_unit {
+            bidding::card_double {},
+            bidding::card_double {},
+            bidding::card_pass {}
+        },
+
+        uncounted::trick_unit {},
+        uncounted::trick_unit {},
+        uncounted::trick_unit {}
+    };
+
+    ASSERT_EQ(unbox(cv::Point2f(0.f, 0.f), input), expected);
 }

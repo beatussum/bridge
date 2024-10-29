@@ -104,19 +104,30 @@ namespace bridge::analyzer::types::raw
     {
         uncounted::trick ret;
 
-        if (__boxed.size() == 1) {
-            card::boxed_card c = __boxed.front();
+        cv::Rect2f front_box = __boxed.front().box;
 
-            add_to_uncounted_trick(
-                ret,
+        bool are_equal =
+            std::all_of(
+                __boxed.cbegin(),
+                __boxed.cend(),
 
-                get_positioning_from_center(
-                    __center,
-                    get_rect_center(c.box)
-                ),
-
-                std::move(c.c)
+                [&] (const card::boxed_card& __rhs)
+                    { return front_box == __rhs.box; }
             );
+
+         if ((__boxed.size() == 1) || are_equal) {
+            for (card::boxed_card c : __boxed) {
+                add_to_uncounted_trick(
+                    ret,
+
+                    get_positioning_from_center(
+                        __center,
+                        get_rect_center(c.box)
+                    ),
+
+                    std::move(c.c)
+                );
+            }
         } else {
             std::vector<cv::Point2f> centers;
 
