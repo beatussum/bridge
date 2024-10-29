@@ -29,6 +29,7 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 set(
     ANALYZER_PUBLIC_HPP
     core/boost.hpp
+    iterators/map.hpp
     mappers/transform.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
@@ -40,7 +41,7 @@ set(
     types/raw.hpp
     types/trick.hpp
     core.hpp
-    map.hpp
+    iterators.hpp
     mappers.hpp
     types.hpp
 )
@@ -49,6 +50,7 @@ list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
 set(
     ANALYZER_PUBLIC_IPP
+    iterators/map.ipp
     types/card/bidding.ipp
     types/card/playing.ipp
     types/raw/counted.ipp
@@ -57,7 +59,6 @@ set(
     types/deal.ipp
     types/trick.ipp
     core.ipp
-    map.ipp
     types.ipp
 )
 
@@ -94,6 +95,7 @@ bridge_add_to_doc("${ANALYZER_PUBLIC_HPP}")
 
 bridge_add_unit_tests(
     TESTS
+        iterators/map
         mappers/transform
         types/card/bidding
         types/card/playing
@@ -101,7 +103,6 @@ bridge_add_unit_tests(
         types/raw/uncounted
         types/deal
         types/raw
-        map
         types
 
     EXTRA_LIBS analyzer

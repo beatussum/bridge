@@ -16,40 +16,18 @@
  */
 
 
-#include "map.hpp"
-#include <gtest/gtest.h>
+#ifndef BRIDGE_ANALYZER_ITERATORS_HPP
+#define BRIDGE_ANALYZER_ITERATORS_HPP
 
-using namespace bridge::analyzer::map;
+/**
+ * @file
+ * @brief The base header of the namespace \ref bridge::analyzer::iterators
+ */
 
-TEST(map_test, one_input)
-{
-    std::array<int, 5> input { 1, 2, 3, 4, 5 };
+/**
+ * @brief This namespace describes various iterator types
+ */
 
-    auto i   = input.cbegin() | map(std::negate<int> {});
-    auto j   = input.cbegin();
-    auto end = input.cend();
+namespace bridge::analyzer::iterators {}
 
-    while (j != end) {
-        ASSERT_EQ(*i, -*j);
-
-        ++i;
-        ++j;
-    }
-}
-
-TEST(map_test, two_inputs)
-{
-    std::array<int, 5> input { 1, 2, 3, 4, 5 };
-    std::array<int, 5> expected { 1, 3, 5, 7, 9 };
-
-    auto i   = input.cbegin() | map(std::plus<int> {});
-    auto j   = expected.cbegin();
-    auto end = expected.cend();
-
-    while (j != end) {
-        ASSERT_EQ(*i, *j);
-
-        ++i;
-        ++j;
-    }
-}
+#endif // BRIDGE_ANALYZER_ITERATORS_HPP
