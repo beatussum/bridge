@@ -79,9 +79,19 @@ set(
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")
 
 find_package(Boost REQUIRED)
-find_package(OpenCV REQUIRED COMPONENTS imgproc)
+find_package(OpenCV REQUIRED COMPONENTS dnn imgproc videoio)
 add_library(analyzer STATIC "${ANALYZER_CPP}")
-target_link_libraries(analyzer PUBLIC Boost::boost opencv_imgproc)
+
+target_link_libraries(
+    analyzer
+
+    PUBLIC
+        Boost::boost
+        opencv_dnn
+        opencv_imgproc
+        opencv_videoio
+)
+
 target_include_directories(analyzer PUBLIC "include/")
 
 target_sources(
