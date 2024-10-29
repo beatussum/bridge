@@ -57,6 +57,7 @@ namespace bridge::analyzer::mappers
 
     class box
     {
+        friend void swap(box&, box&) noexcept;
     public:
         /**
          * @brief Default constructor of \ref box
@@ -398,6 +399,15 @@ namespace bridge::analyzer::mappers
 
     constexpr void swap(blob& __lhs, blob& __rhs) noexcept
         {}
+
+    /**
+     * @brief Swaps two \ref box
+     *
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
+     */
+
+    void swap(box& __lhs, box& __rhs) noexcept;
 
     /**
      * @brief Equality operator for \ref count

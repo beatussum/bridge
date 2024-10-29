@@ -32,6 +32,15 @@ namespace bridge::analyzer::mappers
         }
     }
 
+    void swap(box& __lhs, box& __rhs) noexcept
+    {
+        using std::swap;
+
+        swap(__lhs.m_confidence, __rhs.m_confidence);
+        swap(__lhs.m_mapper, __rhs.m_mapper);
+        swap(__lhs.m_size, __rhs.m_size);
+    }
+
     cv::Mat forward::operator()(const cv::Mat& __input)
     {
         m_net.setInput(__input);
