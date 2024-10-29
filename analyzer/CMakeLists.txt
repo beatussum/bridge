@@ -29,7 +29,6 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 set(
     ANALYZER_PUBLIC_HPP
     core/boost.hpp
-    mappers/forward.hpp
     mappers/transform.hpp
     types/card/bidding.hpp
     types/card/playing.hpp
@@ -66,7 +65,6 @@ list(TRANSFORM ANALYZER_PUBLIC_IPP PREPEND "include/")
 
 set(
     ANALYZER_CPP
-    mappers/forward.cpp
     mappers/transform.cpp
     types/card/bidding.cpp
     types/card/playing.cpp

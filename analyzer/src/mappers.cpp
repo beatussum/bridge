@@ -32,6 +32,12 @@ namespace bridge::analyzer::mappers
         }
     }
 
+    cv::Mat forward::operator()(cv::InputArray __input)
+    {
+        m_net.setInput(__input);
+        return m_net.forward();
+    }
+
     types::raw::counted::trick positive::operator()(
         types::raw::counted::trick __counted
     ) const
