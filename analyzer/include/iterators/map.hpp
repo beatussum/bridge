@@ -26,7 +26,6 @@
 
 /**
  * @file
- *
  * @brief The base header of the namespace \ref bridge::analyzer::iterators::map
  */
 
