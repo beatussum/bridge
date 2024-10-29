@@ -30,7 +30,7 @@ namespace bridge::analyzer::types::raw
     {
         boxed::trick ret;
 
-        cv::MatSize size = __mat.size();
+        cv::MatSize size = __mat.size;
 
         for (int k = 0; k != size[2]; ++k) {
             auto m = std::make_pair<int, float>(-1, -1.f);
