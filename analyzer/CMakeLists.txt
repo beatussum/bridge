@@ -70,6 +70,7 @@ set(
     types/card/playing.cpp
     types/raw/counted.cpp
     types/raw.cpp
+    mappers.cpp
 )
 
 list(TRANSFORM ANALYZER_CPP PREPEND "src/")

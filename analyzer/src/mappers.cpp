@@ -1,0 +1,46 @@
+/*
+ * Copyright (C) 2024 Mattéo Rossillol‑‑Laruelle <beatussum@protonmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+
+#include "mappers.hpp"
+
+namespace bridge::analyzer::mappers
+{
+    namespace
+    {
+        void keep_positive(types::raw::counted::trick_unit& __counted)
+        {
+            for (const types::card::counted_card& c : __counted) {
+                if (c.n <= 0) {
+                    __counted.erase(c);
+                }
+            }
+        }
+    }
+
+    types::raw::counted::trick positive::operator()(
+        types::raw::counted::trick __counted
+    )
+    {
+        keep_positive(__counted.north);
+        keep_positive(__counted.west);
+        keep_positive(__counted.south);
+        keep_positive(__counted.east);
+
+        return __counted;
+    }
+}

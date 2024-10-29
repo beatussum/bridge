@@ -62,6 +62,28 @@ namespace bridge::analyzer::mappers
      */
 
     struct minus : std::minus<types::raw::counted::trick> {};
+
+    /**
+     * @brief A function object allowing to keep only positive
+     * \ref bridge::analyzer::types::raw::counted::trick
+     */
+
+    struct positive
+    {
+        /**
+         * @brief Keeps only positive
+         * \ref bridge::analyzer::types::raw::counted::trick
+         *
+         * @param[in] __counted The trick to filter
+         *
+         * @return A \ref bridge::analyzer::types::raw::counted::trick without
+         * negative \ref bridge::analyzer::types::card::counted_card::n
+         */
+
+        types::raw::counted::trick operator()(
+            types::raw::counted::trick __counted
+        );
+    };
 }
 
 #endif // BRIDGE_ANALYZER_MAPPERS_HPP
