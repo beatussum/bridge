@@ -20,6 +20,7 @@
 #define BRIDGE_ANALYZER_MAPPERS_HPP
 
 #include "types/raw.hpp"
+#include <opencv2/dnn/dnn.hpp>
 
 /**
  * @file
@@ -32,6 +33,23 @@
 
 namespace bridge::analyzer::mappers
 {
+    /**
+     * @brief A function object allowing to create a blob from a input image
+     */
+
+    struct blob
+    {
+        /**
+         * @brief Creates a blob from a input image
+         *
+         * @param[in] __image The input image
+         * @return A 4-dimensional matrix with NCHW dimensions order
+         */
+
+        cv::Mat operator()(cv::InputArray __image) const
+            { return cv::dnn::blobFromImage(__image); }
+    };
+
     /**
      * @brief A function object allowing to cast a
      * \ref bridge::analyzer::types::raw::uncounted::trick to a
