@@ -35,23 +35,13 @@
 
 namespace bridge::analyzer::iterators::capture
 {
-    /**
-     * @brief The detail namespace of \ref bridge::analyzer::iterators::capture
-     *
-     * @warning This namespace should never been used directly: it exists only
-     * for implementation reason.
-     */
-
-    namespace details
-    {
-        struct iterated_tag {}; ///< A dispatch type used by \ref operator|()
-    }
+    struct iterated_tag {}; ///< A dispatch type used by \ref operator|()
 
     class capture
     {
         friend inline bool operator==(const capture&, const capture&);
         friend inline void swap(capture&, capture&);
-        friend capture operator|(cv::VideoCapture, details::iterated_tag);
+        friend capture operator|(cv::VideoCapture, iterated_tag);
     public:
         /**
          * @brief The type of the value returned by the difference between two
@@ -230,8 +220,8 @@ namespace bridge::analyzer::iterators::capture
      * @return A \ref details::iterated_tag instance
      */
 
-    constexpr details::iterated_tag iterated() noexcept
-        { return details::iterated_tag {}; }
+    constexpr iterated_tag iterated() noexcept
+        { return iterated_tag {}; }
 
     /**
      * @brief Pipe operator for \ref capture
@@ -243,7 +233,7 @@ namespace bridge::analyzer::iterators::capture
      * @return The \ref capture
      */
 
-    inline capture operator|(cv::VideoCapture __lhs, details::iterated_tag)
+    inline capture operator|(cv::VideoCapture __lhs, iterated_tag)
         { return capture(std::move(__lhs)); }
 }
 
