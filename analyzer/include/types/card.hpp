@@ -22,6 +22,8 @@
 #include "card/bidding.hpp"
 #include "card/playing.hpp"
 
+#include <opencv2/core/types.hpp>
+
 /**
  * @file
  * @brief The base header of the namespace \ref bridge::analyzer::types::card
@@ -94,6 +96,16 @@ namespace bridge::analyzer::types::card
     };
 
     /**
+     * @brief A boxed card
+     */
+
+    struct boxed_card
+    {
+        cv::Rect2f box; ///< The box of the card
+        card c;         ///< The type of the card
+    };
+
+    /**
      * @brief A counted card
      */
 
@@ -139,6 +151,44 @@ namespace bridge::analyzer::types::card
 
     template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value);
+
+    /**
+     * @brief Equality operator for \ref boxed_card
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    inline bool operator==(const boxed_card& __lhs, const boxed_card& __rhs)
+        { return (__lhs.box == __rhs.box) && (__lhs.c == __rhs.c); }
+
+    /**
+     * @brief Inequality operator for \ref boxed_card
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    inline bool operator!=(const boxed_card& __lhs, const boxed_card& __rhs)
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Inserts a \ref boxed_card to an output stream
+     *
+     * @tparam Ostream The type of \p __os
+     *
+     * @param[in] __os The output stream
+     * @param[in] __value The value to insert
+     *
+     * @return The modified output stream
+     */
+
+    template <class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const boxed_card& __value);
 
     /**
      * @brief Equality operator for \ref counted_card

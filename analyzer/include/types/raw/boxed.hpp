@@ -19,7 +19,7 @@
 #ifndef BRIDGE_ANALYZER_TYPES_RAW_BOXED_HPP
 #define BRIDGE_ANALYZER_TYPES_RAW_BOXED_HPP
 
-#include <opencv2/core/types.hpp>
+#include "../card.hpp"
 
 /**
  * @file
@@ -42,7 +42,7 @@ namespace bridge::analyzer::types::raw::boxed
      * @brief A trick
      */
 
-    class trick : public std::vector<cv::Rect2f>
+    class trick : public std::vector<card::boxed_card>
     {
         template <class Ostream>
         friend constexpr Ostream&& operator<<(Ostream&&, const trick&);
@@ -51,7 +51,7 @@ namespace bridge::analyzer::types::raw::boxed
          * @brief The type of the base class
          */
 
-        using base_type = std::vector<cv::Rect2f>;
+        using base_type = std::vector<card::boxed_card>;
     public:
         using base_type::vector;
 

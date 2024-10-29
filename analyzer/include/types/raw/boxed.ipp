@@ -16,7 +16,6 @@
  */
 
 
-#include "core/cv.hpp"
 #include "core.hpp"
 
 namespace bridge::analyzer::types::raw::boxed

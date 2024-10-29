@@ -16,12 +16,27 @@
  */
 
 
+#include "core/cv.hpp"
+
 namespace bridge::analyzer::types::card
 {
     template <class Ostream>
     constexpr Ostream&& operator<<(Ostream&& __os, const card& __value)
     {
         std::visit([&] (const auto& value) { __os << value; }, __value);
+        return __os;
+    }
+
+    template <class Ostream>
+    constexpr Ostream&& operator<<(Ostream&& __os, const boxed_card& __value)
+    {
+        __os
+            << "boxed_card { box = "
+            << __value.box
+            << ", card = "
+            << __value.c
+            << " }";
+
         return __os;
     }
 
