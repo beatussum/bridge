@@ -22,7 +22,7 @@ namespace bridge::analyzer::mappers
 {
     namespace
     {
-        types::card::card bid_mapper(int __id)
+        constexpr types::card::card bid_mapper(int __id)
         {
             using namespace types::card::bidding;
 
