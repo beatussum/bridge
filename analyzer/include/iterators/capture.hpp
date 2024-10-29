@@ -37,6 +37,11 @@ namespace bridge::analyzer::iterators::capture
 {
     struct iterated_tag {}; ///< A dispatch type used by \ref operator|()
 
+    /**
+     * @brief An iterator allowing to iterate over the frames of a
+     * `cv::VideoCapture`
+     */
+
     class capture
     {
         friend inline bool operator==(const capture&, const capture&);
@@ -212,12 +217,12 @@ namespace bridge::analyzer::iterators::capture
         { std::swap(__lhs.m_video_capture, __rhs.m_video_capture); }
 
     /**
-     * @brief Constructs a \ref details::iterated_tag
+     * @brief Constructs a \ref iterated_tag
      *
      * This functions allows an intuitive interface to iterate over a
      * `cv::VideoCapture`.
      *
-     * @return A \ref details::iterated_tag instance
+     * @return A \ref iterated_tag instance
      */
 
     constexpr iterated_tag iterated() noexcept
