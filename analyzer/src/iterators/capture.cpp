@@ -40,8 +40,16 @@ namespace bridge::analyzer::iterators::capture
 
     capture::reference capture::operator*()
     {
-        if (!m_cached.has_value() && !m_video_capture->retrieve(*m_cached)) {
-            throw std::runtime_error("The current image cannot be retrieved");
+        if (!m_cached.has_value()) {
+            cv::Mat image;
+
+            if (!m_video_capture->retrieve(image)) {
+                throw std::runtime_error(
+                    "The current image cannot be retrieved"
+                );
+            } else {
+                m_cached = image;
+            }
         }
 
         return *m_cached;

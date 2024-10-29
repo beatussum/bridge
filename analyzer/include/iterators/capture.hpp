@@ -109,7 +109,7 @@ namespace bridge::analyzer::iterators::capture
                 std::make_shared<cv::VideoCapture>(std::move(__video_capture))
             )
             , m_cached()
-        {}
+        { ++*this; }
     public:
         /**
          * @brief Copy assignment operator
