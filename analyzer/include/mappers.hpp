@@ -52,7 +52,7 @@ namespace bridge::analyzer::mappers
 
         types::raw::counted::trick operator()(
             const types::raw::uncounted::trick& __uncounted
-        )
+        ) const
             { return types::raw::count(__uncounted); }
     };
 
@@ -82,7 +82,7 @@ namespace bridge::analyzer::mappers
 
         types::raw::counted::trick operator()(
             types::raw::counted::trick __counted
-        );
+        ) const;
     };
 }
 

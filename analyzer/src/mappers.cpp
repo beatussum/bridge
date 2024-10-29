@@ -34,7 +34,7 @@ namespace bridge::analyzer::mappers
 
     types::raw::counted::trick positive::operator()(
         types::raw::counted::trick __counted
-    )
+    ) const
     {
         keep_positive(__counted.north);
         keep_positive(__counted.west);
