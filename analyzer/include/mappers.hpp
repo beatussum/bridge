@@ -34,6 +34,130 @@
 namespace bridge::analyzer::mappers
 {
     /**
+     * @brief The detail namespace of \ref bridge::analyzer::mappers
+     *
+     * @warning This namespace should never been used directly: it exists only
+     * for implementation reason.
+     */
+
+    namespace details
+    {
+        /**
+         * @brief A function object allowing to cast a pure neural network
+         * output to a \ref bridge::analyzer::types::raw::boxed::trick
+         */
+
+        class box
+        {
+            friend void swap(box&, box&) noexcept;
+        public:
+            /**
+             * @brief Default constructor of \ref box
+             */
+
+            box() = default;
+
+            /**
+             * @brief Destructor of \ref box
+             */
+
+            ~box() noexcept = default;
+
+            /**
+             * @brief Copy constructor of \ref box
+             *
+             * @param[in] __other The \ref box to copy
+             */
+
+            box(const box& __other) = default;
+
+            /**
+             * @brief Move constructor of \ref box
+             *
+             * @param[in] __other The \ref box to move
+             */
+
+            box(box&& __other) = default;
+        public:
+            /**
+             * @brief Constructs a new \ref box object with its parameters
+             *
+             * @param[in] __confidence The confidence value allowing to filter
+             * some boxes
+             *
+             * @param[in] __mapper The mapper
+             * @param[in] __size The size of the input image
+             */
+
+            explicit box(
+                float __confidence,
+                std::function<types::card::card(int)> __mapper,
+                cv::Size2f __size
+            )
+                : m_confidence(__confidence)
+                , m_mapper(std::move(__mapper))
+                , m_size(std::move(__size))
+            {}
+        public:
+            /**
+             * @brief Copy assignment operator
+             *
+             * @param[in] __rhs The right hand side operand
+             * @return A reference to the assigned \ref box
+             */
+
+            box& operator=(const box& __rhs) = default;
+
+            /**
+             * @brief Move assignment operator
+             *
+             * @param[in] __rhs The right hand side operand
+             * @return A reference to the assigned \ref box
+             */
+
+            box& operator=(box&& __rhs) = default;
+        public:
+            /**
+             * @brief Casts the output of the neural network to a
+             * \ref types::raw::boxed::trick
+             *
+             * @param[in] __input The matrix to cast
+             * @return A casted \ref types::raw::boxed::trick
+             */
+
+            types::raw::boxed::trick operator()(const cv::Mat& __input)
+            {
+                return
+                    types::raw::box(
+                        m_confidence,
+                        m_mapper,
+                        m_size,
+                        __input
+                    );
+            }
+        private:
+            /**
+             * @brief The confidence value allowing to filter some boxes
+             */
+
+            float m_confidence;
+
+            std::function<types::card::card(int)> m_mapper; ///< The mapper
+
+            cv::Size2f m_size; ///< The size of the input image
+        };
+
+        /**
+         * @brief Swaps two \ref box
+         *
+         * @param[in, out] __lhs The left hand side parameter
+         * @param[in, out] __rhs The right hand side parameter
+         */
+
+        void swap(box& __lhs, box& __rhs) noexcept;
+    }
+
+    /**
      * @brief A function object allowing to create a blob from a input image
      */
 
@@ -48,103 +172,6 @@ namespace bridge::analyzer::mappers
 
         cv::Mat operator()(const cv::Mat& __image) const
             { return cv::dnn::blobFromImage(__image); }
-    };
-
-    /**
-     * @brief A function object allowing to cast a pure neural network output to
-     * a \ref bridge::analyzer::types::raw::boxed::trick
-     */
-
-    class box
-    {
-        friend void swap(box&, box&) noexcept;
-    public:
-        /**
-         * @brief Default constructor of \ref box
-         */
-
-        box() = default;
-
-        /**
-         * @brief Destructor of \ref box
-         */
-
-        ~box() noexcept = default;
-
-        /**
-         * @brief Copy constructor of \ref box
-         *
-         * @param[in] __other The \ref box to copy
-         */
-
-        box(const box& __other) = default;
-
-        /**
-         * @brief Move constructor of \ref box
-         *
-         * @param[in] __other The \ref box to move
-         */
-
-        box(box&& __other) = default;
-    public:
-        /**
-         * @brief Constructs a new \ref box object with its parameters
-         *
-         * @param[in] __confidence The confidence value allowing to filter some
-         * boxes
-         *
-         * @param[in] __mapper The mapper
-         * @param[in] __size The size of the input image
-         */
-
-        explicit box(
-            float __confidence,
-            std::function<types::card::card(int)> __mapper,
-            cv::Size2f __size
-        )
-            : m_confidence(__confidence)
-            , m_mapper(std::move(__mapper))
-            , m_size(std::move(__size))
-        {}
-    public:
-        /**
-         * @brief Copy assignment operator
-         *
-         * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned \ref box
-         */
-
-        box& operator=(const box& __rhs) = default;
-
-        /**
-         * @brief Move assignment operator
-         *
-         * @param[in] __rhs The right hand side operand
-         * @return A reference to the assigned \ref box
-         */
-
-        box& operator=(box&& __rhs) = default;
-    public:
-        /**
-         * @brief Casts the output of the neural network to a
-         * \ref types::raw::boxed::trick
-         *
-         * @param[in] __input The matrix to cast
-         * @return A casted \ref types::raw::boxed::trick
-         */
-
-        types::raw::boxed::trick operator()(const cv::Mat& __input)
-            { return types::raw::box(m_confidence, m_mapper, m_size, __input); }
-    private:
-        /**
-         * @brief The confidence value allowing to filter some boxes
-         */
-
-        float m_confidence;
-
-        std::function<types::card::card(int)> m_mapper; ///< The mapper
-
-        cv::Size2f m_size; ///< The size of the input image
     };
 
     /**
@@ -399,15 +426,6 @@ namespace bridge::analyzer::mappers
 
     constexpr void swap(blob& __lhs, blob& __rhs) noexcept
         {}
-
-    /**
-     * @brief Swaps two \ref box
-     *
-     * @param[in, out] __lhs The left hand side parameter
-     * @param[in, out] __rhs The right hand side parameter
-     */
-
-    void swap(box& __lhs, box& __rhs) noexcept;
 
     /**
      * @brief Equality operator for \ref count

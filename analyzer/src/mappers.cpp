@@ -32,7 +32,7 @@ namespace bridge::analyzer::mappers
         }
     }
 
-    void swap(box& __lhs, box& __rhs) noexcept
+    void details::swap(box& __lhs, box& __rhs) noexcept
     {
         using std::swap;
 
