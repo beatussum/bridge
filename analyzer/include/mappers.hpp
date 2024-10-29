@@ -181,6 +181,95 @@ namespace bridge::analyzer::mappers
     };
 
     /**
+     * @brief A function object allowing to cast a
+     * \ref types::raw::boxed::trick to a \ref types::raw::uncounted::trick
+     */
+
+    class unbox
+    {
+        friend bool operator==(const unbox&, const unbox&);
+        friend void swap(unbox&, unbox&) noexcept;
+    public:
+        /**
+         * @brief Default constructor of \ref unbox
+         */
+
+        unbox() = default;
+
+        /**
+         * @brief Destructor of \ref unbox
+         */
+
+        ~unbox() noexcept = default;
+
+        /**
+         * @brief Copy constructor of \ref unbox
+         *
+         * @param[in] __other The \ref unbox to copy
+         */
+
+        unbox(const unbox& __other) = default;
+
+        /**
+         * @brief Move constructor of \ref unbox
+         *
+         * @param[in] __other The \ref unbox to move
+         */
+
+        unbox(unbox&& __other) = default;
+    public:
+        /**
+         * @brief Constructs a new \ref unbox with its center specified
+         *
+         * @param[in] __center The center used for the call of
+         * \ref types::raw::unbox()
+         */
+
+        explicit unbox(cv::Point2f __center)
+            : m_center(std::move(__center))
+        {}
+    public:
+        /**
+         * @brief Copy assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned \ref unbox
+         */
+
+        unbox& operator=(const unbox& __rhs) = default;
+
+        /**
+         * @brief Move assignment operator
+         *
+         * @param[in] __rhs The right hand side operand
+         * @return A reference to the assigned \ref unbox
+         */
+
+        unbox& operator=(unbox&& __rhs) = default;
+    public:
+        /**
+         * @brief Cast a \ref types::raw::boxed::trick to a
+         * \ref types::raw::uncounted::trick
+         *
+         * @param[in] __boxed The \ref types::raw::boxed::trick to cast
+         * @return The casted \ref types::raw::uncounted::trick
+         *
+         * @see types::raw::unbox()
+         */
+
+        types::raw::uncounted::trick operator()(
+            const types::raw::boxed::trick& __boxed
+        ) const
+            { return types::raw::unbox(m_center, __boxed); }
+    private:
+        /**
+         * @brief The center used for the call of \ref types::raw::unbox()
+         */
+
+        cv::Point2f m_center;
+    };
+
+    /**
      * @brief Equality operator for \ref blob
      *
      * @param[in] __lhs The left hand side operand
@@ -321,6 +410,39 @@ namespace bridge::analyzer::mappers
 
     constexpr void swap(positive& __lhs, positive& __rhs) noexcept
         {}
+
+    /**
+     * @brief Equality operator for \ref unbox
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    inline bool operator==(const unbox& __lhs, const unbox& __rhs)
+        { return __lhs.m_center == __rhs.m_center; }
+
+    /**
+     * @brief Inequality operator for \ref unbox
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    inline bool operator!=(const unbox& __lhs, const unbox& __rhs)
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Swaps two \ref unbox
+     *
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
+     */
+
+    void swap(unbox& __lhs, unbox& __rhs) noexcept;
 }
 
 #endif // BRIDGE_ANALYZER_MAPPERS_HPP

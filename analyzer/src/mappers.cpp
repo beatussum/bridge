@@ -49,4 +49,10 @@ namespace bridge::analyzer::mappers
 
         return __counted;
     }
+
+    void swap(unbox& __lhs, unbox& __rhs) noexcept
+    {
+        using std::swap;
+        swap(__lhs.m_center, __rhs.m_center);
+    }
 }
