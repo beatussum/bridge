@@ -102,6 +102,148 @@ namespace bridge::analyzer::mappers
             types::raw::counted::trick __counted
         ) const;
     };
+
+    /**
+     * @brief Equality operator for \ref blob
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    constexpr bool operator==(const blob& __lhs, const blob& __rhs) noexcept
+        { return true; }
+
+    /**
+     * @brief Inequality operator for \ref blob
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    constexpr bool operator!=(const blob& __lhs, const blob& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Swaps two \ref blob
+     *
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
+     */
+
+    void swap(blob& __lhs, blob& __rhs) noexcept
+        {}
+
+    /**
+     * @brief Equality operator for \ref count
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    constexpr bool operator==(const count& __lhs, const count& __rhs) noexcept
+        { return true; }
+
+    /**
+     * @brief Inequality operator for \ref count
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    constexpr bool operator!=(const count& __lhs, const count& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Swaps two \ref count
+     *
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
+     */
+
+    void swap(count& __lhs, count& __rhs) noexcept
+        {}
+
+    /**
+     * @brief Equality operator for \ref minus
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    constexpr bool operator==(const minus& __lhs, const minus& __rhs) noexcept
+        { return true; }
+
+    /**
+     * @brief Inequality operator for \ref minus
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    constexpr bool operator!=(const minus& __lhs, const minus& __rhs) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Swaps two \ref minus
+     *
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
+     */
+
+    void swap(minus& __lhs, minus& __rhs) noexcept
+        {}
+
+    /**
+     * @brief Equality operator for \ref positive
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is equal to \p __rhs
+     */
+
+    constexpr bool operator==(
+        const positive& __lhs,
+        const positive& __rhs
+    ) noexcept
+        { return true; }
+
+    /**
+     * @brief Inequality operator for \ref positive
+     *
+     * @param[in] __lhs The left hand side operand
+     * @param[in] __rhs The right hand side operand
+     *
+     * @return If \p __lhs is different from \p __rhs
+     */
+
+    constexpr bool operator!=(
+        const positive& __lhs,
+        const positive& __rhs
+    ) noexcept
+        { return !(__lhs == __rhs); }
+
+    /**
+     * @brief Swaps two \ref positive
+     *
+     * @param[in, out] __lhs The left hand side parameter
+     * @param[in, out] __rhs The right hand side parameter
+     */
+
+    void swap(positive& __lhs, positive& __rhs) noexcept
+        {}
 }
 
 #endif // BRIDGE_ANALYZER_MAPPERS_HPP
