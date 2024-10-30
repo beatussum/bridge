@@ -51,9 +51,11 @@ namespace bridge::analyzer::mappers
 
         void keep_positive(types::raw::counted::trick_unit& __counted)
         {
-            for (const types::card::counted_card& c : __counted) {
-                if (c.n <= 0) {
-                    __counted.erase(c);
+            for (auto i = __counted.cbegin(); i != __counted.cend();) {
+                if (i->n <= 0) {
+                    __counted.erase(i++);
+                } else {
+                    ++i;
                 }
             }
         }
