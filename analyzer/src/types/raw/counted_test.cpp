@@ -23,12 +23,28 @@ using namespace bridge::analyzer::types::raw::counted;
 using namespace bridge::analyzer::types::card;
 using bridge::analyzer::core::to_string;
 
+namespace
+{
+    bool true_equal(const trick_unit& __lhs, const trick_unit& __rhs)
+    {
+        for (const counted_card& c : __rhs) {
+            auto it = __lhs.find(c);
+
+            if ((it == __lhs.cend()) || (it->n != c.n) || (it->c != c.c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 TEST(trick_unit_test, unary_minus)
 {
     trick_unit input { counted_card { 1, bidding::card_pass {} } };
     trick_unit expected { counted_card { -1, bidding::card_pass {} } };
 
-    ASSERT_EQ(-input, expected);
+    ASSERT_PRED2(true_equal, -input, expected);
 }
 
 TEST(trick_unit_substraction_test, lhs)
@@ -38,7 +54,7 @@ TEST(trick_unit_substraction_test, lhs)
 
     trick_unit expected { counted_card { 1, bidding::card_pass {} } };
 
-    ASSERT_EQ(lhs - rhs, expected);
+    ASSERT_PRED2(true_equal, lhs - rhs, expected);
 }
 
 TEST(trick_unit_substraction_test, same)
@@ -48,7 +64,7 @@ TEST(trick_unit_substraction_test, same)
 
     trick_unit expected { counted_card { 0, bidding::card_pass {} } };
 
-    ASSERT_EQ(lhs - rhs, expected);
+    ASSERT_PRED2(true_equal, lhs - rhs, expected);
 }
 
 TEST(trick_unit_substraction_test, rhs)
@@ -58,7 +74,7 @@ TEST(trick_unit_substraction_test, rhs)
 
     trick_unit expected { counted_card { -1, bidding::card_pass {} } };
 
-    ASSERT_EQ(lhs - rhs, expected);
+    ASSERT_PRED2(true_equal, lhs - rhs, expected);
 }
 
 TEST(print_test, trick_unit)

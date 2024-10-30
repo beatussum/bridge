@@ -28,8 +28,12 @@ namespace bridge::analyzer::types::raw::counted
 
     trick_unit trick_unit::operator-() const
     {
-        trick_unit ret = *this;
-        std::for_each(begin(), end(), std::negate());
+        trick_unit ret;
+
+        for (const card::counted_card& c : *this) {
+            ret.insert(-c);
+        }
+
         return ret;
     }
 
