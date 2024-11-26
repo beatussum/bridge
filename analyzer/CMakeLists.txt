@@ -26,28 +26,102 @@ project(
 
 list(APPEND CMAKE_MODULE_PATH "cmake/")
 
-set(ANALYZER_CPP)
-list(TRANSFORM ANALYZER_CPP PREPEND "src/")
+set(
+    ANALYZER_PUBLIC_HPP
+    core/boost.hpp
+    core/cv.hpp
+    iterators/capture.hpp
+    iterators/map.hpp
+    mappers/transform.hpp
+    types/card/bidding.hpp
+    types/card/playing.hpp
+    types/raw/boxed.hpp
+    types/raw/counted.hpp
+    types/raw/uncounted.hpp
+    types/card.hpp
+    types/deal.hpp
+    types/metadata.hpp
+    types/raw.hpp
+    types/trick.hpp
+    core.hpp
+    iterators.hpp
+    mappers.hpp
+    types.hpp
+)
 
-set(ANALYZER_PUBLIC_HPP)
 list(TRANSFORM ANALYZER_PUBLIC_HPP PREPEND "include/")
 
-set(ANALYZER_PRIVATE_HPP)
-list(TRANSFORM ANALYZER_PRIVATE_HPP PREPEND "src/")
+set(
+    ANALYZER_PUBLIC_IPP
+    core/cv.ipp
+    iterators/map.ipp
+    types/card/bidding.ipp
+    types/card/playing.ipp
+    types/raw/boxed.ipp
+    types/raw/counted.ipp
+    types/raw/uncounted.ipp
+    types/card.ipp
+    types/deal.ipp
+    types/raw.ipp
+    types/trick.ipp
+    core.ipp
+    types.ipp
+)
 
+list(TRANSFORM ANALYZER_PUBLIC_IPP PREPEND "include/")
+
+set(
+    ANALYZER_CPP
+    iterators/capture.cpp
+    mappers/transform.cpp
+    types/card/bidding.cpp
+    types/card/playing.cpp
+    types/raw/counted.cpp
+    types/raw.cpp
+    mappers.cpp
+)
+
+list(TRANSFORM ANALYZER_CPP PREPEND "src/")
+
+find_package(Boost REQUIRED)
+find_package(OpenCV REQUIRED COMPONENTS dnn imgproc videoio)
 add_library(analyzer STATIC "${ANALYZER_CPP}")
+
+target_link_libraries(
+    analyzer
+
+    PUBLIC
+        Boost::boost
+        opencv_dnn
+        opencv_imgproc
+        opencv_videoio
+)
+
 target_include_directories(analyzer PUBLIC "include/")
 
 target_sources(
-	analyzer
+    analyzer
 
-	PUBLIC
-		FILE_SET HEADERS
-		TYPE HEADERS
-		FILES "${ANALYZER_PUBLIC_HPP}"
+    PUBLIC
+        FILE_SET HEADERS
+        TYPE HEADERS
+        FILES "${ANALYZER_PUBLIC_HPP}" "${ANALYZER_PUBLIC_IPP}"
+)
 
-	PRIVATE
-		FILE_SET private_headers
-		TYPE HEADERS
-		FILES "${ANALYZER_PRIVATE_HPP}"
+bridge_add_to_doc("${ANALYZER_PUBLIC_HPP}")
+
+bridge_add_unit_tests(
+    TESTS
+        iterators/map
+        mappers/transform
+        types/card/bidding
+        types/card/playing
+        types/raw/boxed
+        types/raw/counted
+        types/raw/uncounted
+        types/deal
+        types/raw
+        types
+
+    EXTRA_LIBS analyzer
 )

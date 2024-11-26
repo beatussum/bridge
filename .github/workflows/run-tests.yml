@@ -1,0 +1,55 @@
+name: Run tests
+on: push
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+  run-tests:
+    name: Run tests
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get install -qy cmake libboost-dev libgtest-dev libopencv-dev ninja-build
+
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Run CMake
+        run: cmake -B build -D WITH_TESTS=ON -G Ninja .
+
+      - name: Build project
+        run: ninja -C build
+
+      - name: Run tests
+        continue-on-error: true
+        run: ninja -C build test
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4.4.0
+        with:
+          name: test-results
+          path: build/test-results
+
+  upload-test-report:
+    name: Upload test report
+    runs-on: ubuntu-24.04
+    needs: run-tests
+
+    steps:
+      - name: Download test results
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: test-results
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2.9.0
+        with:
+          check_name: Test results
+          files: "**/*.xml"
