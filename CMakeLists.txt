@@ -222,6 +222,7 @@ foreach (flag IN LISTS BRIDGE_CXX_GNU_FLAGS)
 endforeach ()
 
 add_subdirectory(analyzer)
+add_subdirectory(visualizer)
 
 if (WITH_DOC)
     doxygen_add_docs(
