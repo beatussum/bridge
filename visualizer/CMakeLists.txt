@@ -29,7 +29,7 @@ list(APPEND CMAKE_MODULE_PATH "cmake/")
 set(VISUALIZER_CPP main.cpp)
 list(TRANSFORM VISUALIZER_CPP PREPEND "src/")
 
-find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
 qt6_standard_project_setup()
 qt6_add_executable(visualizer "${VISUALIZER_CPP}")
@@ -39,6 +39,8 @@ target_link_libraries(
 
     PRIVATE
         Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
         analyzer
 )
 
