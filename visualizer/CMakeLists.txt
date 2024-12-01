@@ -26,10 +26,22 @@ project(
 
 list(APPEND CMAKE_MODULE_PATH "cmake/")
 
-set(VISUALIZER_CPP main.cpp)
+set(
+    VISUALIZER_HPP
+    widgets/LoginDialog.hpp
+)
+
+list(TRANSFORM VISUALIZER_HPP PREPEND "include/")
+
+set(
+    VISUALIZER_CPP
+    widgets/LoginDialog.cpp
+    main.cpp
+)
+
 list(TRANSFORM VISUALIZER_CPP PREPEND "src/")
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Sql Widgets)
 
 qt6_standard_project_setup()
 qt6_add_executable(visualizer "${VISUALIZER_CPP}")
@@ -40,9 +52,20 @@ target_link_libraries(
     PRIVATE
         Qt6::Core
         Qt6::Gui
+        Qt6::Sql
         Qt6::Widgets
         analyzer
 )
 
 target_include_directories(visualizer PUBLIC "include/")
+
+target_sources(
+    visualizer
+
+    PUBLIC
+        FILE_SET HEADERS
+        TYPE HEADERS
+        FILES "${VISUALIZER_HPP}"
+)
+
 qt6_finalize_project()
