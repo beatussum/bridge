@@ -49,7 +49,7 @@ jobs:
           name: test-results
 
       - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v2.9.0
+        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
         with:
           check_name: Test results
           files: "**/*.xml"
