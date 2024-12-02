@@ -15,7 +15,7 @@ jobs:
         run: sudo apt-get install -qy cmake doxygen libboost-dev libopencv-dev ninja-build
 
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.2
 
       - name: Run CMake
         run: cmake -B build -D WITH_DOC=ON -G Ninja .
