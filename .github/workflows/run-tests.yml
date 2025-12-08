@@ -19,7 +19,7 @@ jobs:
         run: sudo apt-get install -qy cmake libboost-dev libgtest-dev libopencv-dev ninja-build
 
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v6.0.1
 
       - name: Run CMake
         run: cmake -B build -D WITH_TESTS=ON -G Ninja .
